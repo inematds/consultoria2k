@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consultor de IA — Do Rótulo ao Resultado | INEMA.CLUB</title>
+  <meta name="description" content="Formação prática para atuar como consultor de IA: mapear a restrição real, auditar a prontidão e prescrever a solução mais simples que funciona. IA é a caixa de ferramentas, não o cargo.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: { colors: {
+        primary: '#FACC15',
+        dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+      } } }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+
+    /* Light mode - base */
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    /* Light mode - cores de acento (5 trilhas) */
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .bg-emerald-500\/20 { background-color: rgba(5,150,105,0.12); }
+    html:not(.dark) .bg-emerald-500\/10 { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5,150,105,0.25); }
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .group:hover .group-hover\:text-emerald-400 { color: #059669; }
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .bg-blue-500\/20 { background-color: rgba(37,99,235,0.12); }
+    html:not(.dark) .bg-blue-500\/10 { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37,99,235,0.25); }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .group:hover .group-hover\:text-blue-400 { color: #2563eb; }
+    html:not(.dark) .text-purple-400 { color: #7c3aed; }
+    html:not(.dark) .bg-purple-500\/20 { background-color: rgba(124,58,237,0.12); }
+    html:not(.dark) .bg-purple-500\/10 { background-color: rgba(124,58,237,0.08); }
+    html:not(.dark) .border-purple-500\/30 { border-color: rgba(124,58,237,0.25); }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124,58,237,0.08); }
+    html:not(.dark) .group:hover .group-hover\:text-purple-400 { color: #7c3aed; }
+    html:not(.dark) .text-amber-400 { color: #92400e; }
+    html:not(.dark) .bg-amber-500\/20 { background-color: rgba(217,119,6,0.14); }
+    html:not(.dark) .bg-amber-500\/10 { background-color: rgba(217,119,6,0.09); }
+    html:not(.dark) .border-amber-500\/30 { border-color: rgba(217,119,6,0.28); }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(217,119,6,0.09); }
+    html:not(.dark) .group:hover .group-hover\:text-amber-400 { color: #92400e; }
+    html:not(.dark) .text-teal-400 { color: #0d9488; }
+    html:not(.dark) .bg-teal-500\/20 { background-color: rgba(13,148,136,0.12); }
+    html:not(.dark) .bg-teal-500\/10 { background-color: rgba(13,148,136,0.08); }
+    html:not(.dark) .border-teal-500\/30 { border-color: rgba(13,148,136,0.25); }
+    html:not(.dark) .hover\:text-teal-400:hover { color: #0d9488; }
+    html:not(.dark) .hover\:bg-teal-500\/10:hover { background-color: rgba(13,148,136,0.08); }
+    html:not(.dark) .group:hover .group-hover\:text-teal-400 { color: #0d9488; }
+
+    /* Light mode - gradientes e cores especiais */
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161,98,7,0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161,98,7,0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .text-red-400 { color: #b91c1c; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,0.95); }
+
+    /* Dark mode - bordas suavizadas */
+    .dark .border-dark-600 { border-color: #374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+
+    /* Hero — animação sutil dos nós */
+    @keyframes pyr-pulse { 0%,100% { opacity:.55 } 50% { opacity:1 } }
+    @media (prefers-reduced-motion: no-preference) {
+      .pyr-a { animation: pyr-pulse 2.8s ease-in-out infinite; }
+      .pyr-a:nth-child(2){animation-delay:.3s} .pyr-a:nth-child(3){animation-delay:.6s}
+    }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- NAVIGATION -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🧭</span>
+            <span class="font-bold text-lg hidden sm:inline">Consultor de IA</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="curso/trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors">
+            <span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span>
+          </a>
+          <a href="curso/trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors">
+            <span class="sm:hidden">T2</span><span class="hidden sm:inline">Mapear</span>
+          </a>
+          <a href="curso/trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors">
+            <span class="sm:hidden">T3</span><span class="hidden sm:inline">Auditar</span>
+          </a>
+          <a href="curso/trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors">
+            <span class="sm:hidden">T4</span><span class="hidden sm:inline">Planos</span>
+          </a>
+          <a href="curso/trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors">
+            <span class="sm:hidden">T5</span><span class="hidden sm:inline">Entrega</span>
+          </a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="bg-gradient-to-br from-dark-800 via-dark-900 to-dark-900 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+      <div class="text-center">
+        <span class="inline-block px-3 py-1 bg-primary/10 text-primary border border-primary/40 text-xs font-semibold rounded-full mb-6">FORMAÇÃO · DO RÓTULO AO RESULTADO</span>
+        <h1 class="text-4xl sm:text-5xl font-bold mb-6">🧭 Consultor de IA</h1>
+        <p class="text-lg text-neutral-400 max-w-3xl mx-auto mb-6">
+          O trabalho do consultor não mudou: entrar na empresa, achar a <strong class="text-neutral-100">restrição real</strong> e prescrever a solução mais simples que funciona.
+          A IA é a <strong class="text-neutral-100">caixa de ferramentas</strong> — não a descrição do cargo.
+        </p>
+        <p class="text-base text-neutral-500 max-w-2xl mx-auto mb-10">
+          Aprenda a <span class="text-blue-400 font-semibold">mapear</span> oportunidades, <span class="text-purple-400 font-semibold">auditar</span> a prontidão e montar
+          <span class="text-amber-400 font-semibold">planos de execução</span> — sabendo quando subir a pirâmide de soluções e quando a melhor resposta não tem IA nenhuma.
+        </p>
+      </div>
+
+      <!-- HERO SVG: a pirâmide de soluções -->
+      <div class="rounded-2xl border border-primary/40 bg-dark-900/40 p-3 sm:p-5 mb-10 overflow-hidden max-w-3xl mx-auto">
+        <svg viewBox="0 0 760 300" class="w-full h-auto" role="img" aria-label="Pirâmide de soluções: base de workflows determinísticos sem IA, meio de workflows com IA, topo de agentes de IA. Quanto mais alto, maior o custo, o tempo e o risco.">
+          <defs>
+            <linearGradient id="hero-base" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#34d399"/><stop offset="1" stop-color="#10b981"/></linearGradient>
+            <linearGradient id="hero-mid" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fbbf24"/><stop offset="1" stop-color="#f59e0b"/></linearGradient>
+            <linearGradient id="hero-top" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#0ea5e9"/></linearGradient>
+            <filter id="hero-glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            <pattern id="hero-grid" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="1.3" fill="#94a3b8" opacity="0.10"/></pattern>
+          </defs>
+          <rect x="0" y="0" width="760" height="300" fill="url(#hero-grid)"/>
+
+          <!-- eixo de risco/custo -->
+          <g font-family="Inter,sans-serif">
+            <line x1="60" y1="40" x2="60" y2="262" stroke="#64748b" stroke-width="1.5" opacity="0.6"/>
+            <polygon points="60,34 56,46 64,46" fill="#64748b"/>
+            <text x="50" y="150" fill="#94a3b8" font-size="12.5" transform="rotate(-90 50 150)" text-anchor="middle">custo · tempo · risco ↑</text>
+          </g>
+
+          <!-- Topo: agentes -->
+          <g class="pyr-a" filter="url(#hero-glow)"><polygon points="380,40 470,118 290,118" fill="#0e1b26" stroke="url(#hero-top)" stroke-width="2.5"/></g>
+          <text x="380" y="86" text-anchor="middle" fill="#7dd3fc" font-family="Inter,sans-serif" font-weight="700" font-size="16">Agentes de IA</text>
+          <text x="380" y="104" text-anchor="middle" fill="#bae6fd" font-family="Inter,sans-serif" font-size="11">capacidade e risco máximos</text>
+
+          <!-- Meio: workflows com IA -->
+          <g class="pyr-a"><polygon points="290,126 470,126 530,196 230,196" fill="#1f1604" stroke="url(#hero-mid)" stroke-width="2.5"/></g>
+          <text x="380" y="158" text-anchor="middle" fill="#fbbf24" font-family="Inter,sans-serif" font-weight="700" font-size="16">Workflows com IA</text>
+          <text x="380" y="178" text-anchor="middle" fill="#fcd9a0" font-family="Inter,sans-serif" font-size="11">mais poder, mais pontos de falha</text>
+
+          <!-- Base: determinístico -->
+          <g class="pyr-a"><polygon points="230,204 530,204 590,262 170,262" fill="#0e2018" stroke="url(#hero-base)" stroke-width="2.5"/></g>
+          <text x="380" y="232" text-anchor="middle" fill="#34d399" font-family="Inter,sans-serif" font-weight="700" font-size="16">Workflows determinísticos · sem IA</text>
+          <text x="380" y="252" text-anchor="middle" fill="#a7f3d0" font-family="Inter,sans-serif" font-size="11">baratos, rápidos, confiáveis — comece aqui</text>
+
+          <!-- seta "comece pela base" -->
+          <g font-family="Inter,sans-serif">
+            <text x="650" y="240" fill="#34d399" font-size="12.5" font-weight="600" text-anchor="middle">comece</text>
+            <text x="650" y="256" fill="#34d399" font-size="12.5" font-weight="600" text-anchor="middle">aqui</text>
+            <path d="M650,228 L650,210" stroke="#34d399" stroke-width="2" marker-end="url(#hero-ah)"/>
+            <marker id="hero-ah" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#34d399"/></marker>
+          </g>
+        </svg>
+        <p class="text-center text-xs text-neutral-500 mt-2">A pirâmide de soluções — diagrama ilustrativo. Suba um nível só quando o problema realmente exigir.</p>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-2xl mx-auto">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-xl font-bold text-primary">5</div><div class="text-xs text-neutral-400">Trilhas</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-xl font-bold text-primary">20</div><div class="text-xs text-neutral-400">Módulos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-xl font-bold text-primary">120</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600 text-center"><div class="text-xl font-bold text-primary">~16h</div><div class="text-xs text-neutral-400">Duração</div></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- TRILHAS -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <h2 class="text-2xl font-bold mb-2">As 5 trilhas</h2>
+    <p class="text-neutral-400 mb-8 max-w-3xl">Da base conceitual ao negócio da consultoria. Cada trilha é um passo do jeito como um bom consultor trabalha: entender, mapear, auditar, planejar e entregar.</p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <a href="curso/trilha1/index.html" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-emerald-500/30 p-6 transition-all">
+        <div class="flex items-center justify-between mb-4">
+          <span class="px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full">TRILHA 1</span>
+          <span class="text-xs text-neutral-500">4 módulos</span>
+        </div>
+        <h3 class="text-xl font-bold mb-2 group-hover:text-emerald-400 transition-colors">🧭 Fundamentos</h3>
+        <p class="text-sm text-neutral-400 mb-4">O trabalho por trás do rótulo: a janela de mercado, a restrição real, a pirâmide de soluções e quando NÃO usar IA.</p>
+        <span class="text-emerald-400 text-sm font-semibold">Começar trilha →</span>
+      </a>
+
+      <a href="curso/trilha2/index.html" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 p-6 transition-all">
+        <div class="flex items-center justify-between mb-4">
+          <span class="px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full">TRILHA 2</span>
+          <span class="text-xs text-neutral-500">4 módulos</span>
+        </div>
+        <h3 class="text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors">🔎 Mapear</h3>
+        <p class="text-sm text-neutral-400 mb-4">Descobrir a restrição real: entrevistas, mapeamento de processos, catálogo de oportunidades e a matriz valor × viabilidade.</p>
+        <span class="text-blue-400 text-sm font-semibold">Começar trilha →</span>
+      </a>
+
+      <a href="curso/trilha3/index.html" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-purple-500/30 p-6 transition-all">
+        <div class="flex items-center justify-between mb-4">
+          <span class="px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-semibold rounded-full">TRILHA 3</span>
+          <span class="text-xs text-neutral-500">4 módulos</span>
+        </div>
+        <h3 class="text-xl font-bold mb-2 group-hover:text-purple-400 transition-colors">🛡️ Auditar</h3>
+        <p class="text-sm text-neutral-400 mb-4">Prontidão, dados e risco: readiness assessment, modelos de maturidade, auditoria de dados e governança (NIST AI RMF, ISO 42001).</p>
+        <span class="text-purple-400 text-sm font-semibold">Começar trilha →</span>
+      </a>
+
+      <a href="curso/trilha4/index.html" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-amber-500/30 p-6 transition-all">
+        <div class="flex items-center justify-between mb-4">
+          <span class="px-3 py-1 bg-amber-500/20 text-amber-400 text-xs font-semibold rounded-full">TRILHA 4</span>
+          <span class="text-xs text-neutral-500">4 módulos</span>
+        </div>
+        <h3 class="text-xl font-bold mb-2 group-hover:text-amber-400 transition-colors">🗺️ Planos de execução</h3>
+        <p class="text-sm text-neutral-400 mb-4">Da oportunidade ao business case: ROI, roadmap por ondas, escolher o nível da pirâmide e desenhar pilotos com métricas de sucesso.</p>
+        <span class="text-amber-400 text-sm font-semibold">Começar trilha →</span>
+      </a>
+
+      <a href="curso/trilha5/index.html" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-teal-500/30 p-6 transition-all">
+        <div class="flex items-center justify-between mb-4">
+          <span class="px-3 py-1 bg-teal-500/20 text-teal-400 text-xs font-semibold rounded-full">TRILHA 5</span>
+          <span class="text-xs text-neutral-500">4 módulos</span>
+        </div>
+        <h3 class="text-xl font-bold mb-2 group-hover:text-teal-400 transition-colors">🤝 Entrega & Negócio</h3>
+        <p class="text-sm text-neutral-400 mb-4">O negócio da consultoria: escopo e proposta, precificação, kit de entregáveis e como conduzir a adoção e escalar a prática.</p>
+        <span class="text-teal-400 text-sm font-semibold">Começar trilha →</span>
+      </a>
+
+      <div class="bg-gradient-to-br from-primary/10 to-dark-800 rounded-xl border border-primary/40 p-6 flex flex-col justify-center">
+        <h3 class="text-lg font-bold mb-2 text-primary">A regra que organiza tudo</h3>
+        <p class="text-sm text-neutral-300 mb-2">Comece pela base da pirâmide. Suba para IA, e depois para agentes, só quando o problema realmente exigir.</p>
+        <p class="text-sm text-neutral-400">Forçar IA onde não cabe é a forma mais rápida de perder a confiança do cliente.</p>
+      </div>
+
+    </div>
+
+    <!-- FONTES & FRAMEWORKS -->
+    <section class="mt-20">
+      <h2 class="text-2xl font-bold mb-2">Fontes &amp; frameworks</h2>
+      <p class="text-neutral-400 mb-8 max-w-3xl">O conteúdo é ancorado em frameworks reais de mercado e padrões formais — não em opinião. Levantamento por pesquisa multi-fonte com verificação adversarial (23 fontes, 25 alegações verificadas, 23 confirmadas).</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <a href="https://www.anthropic.com/research/building-effective-agents" target="_blank" class="bg-dark-800 rounded-xl border border-dark-600 hover:border-emerald-500/30 p-5 transition-all">
+          <div class="text-emerald-400 font-semibold mb-1">Anthropic · Building Effective Agents</div>
+          <p class="text-sm text-neutral-400">"Comece pela solução mais simples; aumente a complexidade só quando preciso — pode significar não construir agentes." Base da pirâmide.</p>
+        </a>
+        <a href="https://www.mckinsey.com/about-us/new-at-mckinsey-blog/beyond-the-buzz-making-ai-work-for-real-business-value" target="_blank" class="bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 p-5 transition-all">
+          <div class="text-blue-400 font-semibold mb-1">McKinsey · Don't "AI the wrong thing"</div>
+          <p class="text-sm text-neutral-400">Aplique IA onde autonomia e raciocínio agregam valor; mantenha automação tradicional onde ela ainda funciona melhor.</p>
+        </a>
+        <a href="https://nvlpubs.nist.gov/nistpubs/ai/nist.ai.100-1.pdf" target="_blank" class="bg-dark-800 rounded-xl border border-dark-600 hover:border-purple-500/30 p-5 transition-all">
+          <div class="text-purple-400 font-semibold mb-1">NIST AI RMF 1.0</div>
+          <p class="text-sm text-neutral-400">Gestão de risco de IA em 4 funções — Govern, Map, Measure, Manage. Voluntário, não checklist. Base da trilha Auditar.</p>
+        </a>
+        <a href="https://aimaturitymodel.mitre.org" target="_blank" class="bg-dark-800 rounded-xl border border-dark-600 hover:border-purple-500/30 p-5 transition-all">
+          <div class="text-purple-400 font-semibold mb-1">MITRE · AI Maturity Model</div>
+          <p class="text-sm text-neutral-400">5 níveis, 6 pilares, 20 dimensões e questionário auto-pontuado — template gratuito e vendor-neutro para o assessment.</p>
+        </a>
+        <a href="https://www.gartner.com/en/chief-information-officer/research/ai-maturity-model-toolkit" target="_blank" class="bg-dark-800 rounded-xl border border-dark-600 hover:border-purple-500/30 p-5 transition-all">
+          <div class="text-purple-400 font-semibold mb-1">Gartner · AI Maturity Model</div>
+          <p class="text-sm text-neutral-400">7 pilares (estratégia, dados, governança, engenharia, modelo operacional, cultura, valor) e roadmap priorizado por viabilidade × valor.</p>
+        </a>
+        <a href="https://www.cigen.io/insights/ai-use-case-prioritization-the-critical-step-in-a-practical-ai-adoption-journey" target="_blank" class="bg-dark-800 rounded-xl border border-dark-600 hover:border-amber-500/30 p-5 transition-all">
+          <div class="text-amber-400 font-semibold mb-1">Priorização ponderada de casos de uso</div>
+          <p class="text-sm text-neutral-400">Score por Valor, Viabilidade, Dados, Conformidade, Time-to-value e Fit estratégico — a matriz da trilha Planos.</p>
+        </a>
+      </div>
+      <p class="text-xs text-neutral-500 mt-6">Complementos citados ao longo do curso: ISO/IEC 42001 (sistema de gestão de IA), EU AI Act (categorias de risco), Theory of Constraints (gargalo), e guias de precificação de consultoria. Frameworks de fornecedores (Gartner, CIGen) são usados como ilustrativos; Anthropic, McKinsey e NIST como fontes primárias.</p>
+    </section>
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>Consultor de IA — Do Rótulo ao Resultado · <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a> · 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark');
+    } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

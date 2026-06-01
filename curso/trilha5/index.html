@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trilha 5 · Entrega &amp; Negócio | Consultor de IA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: {
+      primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+    .modal.hidden { display: none; }
+
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    /* acento teal (T5) */
+    html:not(.dark) .text-teal-400 { color: #0d9488; }
+    html:not(.dark) .bg-teal-500\/20 { background-color: rgba(13,148,136,0.12); }
+    html:not(.dark) .bg-teal-500\/10 { background-color: rgba(13,148,136,0.08); }
+    html:not(.dark) .border-teal-500\/30 { border-color: rgba(13,148,136,0.25); }
+    html:not(.dark) .hover\:bg-teal-500\/30:hover { background-color: rgba(13,148,136,0.2); }
+    html:not(.dark) .hover\:text-teal-400:hover { color: #0d9488; }
+    html:not(.dark) .hover\:bg-teal-500\/10:hover { background-color: rgba(13,148,136,0.08); }
+    html:not(.dark) .group:hover .group-hover\:text-teal-400 { color: #0d9488; }
+    /* hover das outras trilhas no nav */
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124,58,237,0.08); }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(217,119,6,0.09); }
+
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161,98,7,0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161,98,7,0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .text-red-400 { color: #b91c1c; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,0.95); }
+
+    .dark .border-dark-600 { border-color: #374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+
+    @keyframes t5-pulse { 0%,100% { opacity:.55 } 50% { opacity:1 } }
+    @media (prefers-reduced-motion: no-preference) {
+      .t5-a { animation: t5-pulse 2.8s ease-in-out infinite; }
+      .t5-a:nth-child(2){animation-delay:.4s} .t5-a:nth-child(3){animation-delay:.8s} .t5-a:nth-child(4){animation-delay:1.2s}
+    }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🧭</span><span class="font-bold text-lg hidden sm:inline">Consultor de IA</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors">
+            <span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors">
+            <span class="sm:hidden">T2</span><span class="hidden sm:inline">Mapear</span></a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors">
+            <span class="sm:hidden">T3</span><span class="hidden sm:inline">Auditar</span></a>
+          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors">
+            <span class="sm:hidden">T4</span><span class="hidden sm:inline">Planos</span></a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-teal-400 bg-teal-500/10">
+            <span class="sm:hidden">T5</span><span class="hidden sm:inline">Entrega</span></a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <header class="relative overflow-hidden bg-gradient-to-br from-teal-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-teal-500/20 text-teal-400 text-xs font-semibold rounded-full mb-4">TRILHA 5</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🤝 Entrega &amp; Negócio da consultoria</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl mb-8">Proposta, preço, entregáveis e adoção. A trilha que transforma diagnóstico em contrato, contrato em resultado e resultado em relacionamento de longo prazo. Confiança é o ativo — tudo aqui serve para construí-la.</p>
+
+      <!-- HERO SVG: escada de ofertas assessment → plano → execução → relacionamento -->
+      <div class="rounded-2xl border border-teal-500/30 bg-dark-900/40 p-3 sm:p-4 mb-8 overflow-hidden">
+        <svg viewBox="0 0 760 260" class="w-full h-auto" role="img" aria-label="Escada de ofertas do consultor: assessment pago no primeiro degrau, plano no segundo, execução no terceiro, e relacionamento de longo prazo no topo. Cada degrau gera confiança e prepara o próximo.">
+          <defs>
+            <linearGradient id="t5-step" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2dd4bf"/><stop offset="1" stop-color="#14b8a6"/></linearGradient>
+            <linearGradient id="t5-cyan" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#0ea5e9"/></linearGradient>
+            <filter id="t5-glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            <pattern id="t5-grid" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="1.3" fill="#14b8a6" opacity="0.12"/></pattern>
+            <marker id="t5-ah" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#2dd4bf"/></marker>
+          </defs>
+          <rect x="0" y="0" width="760" height="260" fill="url(#t5-grid)"/>
+
+          <!-- degrau 1: assessment -->
+          <g class="t5-a" filter="url(#t5-glow)">
+            <rect x="60" y="180" width="140" height="60" rx="10" fill="#0c1f1c" stroke="url(#t5-step)" stroke-width="2.5"/>
+          </g>
+          <text x="130" y="207" text-anchor="middle" fill="#2dd4bf" font-family="Inter,sans-serif" font-weight="700" font-size="13">Assessment</text>
+          <text x="130" y="224" text-anchor="middle" fill="#99f6e4" font-family="Inter,sans-serif" font-size="10.5">pago · baixo risco</text>
+          <text x="130" y="240" text-anchor="middle" fill="#5eead4" font-family="Inter,sans-serif" font-size="10">gera confiança</text>
+
+          <!-- degrau 2: plano -->
+          <g class="t5-a" filter="url(#t5-glow)">
+            <rect x="220" y="140" width="140" height="60" rx="10" fill="#0c1f1c" stroke="url(#t5-step)" stroke-width="2.5"/>
+          </g>
+          <text x="290" y="167" text-anchor="middle" fill="#2dd4bf" font-family="Inter,sans-serif" font-weight="700" font-size="13">Plano / Roadmap</text>
+          <text x="290" y="184" text-anchor="middle" fill="#99f6e4" font-family="Inter,sans-serif" font-size="10.5">by project · clareza</text>
+          <text x="290" y="200" text-anchor="middle" fill="#5eead4" font-family="Inter,sans-serif" font-size="10">escopo fechado</text>
+
+          <!-- degrau 3: execução -->
+          <g class="t5-a" filter="url(#t5-glow)">
+            <rect x="380" y="100" width="140" height="60" rx="10" fill="#0c1f1c" stroke="url(#t5-step)" stroke-width="2.5"/>
+          </g>
+          <text x="450" y="127" text-anchor="middle" fill="#2dd4bf" font-family="Inter,sans-serif" font-weight="700" font-size="13">Execução</text>
+          <text x="450" y="144" text-anchor="middle" fill="#99f6e4" font-family="Inter,sans-serif" font-size="10.5">pacote ou retainer</text>
+          <text x="450" y="160" text-anchor="middle" fill="#5eead4" font-family="Inter,sans-serif" font-size="10">resultado medido</text>
+
+          <!-- degrau 4: relacionamento -->
+          <g class="t5-a" filter="url(#t5-glow)">
+            <rect x="540" y="56" width="150" height="60" rx="10" fill="#0e1b26" stroke="url(#t5-cyan)" stroke-width="2.5"/>
+          </g>
+          <text x="615" y="83" text-anchor="middle" fill="#38bdf8" font-family="Inter,sans-serif" font-weight="700" font-size="13">Relacionamento</text>
+          <text x="615" y="100" text-anchor="middle" fill="#9ad6ff" font-family="Inter,sans-serif" font-size="10.5">retainer / parceiro</text>
+          <text x="615" y="116" text-anchor="middle" fill="#bfe6ff" font-family="Inter,sans-serif" font-size="10">do projeto ao ativo</text>
+
+          <!-- setas conectando degraus -->
+          <line x1="200" y1="205" x2="220" y2="185" stroke="#2dd4bf" stroke-width="2" opacity="0.7" marker-end="url(#t5-ah)"/>
+          <line x1="360" y1="165" x2="380" y2="145" stroke="#2dd4bf" stroke-width="2" opacity="0.7" marker-end="url(#t5-ah)"/>
+          <line x1="520" y1="125" x2="540" y2="105" stroke="#38bdf8" stroke-width="2" opacity="0.7" marker-end="url(#t5-ah)"/>
+
+          <!-- label confiança -->
+          <text x="80" y="30" fill="#94a3b8" font-family="Inter,sans-serif" font-size="11.5">confiança cresce a cada entrega →</text>
+        </svg>
+      </div>
+
+      <div class="grid grid-cols-4 gap-4 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-teal-400">4</div><div class="text-xs text-neutral-400">Módulos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-teal-400">24</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-teal-400">~3h</div><div class="text-xs text-neutral-400">Duração</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-teal-400">Negócio</div><div class="text-xs text-neutral-400">Nível</div></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- MAPA DA TRILHA -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-6">Mapa da trilha</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <a href="#modulo-5-1" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-teal-500/30 p-5 transition-all">
+          <div class="flex items-center justify-between mb-2"><span class="text-teal-400 font-bold text-sm">5.1</span><span class="text-xs text-neutral-500">~45 min</span></div>
+          <h3 class="font-semibold mb-1 group-hover:text-teal-400 transition-colors">📄 Escopo &amp; SOW</h3>
+          <p class="text-xs text-neutral-400">Proposta vende resultado, não horas</p>
+        </a>
+        <a href="#modulo-5-2" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-teal-500/30 p-5 transition-all">
+          <div class="flex items-center justify-between mb-2"><span class="text-teal-400 font-bold text-sm">5.2</span><span class="text-xs text-neutral-500">~40 min</span></div>
+          <h3 class="font-semibold mb-1 group-hover:text-teal-400 transition-colors">💵 Precificação</h3>
+          <p class="text-xs text-neutral-400">Preço ancora no impacto, não no esforço</p>
+        </a>
+        <a href="#modulo-5-3" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-teal-500/30 p-5 transition-all">
+          <div class="flex items-center justify-between mb-2"><span class="text-teal-400 font-bold text-sm">5.3</span><span class="text-xs text-neutral-500">~40 min</span></div>
+          <h3 class="font-semibold mb-1 group-hover:text-teal-400 transition-colors">🧰 Kit de entregáveis</h3>
+          <p class="text-xs text-neutral-400">Templates reutilizáveis = velocidade</p>
+        </a>
+        <a href="#modulo-5-4" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-teal-500/30 p-5 transition-all">
+          <div class="flex items-center justify-between mb-2"><span class="text-teal-400 font-bold text-sm">5.4</span><span class="text-xs text-neutral-500">~45 min</span></div>
+          <h3 class="font-semibold mb-1 group-hover:text-teal-400 transition-colors">📈 Adoção &amp; escala</h3>
+          <p class="text-xs text-neutral-400">Gargalo é gente, não tecnologia</p>
+        </a>
+      </div>
+    </section>
+
+    <h2 class="text-2xl font-bold mb-6">Conteúdo detalhado</h2>
+
+    <!-- MÓDULO 5.1 -->
+    <div id="modulo-5-1" class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2"><span class="text-teal-400 font-bold">5.1</span><span class="text-xs text-neutral-500">~45 min</span></div>
+        <h3 class="text-2xl font-bold mb-2">📄 Escopo e proposta: SOW e expectativas</h3>
+        <p class="text-neutral-400 text-sm">Proposta que vende resultado, não horas. Como definir escopo, entregáveis, fora-de-escopo, marcos e critérios de aceite — e quando recusar o projeto.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <span class="text-lg">🧾</span>
+            <div><span class="font-medium">Anatomia de uma proposta que vende resultado</span><span class="text-neutral-500 text-sm ml-2">- não horas, não features</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A proposta eficaz começa pelo resultado que o cliente quer — menos custo, mais receita, menos risco — e só então descreve como você vai chegar lá. Não começa pelas horas nem pelas atividades.</p></div>
+            <div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Proposta baseada em horas coloca consultor e cliente num jogo de custo; proposta baseada em resultado coloca os dois no mesmo lado da mesa.</p></div>
+            <div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Resultado primeiro; horas são consequência; a proposta é um documento de alinhamento, não orçamento.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <span class="text-lg">🎯</span>
+            <div><span class="font-medium">Escopo, entregáveis e fora-de-escopo</span><span class="text-neutral-500 text-sm ml-2">- evitar scope creep</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Escopo é o que você entrega; fora-de-escopo é o que você explicitamente não entrega. As duas seções precisam estar na proposta — o fora-de-escopo é onde a maioria dos conflitos começa.</p></div>
+            <div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Scope creep silencioso é o maior inimigo da lucratividade. Limites claros protegem você e o cliente.</p></div>
+            <div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Escopo escrito protege; fora-de-escopo explícito; mudança de escopo = nova negociação.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <span class="text-lg">🗓️</span>
+            <div><span class="font-medium">Fases e marcos — assessment, plano, execução</span><span class="text-neutral-500 text-sm ml-2">- visibilidade do progresso</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Dividir o engajamento em fases com marcos claros cria checkpoints naturais onde cliente e consultor avaliam se continuar faz sentido — e gera oportunidades de ampliar o escopo.</p></div>
+            <div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Fases reduzem o risco percebido pelo cliente, facilitam a aprovação do projeto e criam momentos de renovação do relacionamento.</p></div>
+            <div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Assessment → plano → execução; marcos criam visibilidade; checkpoint é oportunidade de expansão.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <span class="text-lg">🤝</span>
+            <div><span class="font-medium">Expectativas: o que o cliente precisa fazer também</span><span class="text-neutral-500 text-sm ml-2">- responsabilidades dos dois lados</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A proposta deve listar o que o cliente precisa fornecer: acesso a dados, participação de stakeholders, reuniões de validação, decisões no prazo. O consultor entrega melhor quando o cliente faz a parte dele.</p></div>
+            <div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Projetos falham quando o cliente some. Deixar claro de antemão o que se espera do cliente evita atraso e conflito.</p></div>
+            <div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Responsabilidades mútuas; cliente como parceiro ativo; prerequisitos listados na proposta.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <span class="text-lg">📐</span>
+            <div><span class="font-medium">SOW e critérios de aceite</span><span class="text-neutral-500 text-sm ml-2">- o que significa "pronto"</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O Statement of Work (SOW) formaliza o que é entregue, quando, e como será aceito. Critérios de aceite são objetivos: "relatório aprovado em reunião de revisão" é mais claro que "cliente satisfeito".</p></div>
+            <div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sem critérios objetivos, o projeto nunca termina — o cliente sempre tem "mais uma coisa". O SOW cria um fim definido.</p></div>
+            <div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">SOW como contrato leve; critério de aceite objetivo; "pronto" tem definição escrita.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <span class="text-lg">🚩</span>
+            <div><span class="font-medium">Sinais de projeto ou cliente para recusar</span><span class="text-neutral-500 text-sm ml-2">- quando dizer não</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Escopo impossível, patrocinador ausente, cliente que quer resultado sem envolvimento, preço que não cobre o custo do relacionamento — são sinais de que recusar o projeto protege sua reputação e energia.</p></div>
+            <div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Projetos ruins custam mais do que o dinheiro que trazem: consomem energia, mandam sinais errados ao mercado e bloqueiam projetos bons.</p></div>
+            <div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Red flags de cliente; custo oculto do projeto ruim; recusar também constrói reputação.</p></div>
+          </div></div>
+        </div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <button onclick="openModal('modal-5-1')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors">Ver em Modal</button>
+        <a href="modulo-5-1.html" class="px-4 py-2 text-sm bg-teal-600 hover:bg-teal-500 text-white rounded-lg transition-colors">Ver Completo</a>
+      </div>
+    </div>
+
+    <!-- MÓDULO 5.2 -->
+    <div id="modulo-5-2" class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2"><span class="text-teal-400 font-bold">5.2</span><span class="text-xs text-neutral-500">~40 min</span></div>
+        <h3 class="text-2xl font-bold mb-2">💵 Precificação do engajamento</h3>
+        <p class="text-neutral-400 text-sm">Modelos de preço, escada de ofertas e como cobrar pelo assessment. Preço que ancora no impacto, não no esforço — e transforma a conversa de custo em valor.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <span class="text-lg">⏱️</span>
+            <div><span class="font-medium">Por hora — quando faz sentido e quando te limita</span><span class="text-neutral-500 text-sm ml-2">- armadilha da eficiência</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Precificação por hora é simples de calcular, mas pune o consultor que fica mais rápido e eficiente. Quanto melhor você fica, menos você ganha — a lógica está invertida.</p></div>
+            <div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Reconhecer o teto natural do modelo hora-a-hora motiva buscar modelos que desacoplam renda de horas trabalhadas.</p></div>
+            <div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Teto de horas; penalidade pela eficiência; hora faz sentido em projetos de escopo indefinido ou suporte avulso.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <span class="text-lg">📦</span>
+            <div><span class="font-medium">Por projeto/pacote — previsibilidade para os dois lados</span><span class="text-neutral-500 text-sm ml-2">- escopo fechado, preço fechado</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Pacote de escopo fixo com preço fixo. O cliente sabe o que paga; você sabe o que entrega. Quando você fica eficiente, o lucro sobe sem precisar renegociar.</p></div>
+            <div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É o modelo mais comum para assessments e diagnósticos — e o primeiro passo para desacoplar tempo de renda.</p></div>
+            <div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Previsibilidade mútua; escopo fechado obrigatório; produtividade vira lucro.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <span class="text-lg">🔁</span>
+            <div><span class="font-medium">Retainer/assinatura — receita recorrente</span><span class="text-neutral-500 text-sm ml-2">- previsibilidade e relacionamento</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O retainer é um valor mensal fixo pela disponibilidade e atenção continuada do consultor. Cria receita previsível, relação contínua e facilita expansão do escopo ao longo do tempo.</p></div>
+            <div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Receita recorrente é o objetivo de longo prazo: você para de recomeçar do zero todo mês e tem base para planejar a prática.</p></div>
+            <div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Disponibilidade, não horas; vínculo contínuo; base para expansão natural do escopo.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <span class="text-lg">💎</span>
+            <div><span class="font-medium">Precificação por valor — ancorando no impacto</span><span class="text-neutral-500 text-sm ml-2">- não no esforço</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O preço é definido com base no valor gerado para o cliente, não no tempo gasto. Se você identifica R$500k de economia, cobrar R$50k por isso é razoável — independente de quantas horas levou.</p></div>
+            <div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É o modelo que mais alinha incentivos: você quer que o cliente seja bem-sucedido porque é isso que justifica o preço.</p></div>
+            <div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Preço × impacto; ancoragem no ROI; requer diagnóstico sólido para quantificar o valor.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <span class="text-lg">🪜</span>
+            <div><span class="font-medium">Escada de ofertas: assessment → plano → execução</span><span class="text-neutral-500 text-sm ml-2">- progressão natural</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Cada degrau da escada resolve um problema diferente e prepara o próximo contrato. O assessment diagnóstica; o plano prioriza; a execução entrega. É uma progressão natural de confiança.</p></div>
+            <div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">A escada transforma o primeiro contrato pequeno na porta para contratos maiores — sem precisar vender projetos complexos logo de cara.</p></div>
+            <div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Baixo risco primeiro; confiança acumulada; cada entrega vende a próxima.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <span class="text-lg">🧮</span>
+            <div><span class="font-medium">Como cobrar pelo assessment/diagnóstico</span><span class="text-neutral-500 text-sm ml-2">- pagar para descobrir o problema</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O assessment pago é uma oferta de escopo pequeno, preço acessível e entrega concreta — geralmente um relatório de prioridades. Filtra clientes sérios e financia o diagnóstico que precede toda recomendação.</p></div>
+            <div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Assessment gratuito cria a expectativa de que diagnóstico tem valor zero — o que deforma a relação antes de começar.</p></div>
+            <div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Assessment como produto; filtro de seriedade; entrega concreta justifica o pagamento.</p></div>
+          </div></div>
+        </div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <button onclick="openModal('modal-5-2')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors">Ver em Modal</button>
+        <a href="modulo-5-2.html" class="px-4 py-2 text-sm bg-teal-600 hover:bg-teal-500 text-white rounded-lg transition-colors">Ver Completo</a>
+      </div>
+    </div>
+
+    <!-- MÓDULO 5.3 -->
+    <div id="modulo-5-3" class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2"><span class="text-teal-400 font-bold">5.3</span><span class="text-xs text-neutral-500">~40 min</span></div>
+        <h3 class="text-2xl font-bold mb-2">🧰 Kit de entregáveis do consultor</h3>
+        <p class="text-neutral-400 text-sm">Templates reutilizáveis que profissionalizam a entrega e aceleram cada novo projeto. Produtizar o que você já faz — é a diferença entre ser artesão e ter uma prática escalável.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <span class="text-lg">📋</span>
+            <div><span class="font-medium">Questionário de readiness</span><span class="text-neutral-500 text-sm ml-2">- antes de entrar na sala</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Um formulário estruturado enviado antes da primeira reunião para mapear maturidade de dados, processos e cultura. Chega informado e economiza horas de descoberta básica.</p></div>
+            <div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Você entra na conversa com hipóteses formadas — e demonstra profissionalismo que já diferencia da maioria dos consultores.</p></div>
+            <div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Pré-trabalho; hipóteses antes da reunião; template reusado em todos os clientes.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <span class="text-lg">🗺️</span>
+            <div><span class="font-medium">Mapa de oportunidades + matriz valor×viabilidade</span><span class="text-neutral-500 text-sm ml-2">- prioridade visual</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O mapa lista todos os casos de uso identificados; a matriz posiciona cada um num quadrante de alto/baixo valor × alta/baixa viabilidade. O quadrante "alto valor, alta viabilidade" é onde começa.</p></div>
+            <div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Transforma a conversa de "IA em todo lugar" para "começamos pelos dois ou três casos com mais impacto e menos atrito".</p></div>
+            <div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Quick wins primeiro; matriz como ferramenta de alinhamento; visibilidade compartilhada.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <span class="text-lg">🌊</span>
+            <div><span class="font-medium">Roadmap por ondas + business case 1 página</span><span class="text-neutral-500 text-sm ml-2">- decisão com uma folha</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Ondas agrupam os casos por janela de tempo — onda 1 (90 dias), onda 2 (6 meses), onda 3 (12 meses). O business case de uma página resume problema, solução, ROI e riscos de cada onda.</p></div>
+            <div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Executivos aprovam projetos que cabem em uma página. Mais do que isso é burocracia que atrasa decisão.</p></div>
+            <div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Ondas como sequência; business case ≤ 1 página; ROI legível por não-técnicos.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <span class="text-lg">📊</span>
+            <div><span class="font-medium">One-pager executivo</span><span class="text-neutral-500 text-sm ml-2">- o CEO lê, o CTO aprova</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Um documento de uma página com situação atual, oportunidade identificada, abordagem proposta e resultado esperado. Fala a língua do C-level sem precisar abrir uma apresentação de 40 slides.</p></div>
+            <div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Decisores leem em velocidade de e-mail. O one-pager aumenta a taxa de aprovação porque remove a fricção de processar informação densa.</p></div>
+            <div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Situação → oportunidade → abordagem → resultado; linguagem de negócio; uma página no máximo.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <span class="text-lg">🛡️</span>
+            <div><span class="font-medium">Registro de risco e nota de governança</span><span class="text-neutral-500 text-sm ml-2">- blindar o consultor e o cliente</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O registro de risco lista o que pode dar errado, a probabilidade, o impacto e a mitigação. A nota de governança documenta quem decide o quê. Ambos protegem consultor e cliente de surpresas.</p></div>
+            <div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Projetos de IA têm riscos específicos — viés, privacidade, falhas silenciosas. Documentar antes é mais profissional e mais barato do que lidar com eles depois.</p></div>
+            <div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Risco mapeado antes; governança clara; responsabilidade documentada.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <span class="text-lg">♻️</span>
+            <div><span class="font-medium">Produtizar e reusar entregáveis</span><span class="text-neutral-500 text-sm ml-2">- artesão vs. prática escalável</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Cada entregável que você cria do zero para um cliente pode virar template para o próximo. Produtizar é transformar o trabalho customizado em base reutilizável que acelera projetos futuros.</p></div>
+            <div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">A diferença entre consultor que trabalha muito e prática escalável está nos ativos reusáveis. Templates são a alavanca que multiplica sua capacidade sem multiplicar suas horas.</p></div>
+            <div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Template como ativo; primeiro cliente financia o template; cada projeto melhora o acervo.</p></div>
+          </div></div>
+        </div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <button onclick="openModal('modal-5-3')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors">Ver em Modal</button>
+        <a href="modulo-5-3.html" class="px-4 py-2 text-sm bg-teal-600 hover:bg-teal-500 text-white rounded-lg transition-colors">Ver Completo</a>
+      </div>
+    </div>
+
+    <!-- MÓDULO 5.4 -->
+    <div id="modulo-5-4" class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2"><span class="text-teal-400 font-bold">5.4</span><span class="text-xs text-neutral-500">~45 min</span></div>
+        <h3 class="text-2xl font-bold mb-2">📈 Adoção, change management e escalar a prática</h3>
+        <p class="text-neutral-400 text-sm">O gargalo real não é tecnologia — é gente. Como garantir adoção, medir valor pós-entrega, construir nicho e transformar projetos em relacionamentos duráveis.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <span class="text-lg">🧠</span>
+            <div><span class="font-medium">Adoção é o gargalo real</span><span class="text-neutral-500 text-sm ml-2">- tecnologia pronta, gente não</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A maioria dos projetos de IA falha no uso, não na construção. A tecnologia fica pronta, mas as pessoas continuam usando os processos antigos — e o resultado esperado nunca aparece.</p></div>
+            <div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Reconhecer o gargalo real muda o foco: você não só entrega o produto — você entrega o resultado, o que inclui garantir que o produto seja usado.</p></div>
+            <div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Adoção ≠ deploy; resultado exige uso; entrega inclui mudança de comportamento.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <span class="text-lg">👤</span>
+            <div><span class="font-medium">Sponsor, campeões e treinamento no fluxo</span><span class="text-neutral-500 text-sm ml-2">- quem sustenta a mudança</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Sponsor é quem tem autoridade e interesse no sucesso; campeões são usuários entusiastas que influenciam pares. Treinar no fluxo significa ensinar a ferramenta dentro da tarefa real, não em salas de aula isoladas.</p></div>
+            <div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sem sponsor a mudança morre no primeiro conflito de prioridade. Sem campeões não há contágio positivo na equipe.</p></div>
+            <div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Tríade: sponsor + campeão + treinamento contextual; contágio interno acelera adoção.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <span class="text-lg">📊</span>
+            <div><span class="font-medium">Medir adoção e valor pós-entrega</span><span class="text-neutral-500 text-sm ml-2">- não sumir após o deploy</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Definir métricas de adoção (taxa de uso, frequência, usuários ativos) e de valor (tempo economizado, erros reduzidos, receita gerada) antes do projeto — e revisitar 30, 60, 90 dias após o lançamento.</p></div>
+            <div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">A revisita pós-entrega é o momento de mostrar valor, identificar o que não pegou e abrir conversa sobre o próximo passo. É a semente do relacionamento de longo prazo.</p></div>
+            <div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Métricas definidas antes; revisita 30/60/90 dias; pós-entrega abre próximo contrato.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <span class="text-lg">🎯</span>
+            <div><span class="font-medium">Nicho — virar referência num setor ou dor</span><span class="text-neutral-500 text-sm ml-2">- especialização gera indicação</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Ser consultor de IA para qualquer empresa é difícil de vender. Ser o consultor de IA para clínicas médicas ou para logística de e-commerce é específico o suficiente para ser lembrado e indicado.</p></div>
+            <div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Nicho reduz o custo de aquisição de clientes: as pessoas se conhecem dentro de um setor, as referências circulam rápido e o conhecimento acumulado se torna barreira de entrada.</p></div>
+            <div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Especialização cria autoridade; referência circula no nicho; conhecimento acumulado é vantagem.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <span class="text-lg">🤝</span>
+            <div><span class="font-medium">Parcerias e quando terceirizar a execução</span><span class="text-neutral-500 text-sm ml-2">- escalar sem contratar</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-teal-400 font-semibeful">O que é:</span><p class="text-neutral-300 text-sm">Quando o projeto exige execução técnica além do seu foco, parcerias com implementadores ou sub-consultores permitem pegar projetos maiores sem dilatar a estrutura interna.</p></div>
+            <div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">A orquestração vale mais do que a execução. Saber quando terceirizar e como manter a qualidade é o que distingue um consultor de um freelancer.</p></div>
+            <div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Consultor orquestra; parceiro executa; controle de qualidade permanece com você.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <span class="text-lg">🔁</span>
+            <div><span class="font-medium">Do projeto ao relacionamento de longo prazo</span><span class="text-neutral-500 text-sm ml-2">- confiança composta</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O projeto termina, o relacionamento não. Clientes que confiam no consultor continuam voltando — para novos projetos, para validar decisões, para indicar. O relacionamento é o ativo real.</p></div>
+            <div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Adquirir um novo cliente custa muito mais do que reter um que já confia em você. A prática sustentável é construída sobre relacionamentos, não sobre prospecção constante.</p></div>
+            <div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Confiança composta; retenção &gt; aquisição; o relacionamento é o produto de longo prazo.</p></div>
+          </div></div>
+        </div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <button onclick="openModal('modal-5-4')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors">Ver em Modal</button>
+        <a href="modulo-5-4.html" class="px-4 py-2 text-sm bg-teal-600 hover:bg-teal-500 text-white rounded-lg transition-colors">Ver Completo</a>
+      </div>
+    </div>
+
+    <!-- NAVEGAÇÃO ENTRE TRILHAS -->
+    <div class="flex flex-col sm:flex-row gap-4 mt-10">
+      <a href="../../index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Voltar ao início</a>
+      <a href="../trilha4/index.html" class="flex-1 text-center px-6 py-3 bg-teal-600 text-white rounded-lg font-semibold hover:bg-teal-500 transition-colors">← Trilha anterior: Planos</a>
+    </div>
+  </main>
+
+  <!-- MODAIS -->
+  <div id="modal-5-1" class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" onclick="if(event.target === this) closeModal()">
+    <div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+      <div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0">
+        <div class="flex items-center space-x-3"><span class="text-teal-400 font-bold">5.1</span><span class="font-semibold">Escopo e proposta</span></div>
+        <button onclick="closeModal()" class="text-neutral-400 hover:text-white text-2xl leading-none">&times;</button>
+      </div>
+      <iframe src="modulo-5-1.html" class="flex-1 w-full rounded-b-xl"></iframe>
+    </div>
+  </div>
+  <div id="modal-5-2" class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" onclick="if(event.target === this) closeModal()">
+    <div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+      <div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0">
+        <div class="flex items-center space-x-3"><span class="text-teal-400 font-bold">5.2</span><span class="font-semibold">Precificação</span></div>
+        <button onclick="closeModal()" class="text-neutral-400 hover:text-white text-2xl leading-none">&times;</button>
+      </div>
+      <iframe src="modulo-5-2.html" class="flex-1 w-full rounded-b-xl"></iframe>
+    </div>
+  </div>
+  <div id="modal-5-3" class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" onclick="if(event.target === this) closeModal()">
+    <div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+      <div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0">
+        <div class="flex items-center space-x-3"><span class="text-teal-400 font-bold">5.3</span><span class="font-semibold">Kit de entregáveis</span></div>
+        <button onclick="closeModal()" class="text-neutral-400 hover:text-white text-2xl leading-none">&times;</button>
+      </div>
+      <iframe src="modulo-5-3.html" class="flex-1 w-full rounded-b-xl"></iframe>
+    </div>
+  </div>
+  <div id="modal-5-4" class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" onclick="if(event.target === this) closeModal()">
+    <div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+      <div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0">
+        <div class="flex items-center space-x-3"><span class="text-teal-400 font-bold">5.4</span><span class="font-semibold">Adoção &amp; escala</span></div>
+        <button onclick="closeModal()" class="text-neutral-400 hover:text-white text-2xl leading-none">&times;</button>
+      </div>
+      <iframe src="modulo-5-4.html" class="flex-1 w-full rounded-b-xl"></iframe>
+    </div>
+  </div>
+
+  <footer class="border-t border-dark-600 py-8 mt-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>Consultor de IA · Trilha 5 — Entrega &amp; Negócio · <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a> · 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      const moduleCard = button.closest('.bg-dark-800');
+      moduleCard.querySelectorAll('.topic-explanation.active').forEach(exp => { if (exp !== explanation) exp.classList.remove('active'); });
+      explanation.classList.toggle('active');
+    }
+    function openModal(modalId) { const m = document.getElementById(modalId); if (m) { m.classList.remove('hidden'); document.body.style.overflow = 'hidden'; } }
+    function closeModal() { document.querySelectorAll('.modal').forEach(m => m.classList.add('hidden')); document.body.style.overflow = 'auto'; }
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark');
+    } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

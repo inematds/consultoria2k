@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 4.2 · Roadmap por ondas | Consultor de IA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: {
+      primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    /* acento amber (T4) */
+    html:not(.dark) .text-amber-400 { color: #92400e; }
+    html:not(.dark) .bg-amber-500\/20 { background-color: rgba(217,119,6,0.14); }
+    html:not(.dark) .bg-amber-500\/10 { background-color: rgba(217,119,6,0.09); }
+    html:not(.dark) .border-amber-500\/30 { border-color: rgba(217,119,6,0.28); }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(217,119,6,0.09); }
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124,58,237,0.08); }
+    html:not(.dark) .hover\:text-teal-400:hover { color: #0d9488; }
+    html:not(.dark) .hover\:bg-teal-500\/10:hover { background-color: rgba(13,148,136,0.08); }
+
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161,98,7,0.08); }
+    html:not(.dark) .border-primary\/30 { border-color: rgba(161,98,7,0.25); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161,98,7,0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .text-red-400 { color: #b91c1c; }
+    html:not(.dark) .bg-red-900\/20 { background-color: rgba(185,28,28,0.08); }
+    html:not(.dark) .border-red-500\/30 { border-color: rgba(185,28,28,0.25); }
+    html:not(.dark) .bg-blue-900\/20 { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37,99,235,0.25); }
+    html:not(.dark) .bg-amber-900\/20 { background-color: rgba(217,119,6,0.10); }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,0.95); }
+
+    .dark .border-dark-600 { border-color: #374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+
+    @keyframes wf-pulse { 0%,100% { opacity:.55 } 50% { opacity:1 } }
+    @media (prefers-reduced-motion: no-preference) {
+      .wf-a { animation: wf-pulse 2.6s ease-in-out infinite; }
+      .wf-a:nth-child(2){animation-delay:.25s} .wf-a:nth-child(3){animation-delay:.5s}
+      .wf-a:nth-child(4){animation-delay:.75s}
+    }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🧭</span><span class="font-bold text-lg hidden sm:inline">Consultor de IA</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors">
+            <span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors">
+            <span class="sm:hidden">T2</span><span class="hidden sm:inline">Mapear</span></a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors">
+            <span class="sm:hidden">T3</span><span class="hidden sm:inline">Auditar</span></a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-amber-400 bg-amber-500/10">
+            <span class="sm:hidden">T4</span><span class="hidden sm:inline">Planos</span></a>
+          <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors">
+            <span class="sm:hidden">T5</span><span class="hidden sm:inline">Entrega</span></a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- BREADCRUMB -->
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-amber-400">Início</a><span>/</span>
+      <a href="index.html" class="hover:text-amber-400">Trilha 4</a><span>/</span>
+      <span class="text-amber-400">Módulo 4.2</span>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <header class="bg-gradient-to-br from-amber-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-amber-500/20 text-amber-400 text-xs font-semibold rounded-full mb-4">MÓDULO 4.2</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🌊 Roadmap por ondas: sequenciar e priorizar</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">Crawl, walk, run — a metodologia que garante que você prova valor antes de escalar, respeita dependências e usa o que o piloto ensinou para replanejar com inteligência.</p>
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-amber-400">6</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-amber-400">~45</div><div class="text-xs text-neutral-400">Minutos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-amber-400">Plano</div><div class="text-xs text-neutral-400">Nível</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-amber-400">Roadmap</div><div class="text-xs text-neutral-400">Tipo</div></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <p class="text-neutral-300 mb-8 leading-relaxed text-lg">
+      O roadmap não é uma lista de projetos — é uma <strong class="text-amber-400">sequência de apostas</strong> ordenada por valor, risco e aprendizado. A abordagem em ondas garante que cada etapa valida o que a próxima precisa para funcionar.
+    </p>
+
+    <!-- SVG: escada crawl → walk → run -->
+    <div class="rounded-2xl border border-amber-500/30 bg-dark-900/40 p-3 sm:p-4 mb-12 overflow-hidden">
+      <svg viewBox="0 0 760 220" class="w-full h-auto" role="img" aria-label="Roadmap em ondas: três degraus crescentes representando crawl (provar valor), walk (aumentar cobertura) e run (escalar com confiança). Cada degrau tem um marco de validação go/no-go.">
+        <defs>
+          <linearGradient id="m42-grad" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fbbf24"/><stop offset="1" stop-color="#f59e0b"/></linearGradient>
+          <filter id="m42-glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <pattern id="m42-grid" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="1.3" fill="#f59e0b" opacity="0.12"/></pattern>
+          <marker id="m42-ah" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#fbbf24"/></marker>
+        </defs>
+        <rect x="0" y="0" width="760" height="220" fill="url(#m42-grid)"/>
+
+        <!-- Degrau 1: Crawl -->
+        <g class="wf-a">
+          <rect x="40" y="140" width="180" height="60" rx="10" fill="#1f1604" stroke="url(#m42-grad)" stroke-width="2"/>
+        </g>
+        <text x="130" y="168" text-anchor="middle" fill="#fbbf24" font-family="Inter,sans-serif" font-weight="700" font-size="15">🐛 Crawl</text>
+        <text x="130" y="186" text-anchor="middle" fill="#fcd9a0" font-family="Inter,sans-serif" font-size="10.5">provar valor · escopo mínimo</text>
+
+        <!-- Seta -->
+        <line x1="220" y1="155" x2="268" y2="120" stroke="#fbbf24" stroke-width="2" marker-end="url(#m42-ah)" stroke-dasharray="6 4"/>
+
+        <!-- Degrau 2: Walk -->
+        <g class="wf-a">
+          <rect x="280" y="100" width="180" height="60" rx="10" fill="#1f1604" stroke="url(#m42-grad)" stroke-width="2.5"/>
+        </g>
+        <text x="370" y="128" text-anchor="middle" fill="#fbbf24" font-family="Inter,sans-serif" font-weight="700" font-size="15">🚶 Walk</text>
+        <text x="370" y="146" text-anchor="middle" fill="#fcd9a0" font-family="Inter,sans-serif" font-size="10.5">ampliar cobertura · capacidades reutilizáveis</text>
+
+        <!-- Seta -->
+        <line x1="460" y1="115" x2="508" y2="80" stroke="#38bdf8" stroke-width="2" marker-end="url(#m42-ah)" stroke-dasharray="6 4"/>
+
+        <!-- Degrau 3: Run -->
+        <g class="wf-a" filter="url(#m42-glow)">
+          <rect x="520" y="40" width="180" height="60" rx="10" fill="#0e1b26" stroke="#38bdf8" stroke-width="2.5"/>
+        </g>
+        <text x="610" y="68" text-anchor="middle" fill="#38bdf8" font-family="Inter,sans-serif" font-weight="700" font-size="15">🏃 Run</text>
+        <text x="610" y="86" text-anchor="middle" fill="#9ad6ff" font-family="Inter,sans-serif" font-size="10.5">escalar com confiança · reaproveitando fundação</text>
+
+        <!-- Marcos go/no-go -->
+        <text x="252" y="178" text-anchor="middle" fill="#9aa4b2" font-family="Inter,sans-serif" font-size="9.5">go/no-go ①</text>
+        <text x="494" y="138" text-anchor="middle" fill="#9aa4b2" font-family="Inter,sans-serif" font-size="9.5">go/no-go ②</text>
+
+        <text x="380" y="210" text-anchor="middle" fill="#9aa4b2" font-family="Inter,sans-serif" font-size="11.5">cada onda valida o que a próxima precisa para funcionar</text>
+      </svg>
+      <p class="text-center text-xs text-neutral-500 mt-2">Roadmap em ondas — sem marco de validação, a onda seguinte começa sobre incerteza.</p>
+    </div>
+
+    <!-- TÓPICO 1 -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl">1</span>
+        <h2 class="text-2xl font-bold">🌊 Ondas: crawl, walk, run</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Cada onda tem um <strong class="text-amber-400">objetivo de negócio, não apenas uma entrega técnica</strong>. Crawl prova que é possível e útil. Walk verifica que escala operacionalmente. Run é quando o padrão vira padrão.</p>
+
+      <div class="space-y-4 mb-6">
+        <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-5">
+          <div class="flex items-center space-x-3 mb-2">
+            <span class="text-2xl">🐛</span>
+            <h4 class="font-bold text-amber-400">Crawl — provar valor</h4>
+          </div>
+          <p class="text-neutral-300 text-sm mb-2">Escopo mínimo que responde à pergunta: "isso funciona aqui?" Com dados reais, usuários reais, mas volume controlado. Resultado esperado: sim ou não, com dados.</p>
+          <p class="text-neutral-500 text-xs">Duração típica: 4-8 semanas. Critério de saída: métrica pré-definida atingida.</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5">
+          <div class="flex items-center space-x-3 mb-2">
+            <span class="text-2xl">🚶</span>
+            <h4 class="font-bold text-amber-400">Walk — ampliar cobertura</h4>
+          </div>
+          <p class="text-neutral-300 text-sm mb-2">Expande o que crawl validou para mais casos de uso, mais usuários ou mais volume. Constrói as capacidades reutilizáveis e integra com mais sistemas.</p>
+          <p class="text-neutral-500 text-xs">Duração típica: 8-16 semanas. Pré-requisito: crawl validado.</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5">
+          <div class="flex items-center space-x-3 mb-2">
+            <span class="text-2xl">🏃</span>
+            <h4 class="font-bold text-amber-400">Run — escalar</h4>
+          </div>
+          <p class="text-neutral-300 text-sm mb-2">O padrão vai para toda a organização ou toda a operação. Os processos de monitoramento e manutenção já existem. O time sabe operar.</p>
+          <p class="text-neutral-500 text-xs">Duração típica: contínuo. Pré-requisito: walk validado com SLA definido.</p>
+        </div>
+      </div>
+
+      <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+        <h3 class="text-lg font-semibold text-red-400 mb-3 flex items-center"><span class="mr-2">⚠️</span> O erro mais caro</h3>
+        <p class="text-neutral-300">Ir direto para Run sem passar por Crawl. O rollback de uma solução que foi para toda a operação sem validação custa 10× mais do que um piloto que falhou.</p>
+      </div>
+    </section>
+
+    <!-- TÓPICO 2 -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl">2</span>
+        <h2 class="text-2xl font-bold">🔗 Dependências: dados e fundação primeiro</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">A maior fonte de atraso em projetos de IA não é o modelo — são as dependências não mapeadas: dados que não existem ou não têm qualidade suficiente, integrações que levam meses, permissões que exigem aprovação jurídica.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-amber-900/20 rounded-xl border border-amber-500/30 p-6">
+          <h4 class="font-bold text-amber-400 mb-4">Dependências comuns</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-amber-400">🗄️</span><span><strong>Dados:</strong> existência, qualidade, acesso, privacidade</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">🔌</span><span><strong>Integrações:</strong> APIs de sistemas legados, CRM, ERP</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">👥</span><span><strong>Equipe:</strong> capacidade técnica, treinamento, tempo</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">⚖️</span><span><strong>Governança:</strong> compliance, LGPD, aprovações</span></li>
+          </ul>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+          <h4 class="font-bold text-neutral-300 mb-4">Ordem recomendada</h4>
+          <div class="space-y-2 text-sm">
+            <div class="flex items-center space-x-2"><span class="text-amber-400 font-bold w-6">1.</span><span class="text-neutral-300">Auditoria e limpeza de dados</span></div>
+            <div class="flex items-center space-x-2"><span class="text-amber-400 font-bold w-6">2.</span><span class="text-neutral-300">Infraestrutura de acesso e pipelines</span></div>
+            <div class="flex items-center space-x-2"><span class="text-amber-400 font-bold w-6">3.</span><span class="text-neutral-300">Integrações críticas mínimas</span></div>
+            <div class="flex items-center space-x-2"><span class="text-amber-400 font-bold w-6">4.</span><span class="text-neutral-300">Primeiro caso de uso (crawl)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Dica prática</h3>
+        <p class="text-neutral-300">Mapeie dependências no primeiro sprint, antes de escrever código. Use uma tabela simples: dependência, responsável, prazo, bloqueador. Revise semanalmente. Dependências invisíveis são o maior risco de cronograma.</p>
+      </div>
+    </section>
+
+    <!-- TÓPICO 3 -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl">3</span>
+        <h2 class="text-2xl font-bold">🏆 Sequenciar por valor, risco e aprendizado</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Quando há múltiplos casos de uso candidatos, o critério de sequência não é "o mais empolgante" nem "o que o CTO pediu". É uma <strong class="text-amber-400">combinação de valor potencial, risco de execução e o que o caso ensina</strong> para os próximos.</p>
+
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center"><span class="mr-2">📐</span> Critérios de sequenciamento</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm border-collapse">
+            <thead>
+              <tr class="bg-dark-900/50">
+                <th class="text-left p-3 text-amber-400 border border-dark-600">Critério</th>
+                <th class="text-left p-3 text-amber-400 border border-dark-600">O que avaliar</th>
+                <th class="text-left p-3 text-amber-400 border border-dark-600">Ideal para 1ª onda</th>
+              </tr>
+            </thead>
+            <tbody class="text-neutral-300">
+              <tr class="border-b border-dark-600">
+                <td class="p-3 border border-dark-600 font-medium">Valor</td>
+                <td class="p-3 border border-dark-600">Quanto impacto se funcionar (R$ ou tempo)</td>
+                <td class="p-3 border border-dark-600">Visível e significativo, mas não crítico</td>
+              </tr>
+              <tr class="border-b border-dark-600">
+                <td class="p-3 border border-dark-600 font-medium">Risco</td>
+                <td class="p-3 border border-dark-600">Chance de falhar × custo do erro</td>
+                <td class="p-3 border border-dark-600">Controlável, erro tolerável</td>
+              </tr>
+              <tr>
+                <td class="p-3 border border-dark-600 font-medium">Aprendizado</td>
+                <td class="p-3 border border-dark-600">O que esse caso ensina para os próximos</td>
+                <td class="p-3 border border-dark-600">Alto — desbloqueará capacidades reutilizáveis</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 4 -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl">4</span>
+        <h2 class="text-2xl font-bold">🧱 Capacidades reutilizáveis</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">O consultor que pensa em plataforma antes de feature reduz o custo marginal de cada onda seguinte. Uma capacidade reutilizável é qualquer bloco construído num caso de uso que <strong class="text-amber-400">pode ser aproveitado nos próximos sem reconstrução</strong>.</p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+          <div class="text-amber-400 font-bold mb-2 text-sm">Pipeline de dados</div>
+          <p class="text-xs text-neutral-400">Ingestão, limpeza e normalização de dados. Construída uma vez, serve todos os modelos.</p>
+        </div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+          <div class="text-amber-400 font-bold mb-2 text-sm">Extração de entidades</div>
+          <p class="text-xs text-neutral-400">Módulo que identifica pessoas, produtos, datas. Reutilizável em qualquer caso com texto.</p>
+        </div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+          <div class="text-amber-400 font-bold mb-2 text-sm">Camada de API</div>
+          <p class="text-xs text-neutral-400">Integração com sistemas de negócio. Construída para um caso, serve os próximos.</p>
+        </div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+          <div class="text-amber-400 font-bold mb-2 text-sm">Monitoramento de drift</div>
+          <p class="text-xs text-neutral-400">Sistema de alertas quando o comportamento do modelo muda. Vale para todos os modelos.</p>
+        </div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+          <div class="text-amber-400 font-bold mb-2 text-sm">Templates de prompt</div>
+          <p class="text-xs text-neutral-400">Padrões de prompt testados para tarefas recorrentes. Reutilizáveis com variação mínima.</p>
+        </div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+          <div class="text-amber-400 font-bold mb-2 text-sm">Avaliação automática</div>
+          <p class="text-xs text-neutral-400">Framework de testes de qualidade de saída. Reaproveitado em todos os módulos de IA.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 5 -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl">5</span>
+        <h2 class="text-2xl font-bold">🗓️ Roadmap visual com marcos e responsáveis</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">O roadmap visual serve a um propósito prático: <strong class="text-amber-400">alinhar expectativas</strong>. Quando todos olham para o mesmo diagrama, as divergências aparecem na reunião de planejamento — não no mês do prazo.</p>
+
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center"><span class="mr-2">📋</span> Estrutura mínima do roadmap</h3>
+        <div class="space-y-3">
+          <div class="flex items-start space-x-3 bg-dark-900/40 rounded-lg p-3">
+            <span class="text-amber-400 font-bold text-sm w-28 flex-shrink-0">Ondas</span>
+            <p class="text-neutral-300 text-sm">Crawl / Walk / Run claramente separados no tempo, com duração estimada e datas-âncora.</p>
+          </div>
+          <div class="flex items-start space-x-3 bg-dark-900/40 rounded-lg p-3">
+            <span class="text-amber-400 font-bold text-sm w-28 flex-shrink-0">Casos de uso</span>
+            <p class="text-neutral-300 text-sm">Cada bloco numa linha ou coluna, com nome, responsável e onda de execução.</p>
+          </div>
+          <div class="flex items-start space-x-3 bg-dark-900/40 rounded-lg p-3">
+            <span class="text-amber-400 font-bold text-sm w-28 flex-shrink-0">Marcos</span>
+            <p class="text-neutral-300 text-sm">Go/no-go ao final de cada onda, com critério de sucesso visível.</p>
+          </div>
+          <div class="flex items-start space-x-3 bg-dark-900/40 rounded-lg p-3">
+            <span class="text-amber-400 font-bold text-sm w-28 flex-shrink-0">Dependências</span>
+            <p class="text-neutral-300 text-sm">Setas ligando o que depende do quê. As críticas ficam em vermelho.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Dica prática</h3>
+        <p class="text-neutral-300">Ferramenta não importa: uma tabela no Google Docs ou um quadro no Miro funcionam igual. O que importa é que seja público, atualizado semanalmente e que todo mundo saiba onde achar.</p>
+      </div>
+    </section>
+
+    <!-- TÓPICO 6 -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl">6</span>
+        <h2 class="text-2xl font-bold">🔁 Replanejar com o que o piloto ensinou</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">O piloto é o melhor consultor que você vai ter. Ele revela o que o planejamento não conseguia ver: dados piores do que o esperado, integração mais complexa, ou um caso de uso que entregou 3× mais valor do que o previsto. <strong class="text-amber-400">Usar esses dados para replanejar é obrigatório</strong>.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-amber-900/20 rounded-xl border border-amber-500/30 p-6">
+          <h4 class="font-bold text-amber-400 mb-4">O que o piloto frequentemente ensina</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-amber-400">→</span><span>Os dados têm mais lacunas do que o mapeamento mostrou</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">→</span><span>A integração com sistema legado vai levar 2× mais tempo</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">→</span><span>Um caso adjacente não mapeado tem valor maior</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">→</span><span>O modelo funciona bem, mas a equipe resiste à adoção</span></li>
+          </ul>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+          <h4 class="font-bold text-neutral-300 mb-4">Revisão formal pós-onda</h4>
+          <div class="space-y-2 text-sm">
+            <div class="flex items-start space-x-2"><span class="text-amber-400 font-bold">1.</span><span class="text-neutral-300">O que aconteceu vs. o que esperávamos</span></div>
+            <div class="flex items-start space-x-2"><span class="text-amber-400 font-bold">2.</span><span class="text-neutral-300">O que isso muda na próxima onda</span></div>
+            <div class="flex items-start space-x-2"><span class="text-amber-400 font-bold">3.</span><span class="text-neutral-300">O que cancela ou reprioriza</span></div>
+            <div class="flex items-start space-x-2"><span class="text-amber-400 font-bold">4.</span><span class="text-neutral-300">Roadmap atualizado publicado</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESUMO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-amber-900/40 via-dark-800 to-dark-800 rounded-xl border border-amber-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">🎒</span> Resumo do módulo</h2>
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3"><span class="text-amber-400 mt-1">✓</span><div><strong class="text-white">Crawl → Walk → Run</strong><span class="text-neutral-400"> — cada onda valida o que a próxima precisa para funcionar.</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-amber-400 mt-1">✓</span><div><strong class="text-white">Dependências mapeadas no início</strong><span class="text-neutral-400"> — dado e fundação antes de qualquer caso de uso.</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-amber-400 mt-1">✓</span><div><strong class="text-white">Sequenciar por valor + risco + aprendizado</strong><span class="text-neutral-400"> — não pelo mais empolgante.</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-amber-400 mt-1">✓</span><div><strong class="text-white">Construir capacidades reutilizáveis</strong><span class="text-neutral-400"> — reduz o custo marginal de cada onda seguinte.</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-amber-400 mt-1">✓</span><div><strong class="text-white">Replanejar com os dados do piloto</strong><span class="text-neutral-400"> — o plano é hipótese, não decreto.</span></div></div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+          <h3 class="font-semibold text-amber-400 mb-2">Próximo módulo:</h3>
+          <p class="text-neutral-300">4.3 — Escolher o nível da pirâmide para cada caso</p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="modulo-4-1.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Módulo 4.1</a>
+          <a href="modulo-4-3.html" class="flex-1 text-center px-6 py-3 bg-amber-600 text-white rounded-lg font-semibold hover:bg-amber-500 transition-colors">Próximo Módulo →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>Consultor de IA · Módulo 4.2 · <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a> · 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark');
+    } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,315 @@
+{
+  "summary": "Deep research harness — fan-out web searches, fetch sources, adversarially verify claims, synthesize a cited report.",
+  "agentCount": 105,
+  "logs": [
+    "Q: Como formatar de forma prática um conteúdo/metodologia (curso, playbook, kit de …",
+    "Decomposed into 5 angles: broad/primary - frameworks e estrutura de engajamento, AI readiness e maturity assessment com templates, priorizacao de casos de uso por valor/ROI/viabilidade, governanca e auditoria de IA (padroes formais), contrarian/filosofia - piramide de solucoes e nao forcar IA",
+    "governanca e auditoria de IA (padroes formais): 6 results",
+    "AI readiness e maturity assessment com templates: 6 results",
+    "priorizacao de casos de uso por valor/ROI/viabilidade: 6 results",
+    "priorizacao de casos de uso por valor/ROI/viabilidade: 3 novel (3 filtered)",
+    "contrarian/filosofia - piramide de solucoes e nao forcar IA: 6 results",
+    "contrarian/filosofia - piramide de solucoes e nao forcar IA: 4 novel (2 filtered)",
+    "broad/primary - frameworks e estrutura de engajamento: 6 results",
+    "broad/primary - frameworks e estrutura de engajamento: 4 novel (2 filtered)",
+    "Fetched 23 sources → 109 claims → verifying top 25",
+    "\"The toolkit prioritizes AI initiatives by identify…\": 3-0 ✓",
+    "\"Gartner's AI maturity model assesses organizations…\": 3-0 ✓",
+    "\"The Gartner AI maturity model groups organizations…\": 0-3 ✗",
+    "\"The NIST AI RMF Playbook provides suggested action…\": 3-0 ✓",
+    "\"MITRE's AI Maturity Model defines five maturity le…\": 3-0 ✓",
+    "\"The Playbook is explicitly voluntary and not a che…\": 3-0 ✓",
+    "\"MITRE prescribes a concrete five-step assessment-t…\": 3-0 ✓",
+    "\"The companion AI Assessment Tool is a 20-question …\": 3-0 ✓",
+    "\"The model converts assessment gaps into a prioriti…\": 2-1 ✓",
+    "\"NIST AI RMF 1.0 organizes AI risk management into …\": 3-0 ✓",
+    "\"When building LLM applications, the recommended ap…\": 3-0 ✓",
+    "\"The MAP function exists precisely to determine whe…\": 1-2 ✗",
+    "\"Agentic systems trade latency and cost for better …\": 3-0 ✓",
+    "\"Anthropic draws an architectural distinction betwe…\": 3-0 ✓",
+    "\"NIST defines AI risk as a composite measure combin…\": 2-1 ✓",
+    "\"AI maturity models are frameworks that assess an o…\": 3-0 ✓",
+    "\"Workflows are preferable for well-defined tasks be…\": 3-0 ✓",
+    "\"Existing AI maturity models define anywhere from 4…\": 3-0 ✓",
+    "\"Fountain City's AI readiness model defines five or…\": 3-0 ✓",
+    "\"The value of a maturity assessment lies less in th…\": 3-0 ✓",
+    "\"The assessment evaluates an organization across se…\": 3-0 ✓",
+    "\"The framework prescribes that an assessment's outp…\": 2-1 ✓",
+    "\"CIGen's prioritization framework scores AI use cas…\": 2-1 ✓",
+    "\"McKinsey advises applying AI selectively — only wh…\": 3-0 ✓",
+    "\"McKinsey's 'Triple the return' framework holds tha…\": 3-0 ✓",
+    "Verify done: 25 claims → 23 confirmed, 2 killed"
+  ],
+  "result": {
+    "question": "Como formatar de forma prática um conteúdo/metodologia (curso, playbook, kit de entregáveis) para profissionais atuarem como consultores de IA em empresas, cobrindo três competências centrais: (1) MAPEAR oportunidades de IA e identificar a restrição real do negócio (não forçar IA onde não cabe); (2) AUDITAR maturidade, dados, processos e prontidão para IA; (3) construir PLANOS DE EXECUÇÃO de IA priorizados por ROI/risco.\n\nEnquadramento filosófico central que deve guiar a pesquisa: o trabalho do consultor não muda — entrar na empresa, identificar a restrição real, prescrever a solução mais simples que funcione. IA é a caixa de ferramentas, não a descrição do cargo. Forçar IA onde não cabe destrói a confiança do cliente. Usar o modelo de PIRÂMIDE de soluções: BASE = workflows determinísticos (sem IA, baratos, rápidos, confiáveis); MEIO = workflows com IA (mais poder, mais custo, mais pontos de falha); TOPO = agentes de IA (capacidade e risco máximos). Começar pela base, só subir quando o problema realmente exigir.\n\nPesquisar e trazer: frameworks reais de consultoria de IA usados no mercado; metodologias de AI readiness assessment / AI maturity models (ex: Gartner, McKinsey, governamentais); frameworks de identificação e priorização de casos de uso de IA (value vs feasibility, ROI); estrutura de AI audit / governança (NIST AI RMF, ISO 42001); templates e entregáveis concretos (assessment questionnaires, opportunity matrix, roadmaps); modelos de precificação e escopo de engajamento de consultoria; e como estruturar tudo isso didaticamente num curso/programa de formação de consultores. Trazer exemplos de deliverables e estrutura de módulos.",
+    "summary": "Para formatar uma metodologia/curso que forme consultores de IA cobrindo MAPEAR, AUDITAR e PLANEJAR, o pilar conceitual mais bem sustentado pelas evidencias é o da restrição (\"constraint-first\"): o consultor entra, identifica o gargalo real do negócio e prescreve a solução mais simples que funcione — IA é a caixa de ferramentas, não a descrição do cargo. Isso é diretamente respaldado pela McKinsey (\"Don't AI the wrong thing\") e pela Anthropic (começar pela solução mais simples, podendo significar não construir agentes), o que valida o modelo de PIRÂMIDE (workflows determinísticos na base, workflows com IA no meio, agentes no topo). Para o módulo de AUDITORIA, há frameworks reusáveis e maduros — o MITRE AI Maturity Model (5 níveis, 6 pilares, 20 dimensões, questionário de 20 perguntas auto-pontuado e fluxo de 5 passos prepare→identificar time→responder→planejar→repetir) é o template mais concreto e gratuito; complementado por Gartner (7 pilares com roadmap priorizado por feasibility-vs-value) e modelos didáticos de estágios (4 a 7 estágios). Para o módulo de PLANEJAMENTO/governança, NIST AI RMF (funções Govern/Map/Measure/Manage, explicitamente voluntário e não-checklist, com risco = probabilidade × magnitude do dano) e a fórmula de priorização ponderada da CIGen (Value, Feasibility, Data, Compliance, Time-to-value, Strategic Fit) fornecem a estrutura de priorização por ROI/risco e os entregáveis. O fio condutor pedagógico recorrente em múltiplas fontes: o output da auditoria não é uma nota, é uma lista priorizada de ações onde o primeiro \"projeto de IA\" ataca o gargalo identificado (ex.: se o gargalo é dado, o primeiro projeto é engenharia de dados; se é cultura, é educação interna).",
+    "findings": [
+      {
+        "claim": "PILAR FILOSOFICO (valida o enquadramento do curso): o trabalho do consultor é identificar a restrição real e prescrever a solução mais simples — não forçar IA. McKinsey: 'Don't AI the wrong thing'; Anthropic: começar pela solução mais simples, o que pode significar não construir agentes. Isso ancora o módulo MAPEAR e justifica o modelo de pirâmide.",
+        "confidence": "high",
+        "vote": "3-0 (McKinsey) + 3-0 (Anthropic)",
+        "sources": [
+          "https://www.mckinsey.com/about-us/new-at-mckinsey-blog/beyond-the-buzz-making-ai-work-for-real-business-value",
+          "https://www.anthropic.com/research/building-effective-agents"
+        ],
+        "evidence": "McKinsey: 'Don't \"AI the wrong thing.\" Apply AI where autonomy, reasoning, and adaptability truly add value... while keeping traditional automation where it still works best.' Anthropic: 'When building applications with LLMs, we recommend finding the simplest solution possible, and only increasing complexity when needed. This might mean not building agentic systems at all.' Ambos primários, votos unânimes."
+      },
+      {
+        "claim": "MODELO DE PIRAMIDE DE SOLUCOES (base do curso): a distinção arquitetural workflows (caminhos de código predefinidos) vs agentes (LLMs que dirigem dinamicamente seu processo) mapeia diretamente num modelo em camadas de complexidade. Workflows = previsibilidade/consistência para tarefas bem-definidas; agentes = flexibilidade/decisão dirigida por modelo, apenas quando necessário e em escala; muitas vezes uma única chamada LLM otimizada basta. Agentes trocam latência e custo por desempenho — tradeoff a avaliar deliberadamente.",
+        "confidence": "high",
+        "vote": "3-0 (todas as sub-claims)",
+        "sources": [
+          "https://www.anthropic.com/research/building-effective-agents"
+        ],
+        "evidence": "Anthropic define: 'Workflows are systems where LLMs and tools are orchestrated through predefined code paths. Agents... dynamically direct their own processes and tool usage.' E: 'workflows offer predictability and consistency for well-defined tasks, whereas agents are the better option when flexibility and model-driven decision-making are needed at scale. For many applications, however, optimizing single LLM calls... is usually enough.' E: 'Agentic systems often trade latency and cost for better task performance.' Fonte primária autoritativa, 4 claims independentes todas 3-0."
+      },
+      {
+        "claim": "ESTRATEGIA DE EXECUCAO/VALOR (reforça MAPEAR e PLANEJAR): McKinsey 'Triple the return' sustenta que empresas top geram até 3x mais valor de investimentos em tecnologia não por gastar mais, mas por executar melhor, via três movimentos: Reimagine the business through tech, Rewire technology for speed and scale, Rehumanize the organization. Útil como narrativa de abertura/ROI do curso.",
+        "confidence": "high",
+        "vote": "3-0",
+        "sources": [
+          "https://www.mckinsey.com/about-us/new-at-mckinsey-blog/beyond-the-buzz-making-ai-work-for-real-business-value",
+          "https://www.mckinsey.com/capabilities/tech-and-ai/our-insights/triple-the-return-how-companies-can-get-more-from-enterprise-tech"
+        ],
+        "evidence": "Confirmado em fonte primária e em artigo dedicado da McKinsey: '...generate up to three times more value... The difference lies not in spending more, but in executing better: Reimagine... Rewire... Rehumanize.' Caveat: o número '3x' é estatística própria da McKinsey, não auditada de forma independente — usar como framing, não como métrica garantida."
+      },
+      {
+        "claim": "TEMPLATE DE AUDITORIA MAIS CONCRETO E REUSAVEL (módulo AUDITAR): o MITRE AI Maturity Model — gratuito, vendor-neutro (FFRDC) — oferece 5 níveis (Initial, Engaged, Defined, Managed, Optimized), 6 pilares (Uso Ético/Equitativo/Responsável; Estratégia e Recursos; Organização; Habilitadores Tecnológicos; Dados; Desempenho e Aplicação) e 20 dimensões. A ferramenta companheira (AI Assessment Tool) é um questionário de 20 perguntas de múltipla escolha (1 por dimensão) que gera score e visualização gráfica automaticamente — entregável diretamente reaproveitável no curso.",
+        "confidence": "high",
+        "vote": "3-0 (estrutura) + 3-0 (questionário)",
+        "sources": [
+          "https://www.mitre.org/sites/default/files/2023-11/PR-22-1879-MITRE-AI-Maturity-Model-and-Organizational-Assessment-Tool-Guide.pdf",
+          "https://aimaturitymodel.mitre.org"
+        ],
+        "evidence": "Guia MITRE: 'organized according to six pillars... Each pillar has either three or four dimensions (20 total)... five levels of maturity: Initial, Engaged, Defined, Managed, and Optimized.' E: 'The AI AT consists of 20 multiple-choice questions—one for each dimension... generates a score and graphical visualization of results.' Caveat: o factsheet 2024 rotula o nível 2 como 'Adopted' em vez de 'Engaged' — versões divergem levemente."
+      },
+      {
+        "claim": "FLUXO AUDITORIA→PLANO (estrutura de processo do curso): o MITRE prescreve 5 passos — (1) preparar, (2) identificar o time de avaliação, (3) responder as perguntas, (4) desenvolver plano para aumentar maturidade, (5) repetir periodicamente. O modelo converte gaps em plano priorizado comparando maturidade atual vs alvo por dimensão e orçando esforço/cronograma com base nas dependências entre próximos passos. Mapeia diretamente na motion 'auditar→planejar' da consultoria.",
+        "confidence": "high",
+        "vote": "3-0 (5 passos) + 2-1 (conversão gap→plano)",
+        "sources": [
+          "https://www.mitre.org/sites/default/files/2023-11/PR-22-1879-MITRE-AI-Maturity-Model-and-Organizational-Assessment-Tool-Guide.pdf"
+        ],
+        "evidence": "MITRE: '3. Answer the questions... 4. Develop a plan to increase AI maturity. 5. Repeat the assessment periodically.' E: 'Leverage the differences between current and targeted levels... Assess the level of effort associated with next steps and dependencies between them to develop a budget and timeline.' CAVEAT (voto 2-1): o rótulo 'ROI/feasibility roadmap' é glosa editorial — o MITRE prioriza por missão/recursos/práticas de negócio, NÃO por scoring ROI ou value-vs-feasibility. O mecanismo gap→esforço/dependências→orçamento/cronograma está sólido."
+      },
+      {
+        "claim": "MODELO DE MATURIDADE DA GARTNER (alternativa premium para AUDITAR + priorização): avalia 7 pilares — strategy, data, governance, engineering, operating model, culture, AI product/value — e prioriza iniciativas identificando gaps entre maturidade atual e alvo, selecionando as oportunidades mais viáveis de maior valor (lógica feasibility-vs-value), gerando roadmap priorizado.",
+        "confidence": "high",
+        "vote": "3-0 (7 pilares) + 3-0 (priorização)",
+        "sources": [
+          "https://www.gartner.com/en/chief-information-officer/research/ai-maturity-model-toolkit"
+        ],
+        "evidence": "Gartner: 'maturity score across strategy, data, governance, engineering, operating model, culture and AI product/value — plus a prioritized roadmap.' E: 'identify the most feasible opportunities that promise the greatest value.' Caveat: é vendor copy (Gartner descrevendo seu próprio toolkit, pago) — a claim só descreve o que o toolkit se propõe a fazer. NOTA: a versão de '5 estágios da Gartner' (Foundational/Emerging/Operational/Scaled/Transformational) foi REFUTADA (0-3) — não usar essa nomenclatura."
+      },
+      {
+        "claim": "DEFINICAO E ESTAGIOS DE MATURIDADE PARA ENSINO (escada didática do módulo AUDITAR): modelos de maturidade de IA avaliam prontidão, capacidades e impacto em data infrastructure, talent, governance e business outcomes. Existem modelos com 4 a 7 estágios; um modelo didático de 4 estágios: Awareness/Experimentation, Active/Operational, Expansion/Mature, Leading/Transformational. O valor está menos nos rótulos e mais em identificar capacidades/gaps e produzir roadmap (coleta de dados, investimento em tecnologia, gestão de mudança).",
+        "confidence": "medium",
+        "vote": "3-0 (mas fonte secundária)",
+        "sources": [
+          "https://thedecisionlab.com/reference-guide/management/ai-maturity-models"
+        ],
+        "evidence": "The Decision Lab: 'frameworks that help organizations assess their effectiveness in using AI by measuring readiness, capabilities, and impact... data infrastructure, talent, governance, and business outcomes.' E: 'maturity is less about labels, and more about... assessing their capabilities and readiness.' Caveat: fonte secundária (reference-guide), porém corroborada por Gartner/Microsoft/BMC e voto unânime; claim definicional de baixa controvérsia."
+      },
+      {
+        "claim": "PRINCIPIO DA RESTRICAO OPERACIONALIZADO (núcleo de MAPEAR + entregável-chave): o modelo Fountain City (5 estágios: Awareness, Exploratory, Operational, Systematized, Transformational; 7 domínios) trata o domínio de menor score como prioridade máxima por ser o gargalo. O output da avaliação NÃO é uma nota — é uma lista priorizada de ações, e o primeiro 'projeto de IA' ataca o gargalo (se o gargalo é dado → projeto de engenharia de dados; se é cultura → educação interna). 'Enabling projects' devem preceder 'value projects'.",
+        "confidence": "medium",
+        "vote": "3-0 (estágios/domínios) + 2-1 (output=lista priorizada)",
+        "sources": [
+          "https://fountaincity.tech/resources/blog/ai-readiness-evaluation/"
+        ],
+        "evidence": "Fountain City: 'your lowest-scored domain becomes your highest priority because it limits your ability to progress.' E: 'The output of an assessment is not a score. It is a prioritized list of actions. If data is your bottleneck, your first \"AI project\" is actually a data engineering project. If culture is the bottleneck, your first project is internal education.' Caveat: framework de um único vendor (consultoria) — usar como ilustrativo, não canônico. Tensão interna leve: a mesma página também oferece um self-scoring tool de 10 perguntas e um score de 5 estágios."
+      },
+      {
+        "claim": "ESTRUTURA DE GOVERNANCA / AUDITORIA DE RISCO (módulo AUDITAR + PLANEJAR): NIST AI RMF 1.0 organiza a gestão de risco em 4 funções — GOVERN (camada transversal de cultura/governança), MAP, MEASURE, MANAGE — sendo que a maioria começa por MAP e segue para MEASURE/MANAGE, iterativamente. O Playbook fornece ações sugeridas alinhadas a cada subcategoria das 4 funções, é explicitamente VOLUNTARIO e NÃO uma checklist — organizações adotam tantas ou tão poucas sugestões quanto se aplicam. Mapeia na motion auditar-e-executar e reforça 'prescrever só o que cabe'.",
+        "confidence": "high",
+        "vote": "3-0 (4 funções) + 3-0 (Playbook) + 3-0 (voluntário)",
+        "sources": [
+          "https://nvlpubs.nist.gov/nistpubs/ai/nist.ai.100-1.pdf",
+          "https://airc.nist.gov/airmf-resources/playbook/"
+        ],
+        "evidence": "NIST: 'GOVERN is a cross-cutting function... most users of the AI RMF would start with the MAP function and continue to MEASURE or MANAGE... iterative.' Playbook: 'neither a checklist nor set of steps to be followed in its entirety. Playbook suggestions are voluntary. Organizations may utilize... borrowing as many – or as few – suggestions as apply.' Fontes governamentais primárias, AI RMF 1.0 ainda vigente. NOTA: a claim de que MAP produz um go/no-go explícito sobre IA foi REFUTADA (1-2) — não afirmar isso."
+      },
+      {
+        "claim": "FORMULA DE PRIORIZACAO POR ROI/RISCO (núcleo do módulo PLANEJAR): NIST define risco como medida composta de probabilidade × magnitude do dano, dando ao consultor base para priorizar casos de uso por risco. A CIGen oferece fórmula ponderada concreta de priorização de casos de uso com 6 critérios: Value, Feasibility, Data, Compliance/risk, Time-to-value, Strategic Fit (Weighted = w_value·Value + w_feas·Feasibility + w_data·Data + w_risk·Compliance + w_time·Time + w_fit·StrategicFit). Entregável reaproveitável como matriz/planilha de priorização.",
+        "confidence": "medium",
+        "vote": "2-1 (NIST risco) + 2-1 (CIGen fórmula)",
+        "sources": [
+          "https://nvlpubs.nist.gov/nistpubs/ai/nist.ai.100-1.pdf",
+          "https://www.cigen.io/insights/ai-use-case-prioritization-the-critical-step-in-a-practical-ai-adoption-journey"
+        ],
+        "evidence": "NIST: 'risk refers to the composite measure of an event's probability of occurring and the magnitude or degree of the consequences.' CIGen: 'Weighted = w_value·Value + w_feas·Feasibility + w_data·Data + w_risk·Compliance + w_time·Time (+ w_fit·StrategicFit).' Caveats: a aplicação 'fórmula de ROI' é glosa do pesquisador sobre o NIST (NIST nota que impactos podem ser positivos/negativos); CIGen é fonte secundária/primária do próprio vendor, com StrategicFit opcional (parênteses) e Cost mencionado à parte — é um template configurável, não fórmula proprietária fixa."
+      }
+    ],
+    "caveats": "1) Mistura de tipos de fonte: as fundações conceituais (Anthropic, McKinsey) e os frameworks de governança (NIST AI RMF) são fontes primárias autoritativas e gov/vendor-neutro; já MITRE é primário e vendor-neutro (FFRDC, gratuito) — esses são os mais sólidos para basear o curso. Em contraste, Gartner (toolkit pago, vendor copy), Fountain City (consultoria, framework próprio) e CIGen (vendor) são descrições dos próprios produtos: úteis como exemplos de entregável, mas devem ser citados como ilustrativos, não como padrões canônicos. 2) Divergência de versões/nomenclatura: o nível 2 do MITRE aparece como 'Engaged' (guia 2022/2023) e 'Adopted' (factsheet 2024); a tentativa de atribuir à Gartner uma escada de 5 estágios nomeada (Foundational/Emerging/Operational/Scaled/Transformational) foi REFUTADA — não use essa nomenclatura. 3) Glosas editoriais a vigiar: 'ROI/feasibility roadmap' atribuído ao MITRE e 'fórmula de ROI' atribuída ao NIST são interpretações do pesquisador — o MITRE prioriza por missão/recursos e o NIST define risco (não ROI) explicitamente. 4) A afirmação de que a função MAP do NIST produz um go/no-go explícito sobre adotar IA foi REFUTADA (1-2): não ensine isso como fato do NIST. 5) Estatísticas auto-promocionais (ex.: '3x' da McKinsey, scores de toolkits) não são auditadas independentemente. 6) Recência: tudo verificado vigente em meados de 2026 (NIST AI RMF 1.0 de jan/2023 ainda é a versão atual; metodologias de maturidade são estáveis, não benchmarks voláteis). 7) Lacuna de evidência: nenhuma fonte verificada cobre diretamente PRECIFICACAO/ESCOPO de engajamento de consultoria nem ESTRUTURA PEDAGOGICA/MODULAR de um curso — esses elementos do pedido ficaram sem suporte de evidência verificada e precisariam de pesquisa adicional.",
+    "openQuestions": [
+      "Quais modelos concretos de PRECIFICACAO e ESCOPO de engajamento de consultoria de IA são praticados no mercado (fixo vs por valor vs retainer; faixas de preço por porte de cliente)? Nenhuma das fontes verificadas endereçou isso.",
+      "Como estruturar didaticamente o curso em MODULOS e sequência de aprendizagem (carga horária, exercícios, casos práticos, certificação)? As fontes deram os frameworks-conteúdo, mas não a engenharia pedagógica do programa de formação.",
+      "Como traduzir a fórmula de priorização ponderada (CIGen) e a definição de risco do NIST numa MATRIZ/PLANILHA de priorização única e padronizada (com pesos default sugeridos) que o consultor aplique de forma repetível em campo?",
+      "Existe um mapeamento validado entre os níveis da PIRAMIDE (workflow determinístico → workflow com IA → agente) e gatilhos objetivos de decisão (critérios mensuráveis de quando subir de camada), além do tradeoff qualitativo latência/custo×desempenho da Anthropic?"
+    ],
+    "refuted": [
+      {
+        "claim": "The Gartner AI maturity model groups organizations into five stages: Foundational (ad hoc experimentation), Emerging (early pilots), Operational (AI embedded in select processes with defined ownership), Scaled (deployed across functions with measurable ROI), and Transformational (AI reshapes decision making and operating models).",
+        "vote": "0-3",
+        "source": "https://www.gartner.com/en/chief-information-officer/research/ai-maturity-model-toolkit"
+      },
+      {
+        "claim": "The MAP function exists precisely to determine whether AI is an appropriate or necessary tool for a given context, and its completion produces an explicit initial go/no-go decision on whether to design, develop, or deploy an AI system — formalizing the 'don't force AI where it doesn't fit' principle.",
+        "vote": "1-2",
+        "source": "https://nvlpubs.nist.gov/nistpubs/ai/nist.ai.100-1.pdf"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://dev.to/wedgemethoddev/how-i-structure-every-ai-consulting-engagement-the-5-phase-framework-13f8",
+        "quality": "blog",
+        "angle": "broad/primary - frameworks e estrutura de engajamento",
+        "claimCount": 5
+      },
+      {
+        "url": "https://easytechpartners.com/en/blog/ai-roadmap-consulting-how-to-plan-cost-and-choose-the-right-partner-in-2026/",
+        "quality": "blog",
+        "angle": "broad/primary - frameworks e estrutura de engajamento",
+        "claimCount": 5
+      },
+      {
+        "url": "https://www.businessplusai.com/blog/ai-consulting-packages-a-comprehensive-pricing-guide-for-businesses",
+        "quality": "blog",
+        "angle": "broad/primary - frameworks e estrutura de engajamento",
+        "claimCount": 5
+      },
+      {
+        "url": "https://www.mckinsey.com/about-us/new-at-mckinsey-blog/beyond-the-buzz-making-ai-work-for-real-business-value",
+        "quality": "primary",
+        "angle": "broad/primary - frameworks e estrutura de engajamento",
+        "claimCount": 5
+      },
+      {
+        "url": "https://www.gartner.com/en/chief-information-officer/research/ai-maturity-model-toolkit",
+        "quality": "primary",
+        "angle": "AI readiness e maturity assessment com templates",
+        "claimCount": 5
+      },
+      {
+        "url": "https://www.mitre.org/sites/default/files/2023-11/PR-22-1879-MITRE-AI-Maturity-Model-and-Organizational-Assessment-Tool-Guide.pdf",
+        "quality": "primary",
+        "angle": "AI readiness e maturity assessment com templates",
+        "claimCount": 5
+      },
+      {
+        "url": "https://thinking.inc/en/pillar-pages/ai-maturity-model/",
+        "quality": "blog",
+        "angle": "AI readiness e maturity assessment com templates",
+        "claimCount": 5
+      },
+      {
+        "url": "https://thedecisionlab.com/reference-guide/management/ai-maturity-models",
+        "quality": "secondary",
+        "angle": "AI readiness e maturity assessment com templates",
+        "claimCount": 5
+      },
+      {
+        "url": "https://fountaincity.tech/resources/blog/ai-readiness-evaluation/",
+        "quality": "secondary",
+        "angle": "AI readiness e maturity assessment com templates",
+        "claimCount": 5
+      },
+      {
+        "url": "https://agility-at-scale.com/ai/data/data-strategy-for-ai-maturity-model/",
+        "quality": "blog",
+        "angle": "AI readiness e maturity assessment com templates",
+        "claimCount": 4
+      },
+      {
+        "url": "https://agility-at-scale.com/ai/strategy/ai-use-case-identification-and-prioritization/",
+        "quality": "blog",
+        "angle": "priorizacao de casos de uso por valor/ROI/viabilidade",
+        "claimCount": 5
+      },
+      {
+        "url": "https://www.cigen.io/insights/ai-use-case-prioritization-the-critical-step-in-a-practical-ai-adoption-journey",
+        "quality": "secondary",
+        "angle": "priorizacao de casos de uso por valor/ROI/viabilidade",
+        "claimCount": 5
+      },
+      {
+        "url": "https://xylitytech.com/artificial-intelligence/ai-use-case-prioritization-scoring-framework/",
+        "quality": "blog",
+        "angle": "priorizacao de casos de uso por valor/ROI/viabilidade",
+        "claimCount": 5
+      },
+      {
+        "url": "https://airc.nist.gov/airmf-resources/playbook/",
+        "quality": "primary",
+        "angle": "governanca e auditoria de IA (padroes formais)",
+        "claimCount": 5
+      },
+      {
+        "url": "https://nvlpubs.nist.gov/nistpubs/ai/nist.ai.100-1.pdf",
+        "quality": "primary",
+        "angle": "governanca e auditoria de IA (padroes formais)",
+        "claimCount": 5
+      },
+      {
+        "url": "https://fairnow.ai/map-nist-ai-rmf-iso-42001/",
+        "quality": "unreliable",
+        "angle": "governanca e auditoria de IA (padroes formais)",
+        "claimCount": 0
+      },
+      {
+        "url": "https://www.aigl.blog/ai-rmf-1-0-controls-checklist/",
+        "quality": "blog",
+        "angle": "governanca e auditoria de IA (padroes formais)",
+        "claimCount": 5
+      },
+      {
+        "url": "https://www.scrut.io/post/iso-42001-vs-nist-rmf",
+        "quality": "blog",
+        "angle": "governanca e auditoria de IA (padroes formais)",
+        "claimCount": 5
+      },
+      {
+        "url": "https://www.holisticai.com/blog/nist-ai-risk-management-framework-playbook",
+        "quality": "secondary",
+        "angle": "governanca e auditoria de IA (padroes formais)",
+        "claimCount": 5
+      },
+      {
+        "url": "https://www.anthropic.com/research/building-effective-agents",
+        "quality": "primary",
+        "angle": "contrarian/filosofia - piramide de solucoes e nao forcar IA",
+        "claimCount": 5
+      },
+      {
+        "url": "https://www.salesforce.com/blog/deterministic-ai/",
+        "quality": "blog",
+        "angle": "contrarian/filosofia - piramide de solucoes e nao forcar IA",
+        "claimCount": 5
+      },
+      {
+        "url": "https://tensoria.fr/en/blog/workflow-vs-ai-agent-when-to-use",
+        "quality": "blog",
+        "angle": "contrarian/filosofia - piramide de solucoes e nao forcar IA",
+        "claimCount": 5
+      },
+      {
+        "url": "https://www.barnacle.ai/blog/2025-09-25-agents-intro",
+        "quality": "blog",
+        "angle": "contrarian/filosofia - piramide de solucoes e nao forcar IA",
+        "claimCount": 5
+      }
+    ],
+    "stats": {
+      "angles": 5,
+      "sourcesFetched": 23,
+      "claimsExtracted": 109,
+      "claimsVerified": 25,
+      "confirmed": 23,
+      "killed": 2,
+      "afterSynthesis": 10,
+      "urlDupes": 2,
+      "budgetDropped": 5,
+      "agentCalls": 105
+    }
+  }
+}

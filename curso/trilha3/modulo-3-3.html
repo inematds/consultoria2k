@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 3.3 · Auditoria de dados e infraestrutura | Consultor de IA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: {
+      primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    /* acento purple (T3) */
+    html:not(.dark) .text-purple-400 { color: #7c3aed; }
+    html:not(.dark) .bg-purple-500\/20 { background-color: rgba(124,58,237,0.12); }
+    html:not(.dark) .bg-purple-500\/10 { background-color: rgba(124,58,237,0.08); }
+    html:not(.dark) .border-purple-500\/30 { border-color: rgba(124,58,237,0.25); }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124,58,237,0.08); }
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(217,119,6,0.09); }
+    html:not(.dark) .hover\:text-teal-400:hover { color: #0d9488; }
+    html:not(.dark) .hover\:bg-teal-500\/10:hover { background-color: rgba(13,148,136,0.08); }
+
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161,98,7,0.08); }
+    html:not(.dark) .border-primary\/30 { border-color: rgba(161,98,7,0.25); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161,98,7,0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .text-red-400 { color: #b91c1c; }
+    html:not(.dark) .bg-red-900\/20 { background-color: rgba(185,28,28,0.08); }
+    html:not(.dark) .border-red-500\/30 { border-color: rgba(185,28,28,0.25); }
+    html:not(.dark) .bg-blue-900\/20 { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37,99,235,0.25); }
+    html:not(.dark) .bg-emerald-900\/20 { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5,150,105,0.25); }
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,0.95); }
+
+    .dark .border-dark-600 { border-color: #374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+
+    @keyframes wf-pulse { 0%,100% { opacity:.55 } 50% { opacity:1 } }
+    @media (prefers-reduced-motion: no-preference) {
+      .wf-a { animation: wf-pulse 2.8s ease-in-out infinite; }
+      .wf-a:nth-child(2){animation-delay:.3s} .wf-a:nth-child(3){animation-delay:.6s}
+      .wf-a:nth-child(4){animation-delay:.9s} .wf-a:nth-child(5){animation-delay:1.2s}
+    }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🧭</span><span class="font-bold text-lg hidden sm:inline">Consultor de IA</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors">
+            <span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors">
+            <span class="sm:hidden">T2</span><span class="hidden sm:inline">Mapear</span></a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-400 bg-purple-500/10">
+            <span class="sm:hidden">T3</span><span class="hidden sm:inline">Auditar</span></a>
+          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors">
+            <span class="sm:hidden">T4</span><span class="hidden sm:inline">Planos</span></a>
+          <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors">
+            <span class="sm:hidden">T5</span><span class="hidden sm:inline">Entrega</span></a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- BREADCRUMB -->
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-purple-400">Início</a><span>/</span>
+      <a href="index.html" class="hover:text-purple-400">Trilha 3</a><span>/</span>
+      <span class="text-purple-400">Módulo 3.3</span>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <header class="bg-gradient-to-br from-purple-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-semibold rounded-full mb-4">MÓDULO 3.3</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🗄️ Auditoria de dados e infraestrutura</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">"Dado ruim, IA ruim." Antes de qualquer modelo, você precisa saber o que existe, onde está, se é confiável e se pode ser usado legalmente. Esta auditoria é o work you do before the work.</p>
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">6</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">~45</div><div class="text-xs text-neutral-400">Minutos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">Audit</div><div class="text-xs text-neutral-400">Nível</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">Dados</div><div class="text-xs text-neutral-400">Tipo</div></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- INTRO -->
+    <p class="text-neutral-300 mb-8 leading-relaxed text-lg">
+      GIGO: <em>Garbage In, Garbage Out</em>. Não importa o modelo de IA que você escolhe — se os dados de entrada são ruins, a saída será ruim. A <strong class="text-purple-400">auditoria de dados</strong> é o que separa o consultor que entrega resultado do que vende esperança com tecnologia cara.
+    </p>
+
+    <!-- SVG: Pipeline de dados para IA -->
+    <div class="rounded-2xl border border-purple-500/30 bg-dark-900/40 p-3 sm:p-4 mb-12 overflow-hidden">
+      <svg viewBox="0 0 820 200" class="w-full h-auto" role="img" aria-label="Pipeline de dados: fontes diversas passam por auditoria (inventário, qualidade, acesso, LGPD) antes de alimentar o modelo de IA. Seta de rejeição volta para correção de dados.">
+        <defs>
+          <linearGradient id="m33-grad" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c084fc"/><stop offset="1" stop-color="#a855f7"/></linearGradient>
+          <filter id="m33-glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <pattern id="m33-grid" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="1.3" fill="#a855f7" opacity="0.12"/></pattern>
+          <marker id="m33-ah" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#c084fc"/></marker>
+          <marker id="m33-ahc" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#38bdf8"/></marker>
+          <marker id="m33-ahr" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#f87171"/></marker>
+        </defs>
+        <rect x="0" y="0" width="820" height="200" fill="url(#m33-grid)"/>
+        <!-- Fontes -->
+        <g font-family="Inter,sans-serif" font-size="10" fill="#94a3b8">
+          <rect x="30" y="30" width="90" height="30" rx="6" fill="#1a1230" stroke="#7c3aed" stroke-width="1.5"/>
+          <text x="75" y="50" text-anchor="middle">🗄️ ERP/CRM</text>
+          <rect x="30" y="75" width="90" height="30" rx="6" fill="#1a1230" stroke="#7c3aed" stroke-width="1.5"/>
+          <text x="75" y="95" text-anchor="middle">📊 Planilhas</text>
+          <rect x="30" y="120" width="90" height="30" rx="6" fill="#1a1230" stroke="#7c3aed" stroke-width="1.5"/>
+          <text x="75" y="140" text-anchor="middle">📄 Documentos</text>
+          <rect x="30" y="165" width="90" height="30" rx="6" fill="#1a1230" stroke="#7c3aed" stroke-width="1.5"/>
+          <text x="75" y="185" text-anchor="middle">🌐 APIs ext.</text>
+        </g>
+        <!-- Setas para auditoria -->
+        <g stroke="#7c3aed" stroke-width="1.5" opacity="0.6" marker-end="url(#m33-ah)">
+          <line x1="120" y1="45" x2="238" y2="80"/>
+          <line x1="120" y1="90" x2="238" y2="88"/>
+          <line x1="120" y1="135" x2="238" y2="96"/>
+          <line x1="120" y1="180" x2="238" y2="105"/>
+        </g>
+        <!-- Bloco de Auditoria -->
+        <g filter="url(#m33-glow)">
+          <rect x="240" y="60" width="160" height="80" rx="12" fill="#1a1230" stroke="url(#m33-grad)" stroke-width="2.5"/>
+        </g>
+        <text x="320" y="82" text-anchor="middle" fill="#c084fc" font-family="Inter,sans-serif" font-weight="700" font-size="13">🔬 Auditoria</text>
+        <text x="320" y="100" text-anchor="middle" fill="#d8b4fe" font-family="Inter,sans-serif" font-size="10">Inventário · Qualidade</text>
+        <text x="320" y="115" text-anchor="middle" fill="#d8b4fe" font-family="Inter,sans-serif" font-size="10">Acesso · LGPD</text>
+        <text x="320" y="130" text-anchor="middle" fill="#d8b4fe" font-family="Inter,sans-serif" font-size="10">Prontidão RAG/treino</text>
+        <!-- Seta Auditoria → IA -->
+        <line x1="400" y1="100" x2="518" y2="100" stroke="#38bdf8" stroke-width="2" marker-end="url(#m33-ahc)"/>
+        <!-- Bloco Modelo IA -->
+        <g class="wf-a" filter="url(#m33-glow)">
+          <rect x="520" y="70" width="130" height="60" rx="12" fill="#0e0826" stroke="#38bdf8" stroke-width="2.5"/>
+        </g>
+        <text x="585" y="95" text-anchor="middle" fill="#38bdf8" font-family="Inter,sans-serif" font-weight="700" font-size="13">🧠 Modelo IA</text>
+        <text x="585" y="115" text-anchor="middle" fill="#7dd3fc" font-family="Inter,sans-serif" font-size="10">dado pronto → output útil</text>
+        <!-- Seta de rejeição volta -->
+        <path d="M400,60 Q460,20 400,30 Q340,30 320,60" stroke="#f87171" stroke-width="1.5" fill="none" marker-end="url(#m33-ahr)" stroke-dasharray="5,4"/>
+        <text x="385" y="16" text-anchor="middle" fill="#f87171" font-family="Inter,sans-serif" font-size="10">dado ruim → corrigir primeiro</text>
+        <!-- Seta saída -->
+        <line x1="650" y1="100" x2="750" y2="100" stroke="#38bdf8" stroke-width="2" marker-end="url(#m33-ahc)"/>
+        <g class="wf-a">
+          <rect x="752" y="76" width="52" height="48" rx="8" fill="#0e2018" stroke="#38bdf8" stroke-width="1.5"/>
+        </g>
+        <text x="778" y="98" text-anchor="middle" fill="#38bdf8" font-family="Inter,sans-serif" font-weight="700" font-size="11">✅</text>
+        <text x="778" y="113" text-anchor="middle" fill="#7dd3fc" font-family="Inter,sans-serif" font-size="9">resultado</text>
+      </svg>
+      <p class="text-center text-xs text-neutral-500 mt-2">Auditoria filtra o que entra no modelo — dado ruim retorna para correção antes de avançar.</p>
+    </div>
+
+    <!-- TÓPICO 1 -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">1</span>
+        <h2 class="text-2xl font-bold">📦 Inventário de dados</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Você não pode auditar o que não conhece. O primeiro passo é mapear <strong class="text-purple-400">todos os repositórios</strong> de dados da organização — incluindo os que ninguém mantém oficialmente (shadow IT) e os que estão em silos que ninguém consegue conectar.</p>
+
+      <div class="bg-gradient-to-br from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center"><span class="mr-2">🗺️</span> O que mapear no inventário</h3>
+        <ul class="space-y-2 text-neutral-300">
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span><strong>Sistemas transacionais</strong> — ERP, CRM, e-commerce, sistemas financeiros.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span><strong>Planilhas e documentos</strong> — o "shadow IT" de dados em Excel/Sheets, Google Docs, Word.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span><strong>Arquivos não-estruturados</strong> — PDFs, e-mails, imagens, áudios de atendimento.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span><strong>APIs externas</strong> — dados de terceiros que a empresa usa (Google Analytics, ad platforms, etc.).</span></li>
+        </ul>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Surpresa comum no inventário</h3>
+        <p class="text-neutral-300">As empresas geralmente subestimam seus dados não-estruturados. Uma empresa de serviços pode ter 5 anos de e-mails de atendimento — um ativo potencial para RAG ou análise de sentimento que ninguém mapeou como dado porque "e-mail não é dado".</p>
+      </div>
+    </section>
+
+    <!-- TÓPICO 2 -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">2</span>
+        <h2 class="text-2xl font-bold">🔬 Qualidade dos dados — as 4 dimensões</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Ter dados não é suficiente — eles precisam ter qualidade nas <strong class="text-purple-400">4 dimensões</strong> que determinam se são utilizáveis por modelos de IA. Uma falha em qualquer dimensão pode tornar o dado inútil ou perigoso.</p>
+
+      <div class="space-y-4 mb-6">
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center"><span class="text-purple-400 font-bold">1</span></div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold text-white mb-2">Completude</h4>
+            <p class="text-neutral-300 text-sm">Qual % dos campos críticos está preenchido? &lt;80% em campo crítico é problema. Campos vazios produzem predições imprecisas ou erros de processamento.</p>
+            <p class="text-xs text-purple-400 mt-2 font-semibold">Métrica: % de campos preenchidos por tabela/fonte</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center"><span class="text-purple-400 font-bold">2</span></div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold text-white mb-2">Consistência</h4>
+            <p class="text-neutral-300 text-sm">O mesmo dado tem o mesmo formato em todos os sistemas? "SP", "São Paulo", "São Paulo - SP" no mesmo campo são 3 entidades diferentes para um modelo.</p>
+            <p class="text-xs text-purple-400 mt-2 font-semibold">Métrica: % de entradas com formato padronizado</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center"><span class="text-purple-400 font-bold">3</span></div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold text-white mb-2">Atualidade</h4>
+            <p class="text-neutral-300 text-sm">Dados de 3 anos atrás podem não refletir padrões atuais do negócio — especialmente após a pandemia, mudanças de produto ou de mercado. Dado obsoleto produz predições desatualizadas.</p>
+            <p class="text-xs text-purple-400 mt-2 font-semibold">Métrica: data da última atualização; janela temporal útil</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center"><span class="text-purple-400 font-bold">4</span></div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold text-white mb-2">Ausência de viés</h4>
+            <p class="text-neutral-300 text-sm">A amostra representa o universo que o modelo vai atender? Dados de clientes só de uma região, faixa etária ou segmento geram modelos que discriminam os demais — e muitas vezes ilegal.</p>
+            <p class="text-xs text-purple-400 mt-2 font-semibold">Métrica: distribuição por grupos relevantes para o caso de uso</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+        <h3 class="text-lg font-semibold text-red-400 mb-3 flex items-center"><span class="mr-2">⚠️</span> Alerta: dado ruim, IA ruim</h3>
+        <p class="text-neutral-300">Nenhuma engenharia de prompt, nenhum modelo caro e nenhuma quantidade de GPU compensa dados ruins. Se a auditoria revelar qualidade crítica abaixo do mínimo, a recomendação profissional é: corrija os dados antes de iniciar o projeto de IA.</p>
+      </div>
+    </section>
+
+    <!-- TÓPICO 3 -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">3</span>
+        <h2 class="text-2xl font-bold">🔗 Acesso e integração</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Dado de qualidade num sistema inacessível é tão inútil quanto dado ruim. A auditoria de acesso verifica se os dados podem ser <strong class="text-purple-400">conectados aos componentes de IA</strong> sem gambiarras de exportação manual.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+          <h4 class="font-bold text-emerald-400 mb-4">✓ Acesso adequado</h4>
+          <ul class="space-y-3 text-neutral-300">
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>API REST documentada e estável</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Exportação automatizável (webhook/cron)</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Permissões claras — quem acessa o quê</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Dado acessível em tempo real ou near-real-time</span></li>
+          </ul>
+        </div>
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-4">✗ Acesso bloqueado</h4>
+          <ul class="space-y-3 text-neutral-300">
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Sistema legado sem API — só export manual</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Dado em silo de área que não compartilha</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Banco de dados só acessível via VPN interna</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Vendor lock — fornecedor controla os dados</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 4 -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">4</span>
+        <h2 class="text-2xl font-bold">🔒 LGPD, privacidade e soberania de dados</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Usar dados pessoais em projetos de IA sem base legal não é só risco jurídico — é risco reputacional. A <strong class="text-purple-400">LGPD define regras claras</strong> que o consultor precisa conhecer e comunicar antes de propor qualquer uso de dados de clientes ou colaboradores em modelos.</p>
+
+      <div class="bg-gradient-to-br from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center"><span class="mr-2">⚖️</span> O que verificar em relação à LGPD</h3>
+        <ul class="space-y-3 text-neutral-300">
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span><strong>Base legal:</strong> o dado foi coletado com consentimento ou base legítima para o uso proposto?</span></li>
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span><strong>Finalidade:</strong> usar o dado em um modelo de IA está dentro da finalidade declarada na coleta?</span></li>
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span><strong>Minimização:</strong> você vai usar apenas os dados necessários para a finalidade?</span></li>
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span><strong>RAG com dados internos:</strong> documentos internos com dados pessoais precisam de tratamento antes de ir para o vector store.</span></li>
+        </ul>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-purple-400 font-bold mb-1">Base legal</div><p class="text-sm text-neutral-400">consentimento ou legítimo interesse</p></div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-purple-400 font-bold mb-1">Finalidade</div><p class="text-sm text-neutral-400">IA dentro do escopo da coleta</p></div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-purple-400 font-bold mb-1">Minimização</div><p class="text-sm text-neutral-400">só o dado necessário</p></div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-red-400 font-bold mb-1">DPO</div><p class="text-sm text-neutral-400">envolver antes, não depois</p></div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 5 -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">5</span>
+        <h2 class="text-2xl font-bold">🧠 Prontidão para RAG e fine-tuning</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">As duas abordagens mais comuns de personalizar LLMs exigem tipos de dados <strong class="text-purple-400">completamente diferentes</strong>. A auditoria define qual é viável — e o consultor que propõe fine-tuning para uma empresa sem dados rotulados está cometendo um erro caro.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+          <h4 class="font-bold text-purple-400 mb-4">RAG — Retrieval-Augmented Generation</h4>
+          <p class="text-neutral-300 text-sm mb-4">O modelo consulta uma base de documentos em tempo real. O dado ideal é:</p>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li>• Documentos textuais com conteúdo relevante</li>
+            <li>• Podem ser não-estruturados (PDFs, Word, e-mails)</li>
+            <li>• Precisam ser "chunkeáveis" (dividíveis em partes)</li>
+            <li>• Atualização frequente é suportada</li>
+          </ul>
+          <p class="text-xs text-purple-400 mt-3 font-semibold">Requer: documentos organizados + pipeline de indexação</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+          <h4 class="font-bold text-purple-400 mb-4">Fine-tuning</h4>
+          <p class="text-neutral-300 text-sm mb-4">O modelo é treinado/ajustado em dados específicos. O dado ideal é:</p>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li>• Pares input/output de alta qualidade</li>
+            <li>• Mínimo 500-1000 exemplos (idealmente mais)</li>
+            <li>• Consistentes e representativos do uso real</li>
+            <li>• Rotulados por especialistas do domínio</li>
+          </ul>
+          <p class="text-xs text-purple-400 mt-3 font-semibold">Requer: dado rotulado de qualidade — ativo raro</p>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Regra de ouro</h3>
+        <p class="text-neutral-300">Para a maioria das empresas brasileiras, RAG é a abordagem certa: mais rápido, mais barato, dado atualizável e sem necessidade de dado rotulado. Fine-tuning fica para casos onde o RAG realmente não resolve — e os dados de treino existem e são de qualidade.</p>
+      </div>
+    </section>
+
+    <!-- TÓPICO 6 -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">6</span>
+        <h2 class="text-2xl font-bold">🩺 Entregável: relatório de saúde de dados</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">O produto final da auditoria é um <strong class="text-purple-400">relatório objetivo</strong> que documenta o que foi encontrado, pontua a qualidade por dimensão e declara se os dados estão prontos para cada caso de uso — ou o que precisa ser remediado primeiro.</p>
+
+      <div class="bg-gradient-to-br from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center"><span class="mr-2">📋</span> Estrutura do relatório</h3>
+        <div class="space-y-3 text-sm text-neutral-300">
+          <div class="flex items-start space-x-3 bg-dark-700/50 rounded-lg p-3">
+            <span class="text-purple-400 font-bold flex-shrink-0">1.</span>
+            <span><strong class="text-white">Inventário:</strong> lista de fontes de dados com tipo, volume e dono responsável</span>
+          </div>
+          <div class="flex items-start space-x-3 bg-dark-700/50 rounded-lg p-3">
+            <span class="text-purple-400 font-bold flex-shrink-0">2.</span>
+            <span><strong class="text-white">Score de qualidade:</strong> notas por dimensão (completude, consistência, atualidade, viés) por fonte</span>
+          </div>
+          <div class="flex items-start space-x-3 bg-dark-700/50 rounded-lg p-3">
+            <span class="text-purple-400 font-bold flex-shrink-0">3.</span>
+            <span><strong class="text-white">Problemas críticos:</strong> o que bloqueia o projeto se não for corrigido</span>
+          </div>
+          <div class="flex items-start space-x-3 bg-dark-700/50 rounded-lg p-3">
+            <span class="text-purple-400 font-bold flex-shrink-0">4.</span>
+            <span><strong class="text-white">Prontidão por caso de uso:</strong> declaração por caso de uso (Pronto / Pronto com restrições / Não pronto)</span>
+          </div>
+          <div class="flex items-start space-x-3 bg-dark-700/50 rounded-lg p-3">
+            <span class="text-purple-400 font-bold flex-shrink-0">5.</span>
+            <span><strong class="text-white">Plano de remediação:</strong> ações prioritárias com responsável e prazo estimado</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold mb-1">✅ Pronto</div><p class="text-sm text-neutral-400">pode avançar para o projeto</p></div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-amber-400 font-bold mb-1">⚠️ Restrição</div><p class="text-sm text-neutral-400">escopo limitado é viável</p></div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-red-400 font-bold mb-1">🛑 Não pronto</div><p class="text-sm text-neutral-400">remediar antes de avançar</p></div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-purple-400 font-bold mb-1">📌 Remediação</div><p class="text-sm text-neutral-400">prazo e responsável definidos</p></div>
+      </div>
+    </section>
+
+    <!-- RESUMO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-purple-900/40 via-dark-800 to-dark-800 rounded-xl border border-purple-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">🎒</span> Resumo do módulo</h2>
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">Inventário primeiro</strong><span class="text-neutral-400"> — você não pode auditar o que não mapeou.</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">4 dimensões de qualidade</strong><span class="text-neutral-400"> — completude, consistência, atualidade e ausência de viés.</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">LGPD é requisito, não opcional</strong><span class="text-neutral-400"> — envolver o DPO antes de propor uso de dados pessoais em IA.</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">RAG antes de fine-tuning</strong><span class="text-neutral-400"> — para a maioria das empresas, RAG é viável; fine-tuning precisa de dado rotulado de qualidade.</span></div></div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+          <h3 class="font-semibold text-purple-400 mb-2">Próximo módulo:</h3>
+          <p class="text-neutral-300">3.4 — Governança e risco: NIST AI RMF, ISO 42001, EU AI Act — como estruturar controles proporcionais</p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="modulo-3-2.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Módulo anterior</a>
+          <a href="modulo-3-4.html" class="flex-1 text-center px-6 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-500 transition-colors">Próximo Módulo →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>Consultor de IA · Módulo 3.3 · <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a> · 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark');
+    } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

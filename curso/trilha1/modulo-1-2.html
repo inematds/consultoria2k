@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 1.2 · O trabalho que não muda | Consultor de IA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: {
+      primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .bg-emerald-500\/20 { background-color: rgba(5,150,105,0.12); }
+    html:not(.dark) .bg-emerald-500\/10 { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5,150,105,0.25); }
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124,58,237,0.08); }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(217,119,6,0.09); }
+    html:not(.dark) .hover\:text-teal-400:hover { color: #0d9488; }
+    html:not(.dark) .hover\:bg-teal-500\/10:hover { background-color: rgba(13,148,136,0.08); }
+
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161,98,7,0.08); }
+    html:not(.dark) .border-primary\/30 { border-color: rgba(161,98,7,0.25); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161,98,7,0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .text-red-400 { color: #b91c1c; }
+    html:not(.dark) .bg-red-900\/20 { background-color: rgba(185,28,28,0.08); }
+    html:not(.dark) .border-red-500\/30 { border-color: rgba(185,28,28,0.25); }
+    html:not(.dark) .bg-blue-900\/20 { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37,99,235,0.25); }
+    html:not(.dark) .bg-emerald-900\/20 { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,0.95); }
+
+    .dark .border-dark-600 { border-color: #374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🧭</span><span class="font-bold text-lg hidden sm:inline">Consultor de IA</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-emerald-400 bg-emerald-500/10">
+            <span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors">
+            <span class="sm:hidden">T2</span><span class="hidden sm:inline">Mapear</span></a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors">
+            <span class="sm:hidden">T3</span><span class="hidden sm:inline">Auditar</span></a>
+          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors">
+            <span class="sm:hidden">T4</span><span class="hidden sm:inline">Planos</span></a>
+          <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors">
+            <span class="sm:hidden">T5</span><span class="hidden sm:inline">Entrega</span></a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- BREADCRUMB -->
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-emerald-400">Início</a><span>/</span>
+      <a href="index.html" class="hover:text-emerald-400">Trilha 1</a><span>/</span>
+      <span class="text-emerald-400">Módulo 1.2</span>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <header class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-4">MÓDULO 1.2</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🔧 O trabalho que não muda: achar a restrição real e prescrever</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">O título mudou. O trabalho, não. Consultoria é diagnóstico + prescrição — e quem confunde sintoma com restrição real entrega solução para o problema errado.</p>
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">6</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">~40</div><div class="text-xs text-neutral-400">Minutos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">Base</div><div class="text-xs text-neutral-400">Nível</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">Método</div><div class="text-xs text-neutral-400">Tipo</div></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- INTRO + SVG -->
+    <p class="text-neutral-300 mb-8 leading-relaxed text-lg">
+      A IA mudou a caixa de ferramentas do consultor, mas não mudou o trabalho em si: <strong class="text-emerald-400">entrar, diagnosticar a restrição real e prescrever a solução mais simples que funciona</strong>. Quem pula o diagnóstico e vai direto à ferramenta favorita entrega a resposta certa para a pergunta errada.
+    </p>
+
+    <div class="rounded-2xl border border-emerald-500/30 bg-dark-900/40 p-3 sm:p-4 mb-12 overflow-hidden">
+      <svg viewBox="0 0 820 210" class="w-full h-auto" role="img" aria-label="Fluxo do trabalho do consultor: Entrada → Diagnóstico (restrição real) → Prescrição (solução mais simples) → Resultado. A IA aparece como ferramenta na etapa de diagnóstico e prescrição, não como destino.">
+        <defs>
+          <linearGradient id="m12-grad" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#34d399"/><stop offset="1" stop-color="#10b981"/></linearGradient>
+          <filter id="m12-glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="2.8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <pattern id="m12-grid" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="1.3" fill="#10b981" opacity="0.11"/></pattern>
+          <marker id="m12-ah" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#34d399"/></marker>
+        </defs>
+        <rect x="0" y="0" width="820" height="210" fill="url(#m12-grid)"/>
+
+        <!-- Boxes: Entrada → Diagnostico → Prescricao → Resultado -->
+        <g filter="url(#m12-glow)">
+          <rect x="30" y="75" width="140" height="60" rx="10" fill="#0e2018" stroke="url(#m12-grad)" stroke-width="2"/>
+        </g>
+        <text x="100" y="100" text-anchor="middle" fill="#34d399" font-weight="700" font-size="13" font-family="Inter,sans-serif">Entrada</text>
+        <text x="100" y="120" text-anchor="middle" fill="#a7f3d0" font-size="11" font-family="Inter,sans-serif">cliente, operação</text>
+
+        <line x1="172" y1="105" x2="205" y2="105" stroke="#34d399" stroke-width="1.8" marker-end="url(#m12-ah)"/>
+
+        <g filter="url(#m12-glow)">
+          <rect x="207" y="60" width="160" height="90" rx="10" fill="#0e2018" stroke="url(#m12-grad)" stroke-width="2.5"/>
+        </g>
+        <text x="287" y="90" text-anchor="middle" fill="#34d399" font-weight="700" font-size="13" font-family="Inter,sans-serif">Diagnóstico</text>
+        <text x="287" y="110" text-anchor="middle" fill="#a7f3d0" font-size="11" font-family="Inter,sans-serif">restrição real</text>
+        <text x="287" y="128" text-anchor="middle" fill="#6ee7b7" font-size="10" font-family="Inter,sans-serif">(não o sintoma)</text>
+
+        <line x1="369" y1="105" x2="403" y2="105" stroke="#34d399" stroke-width="1.8" marker-end="url(#m12-ah)"/>
+
+        <rect x="405" y="60" width="160" height="90" rx="10" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/>
+        <text x="485" y="90" text-anchor="middle" fill="#7dd3fc" font-weight="700" font-size="13" font-family="Inter,sans-serif">Prescrição</text>
+        <text x="485" y="110" text-anchor="middle" fill="#bae6fd" font-size="11" font-family="Inter,sans-serif">solução mais simples</text>
+        <text x="485" y="128" text-anchor="middle" fill="#7dd3fc" font-size="10" font-family="Inter,sans-serif">IA ou não-IA</text>
+
+        <line x1="567" y1="105" x2="600" y2="105" stroke="#34d399" stroke-width="1.8" marker-end="url(#m12-ah)"/>
+
+        <g filter="url(#m12-glow)">
+          <rect x="602" y="75" width="160" height="60" rx="10" fill="#0e2018" stroke="url(#m12-grad)" stroke-width="2"/>
+        </g>
+        <text x="682" y="100" text-anchor="middle" fill="#34d399" font-weight="700" font-size="13" font-family="Inter,sans-serif">Resultado</text>
+        <text x="682" y="120" text-anchor="middle" fill="#a7f3d0" font-size="11" font-family="Inter,sans-serif">negócio melhorado</text>
+
+        <!-- Label IA como ferramenta -->
+        <rect x="330" y="168" width="160" height="28" rx="8" fill="#1f1604" stroke="#fbbf24" stroke-width="1.5"/>
+        <text x="410" y="186" text-anchor="middle" fill="#fbbf24" font-size="11" font-family="Inter,sans-serif">IA = ferramenta, não destino</text>
+      </svg>
+      <p class="text-center text-xs text-neutral-500 mt-2">Diagrama ilustrativo — o fluxo do consultor não mudou com a IA.</p>
+    </div>
+
+    <!-- TÓPICO 1 -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">1</span>
+        <h2 class="text-2xl font-bold">🩺 Consultoria = diagnóstico + prescrição</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">O modelo mais útil para pensar no trabalho do consultor é o do <strong class="text-emerald-400">médico</strong>: ninguém contrata um médico para que ele traga uma lista de remédios — contrata para que ele descubra o que está errado e recomende o tratamento certo. A ferramenta (o remédio) vem depois do diagnóstico.</p>
+
+      <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center"><span class="mr-2">⚕️</span> As duas metades do trabalho</h3>
+        <ul class="space-y-3 text-neutral-300">
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>Diagnóstico</strong> — entender a operação, identificar onde está a restrição real, separar sintoma de causa.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>Prescrição</strong> — recomendar a solução mais simples e adequada ao problema identificado. Isso pode ser IA, pode não ser.</span></li>
+        </ul>
+        <p class="text-neutral-400 text-sm mt-4">Consultores que pulam o diagnóstico e vão direto à prescrição (geralmente a ferramenta que mais conhecem) entregam a solução certa para o problema errado.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold mb-1">Escutar</div><p class="text-sm text-neutral-400">entender antes de propor</p></div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold mb-1">Identificar</div><p class="text-sm text-neutral-400">a restrição, não o sintoma</p></div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold mb-1">Prescrever</div><p class="text-sm text-neutral-400">com a ferramenta certa</p></div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold mb-1">Validar</div><p class="text-sm text-neutral-400">resultado vs. problema</p></div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 2 -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">2</span>
+        <h2 class="text-2xl font-bold">🔍 Restrição real vs. sintoma</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">O que o cliente pede raramente é o problema. É o <strong class="text-emerald-400">sintoma visível</strong> de uma restrição mais profunda. Tratar o sintoma dá resultado de curto prazo — e mantém o problema vivo para voltar cobrar depois.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+          <h4 class="font-bold text-emerald-400 mb-4">✓ O que o consultor busca</h4>
+          <ul class="space-y-3 text-neutral-300">
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Pergunta "por que isso está acontecendo?" antes de propor</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Mapeia o processo para encontrar onde o fluxo trava</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Distingue o que o cliente quer do que o cliente precisa</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Valida a hipótese de restrição com dados antes de agir</span></li>
+          </ul>
+        </div>
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-4">✗ Armadilhas comuns</h4>
+          <ul class="space-y-3 text-neutral-300">
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Aceitar o pedido do cliente como definição do problema</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Propor solução na primeira reunião, antes de entender a operação</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Resolver o sintoma mais visível, que não é o gargalo</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Confundir urgência do cliente com importância do problema</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Pergunta de ouro</h3>
+        <p class="text-neutral-300">Antes de qualquer proposta, pergunte: <strong>"Se resolvermos isso, o problema que o cliente trouxe desaparece de fato?"</strong> Se a resposta for "provavelmente não", você ainda não achou a restrição.</p>
+      </div>
+    </section>
+
+    <!-- TÓPICO 3 -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">3</span>
+        <h2 class="text-2xl font-bold">🧩 Theory of Constraints aplicada a operações</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">A Theory of Constraints (ToC) de Goldratt diz o que todo consultor precisa internalizar: <strong class="text-emerald-400">toda operação tem exatamente uma restrição dominante</strong> em qualquer momento. Melhorar qualquer outra coisa que não seja o gargalo não aumenta o resultado do sistema.</p>
+
+      <div class="space-y-6 mb-6">
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center"><span class="text-emerald-400 font-bold">1</span></div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+            <h4 class="font-semibold text-white mb-2">Identificar a restrição</h4>
+            <p class="text-sm text-neutral-400 mb-2">Passo 1 de 5</p>
+            <p class="text-neutral-300 text-sm">Onde o sistema para? Qual etapa acumula fila, causa espera para o próximo passo ou tem capacidade menor que a demanda?</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center"><span class="text-emerald-400 font-bold">2</span></div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+            <h4 class="font-semibold text-white mb-2">Explorar antes de investir</h4>
+            <p class="text-sm text-neutral-400 mb-2">Passo 2 de 5</p>
+            <p class="text-neutral-300 text-sm">Extraia o máximo da restrição existente sem gastar mais. Eliminar desperdício no gargalo frequentemente resolve o problema sem nenhum sistema novo.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center"><span class="text-emerald-400 font-bold">3</span></div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+            <h4 class="font-semibold text-white mb-2">Subordinar tudo ao gargalo</h4>
+            <p class="text-sm text-neutral-400 mb-2">Passo 3 de 5</p>
+            <p class="text-neutral-300 text-sm">Todos os outros passos servem ao gargalo — não o contrário. Automatizar o que não é gargalo produz estoque de espera, não resultado.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center"><span class="text-emerald-400 font-bold">4</span></div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+            <h4 class="font-semibold text-white mb-2">Elevar a restrição</h4>
+            <p class="text-sm text-neutral-400 mb-2">Passo 4 — só se necessário</p>
+            <p class="text-neutral-300 text-sm">Agora sim: investir para aumentar a capacidade do gargalo. Aqui entra a IA, automação ou contratação — depois de entender a restrição, não antes.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center"><span class="mr-2">📊</span> Por que isso importa para o consultor de IA</h3>
+        <p class="text-neutral-300">A maioria das propostas de IA são soluções para não-gargalos. Automatizar a etapa errada não aumenta o throughput do sistema — apenas cria estoque digital numa fila que ninguém lê. Identificar o gargalo real é o que separa o consultor do vendedor de ferramenta.</p>
+      </div>
+    </section>
+
+    <!-- TÓPICO 4 -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">4</span>
+        <h2 class="text-2xl font-bold">💬 Confiança é o ativo: você é contratado pelo julgamento</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Nenhum cliente contrata um consultor para executar tarefas que já sabe fazer. Contrata pelo <strong class="text-emerald-400">julgamento</strong>: a capacidade de olhar para a operação e dizer com confiança onde está o problema e qual é a solução certa — mesmo quando a resposta é inconveniente.</p>
+
+      <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center"><span class="mr-2">🤝</span> O que constrói confiança</h3>
+        <ul class="space-y-3 text-neutral-300">
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>Fazer perguntas desconfortáveis</strong> — quem nunca questiona o cliente está vendendo validação, não consultoria.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>Entregar diagnósticos honestos</strong> — mesmo quando o diagnóstico não favorece a proposta de IA.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>Recomendar o que é certo, não o que é maior</strong> — projeto menor bem-feito vale mais do que projeto grande mal-entregue.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>Admitir o que não sabe</strong> — clientes reconhecem humildade intelectual e a valorizam.</span></li>
+        </ul>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Dica prática</h3>
+        <p class="text-neutral-300">Consultor que entrega um diagnóstico que diz "o problema aqui não precisa de IA" raramente perde o cliente — quase sempre o fideliza. O cliente percebe que está recebendo julgamento real, não pitch de ferramenta. E vai te ligar de novo quando o próximo problema aparecer.</p>
+      </div>
+    </section>
+
+    <!-- TÓPICO 5 -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">5</span>
+        <h2 class="text-2xl font-bold">🛑 A tentação do martelo: quando o título distorce o diagnóstico</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Maslow dizia: quem só tem martelo, todo problema parece prego. O consultor de IA corre o risco de ver <strong class="text-emerald-400">IA em todo problema</strong> — não porque IA é a resposta certa, mas porque é a ferramenta com que se identifica. Esse é o viés mais perigoso do rótulo.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+          <h4 class="font-bold text-emerald-400 mb-4">✓ Diagnóstico neutro</h4>
+          <ul class="space-y-3 text-neutral-300">
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Começa pela pergunta: "qual é o problema?"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Avalia todas as soluções possíveis antes de escolher</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Escolhe IA quando ela é genuinamente a melhor opção</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Justifica a escolha com critérios objetivos</span></li>
+          </ul>
+        </div>
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-4">✗ Viés do martelo</h4>
+          <ul class="space-y-3 text-neutral-300">
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Começa pela pergunta: "onde posso usar IA aqui?"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Força a narrativa de IA para qualquer situação</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Ignora soluções mais simples e baratas</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Vende complexidade onde simplicidade bastaria</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+        <h3 class="text-lg font-semibold text-red-400 mb-3 flex items-center"><span class="mr-2">⚠️</span> Atenção</h3>
+        <p class="text-neutral-300">O viés do martelo não é maldade — é uma distorção cognitiva natural de quem se especializa numa ferramenta. A antídoto é sempre começar o diagnóstico com a pergunta "qual é o problema?" — não com "como posso aplicar IA aqui?".</p>
+      </div>
+    </section>
+
+    <!-- TÓPICO 6 -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">6</span>
+        <h2 class="text-2xl font-bold">🗣️ Traduzir tecnologia em resultado de negócio</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">O cliente não compra modelo de linguagem, embedding ou pipeline de RAG. Compra <strong class="text-emerald-400">tempo economizado, erro evitado, receita gerada ou risco reduzido</strong>. O consultor que fala em tecnologia com o cliente está falando no idioma errado.</p>
+
+      <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center"><span class="mr-2">🔄</span> O tradutor de dois sentidos</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <p class="text-sm text-neutral-400 mb-2 font-semibold">Técnico → Negócio</p>
+            <ul class="space-y-2 text-neutral-300 text-sm">
+              <li><span class="text-red-400">✗</span> "RAG com embeddings semânticos"</li>
+              <li><span class="text-emerald-400">✓</span> "Respostas automáticas corretas em vez de ficar buscando no manual"</li>
+            </ul>
+          </div>
+          <div>
+            <p class="text-sm text-neutral-400 mb-2 font-semibold">Negócio → Técnico</p>
+            <ul class="space-y-2 text-neutral-300 text-sm">
+              <li><span class="text-red-400">✗</span> "Quero IA no meu atendimento"</li>
+              <li><span class="text-emerald-400">✓</span> "Quer reduzir 60% do tempo de resposta em perguntas repetidas?"</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> O teste da diretoria</h3>
+        <p class="text-neutral-300">Antes de apresentar qualquer solução, passe pelo filtro: <strong>"Se eu tirar todas as palavras técnicas desta frase, o que sobra?"</strong> O que sobrar deve ser o resultado de negócio que o decisor se importa — e é isso que vai na proposta.</p>
+      </div>
+
+      <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center"><span class="mr-2">📊</span> Métricas que o cliente entende</h3>
+        <ul class="space-y-2 text-neutral-300">
+          <li><strong>Tempo:</strong> horas/semana recuperadas por pessoa</li>
+          <li><strong>Custo:</strong> redução de custo operacional em R$/mês</li>
+          <li><strong>Erro:</strong> % de retrabalho ou falha eliminados</li>
+          <li><strong>Receita:</strong> conversão ou ticket médio aumentados</li>
+          <li><strong>Risco:</strong> incidentes de compliance ou multas evitados</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- RESUMO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-emerald-900/40 via-dark-800 to-dark-800 rounded-xl border border-emerald-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">🎒</span> Resumo do módulo</h2>
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Diagnóstico antes de prescrição</strong><span class="text-neutral-400"> — o modelo médico: entender o problema antes de recomendar a ferramenta.</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">O cliente pede o sintoma</strong><span class="text-neutral-400"> — o consultor encontra a restrição real por trás do pedido.</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">ToC como lente</strong><span class="text-neutral-400"> — toda operação tem um gargalo; otimizar o que não é o gargalo não muda o resultado.</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Julgamento é o produto</strong><span class="text-neutral-400"> — confiança se constrói sendo honesto, mesmo quando a resposta não é IA.</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Fale o idioma do cliente</strong><span class="text-neutral-400"> — resultado de negócio, não arquitetura técnica.</span></div></div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+          <h3 class="font-semibold text-emerald-400 mb-2">Próximo módulo:</h3>
+          <p class="text-neutral-300">1.3 — A pirâmide de soluções: determinístico → IA → agentes</p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Voltar para Trilha</a>
+          <a href="modulo-1-3.html" class="flex-1 text-center px-6 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-500 transition-colors">Próximo Módulo →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>Consultor de IA · Módulo 1.2 · <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a> · 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark');
+    } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

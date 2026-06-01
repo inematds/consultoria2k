@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 4.1 · ROI e custo total | Consultor de IA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: {
+      primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    /* acento amber (T4) */
+    html:not(.dark) .text-amber-400 { color: #92400e; }
+    html:not(.dark) .bg-amber-500\/20 { background-color: rgba(217,119,6,0.14); }
+    html:not(.dark) .bg-amber-500\/10 { background-color: rgba(217,119,6,0.09); }
+    html:not(.dark) .border-amber-500\/30 { border-color: rgba(217,119,6,0.28); }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(217,119,6,0.09); }
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124,58,237,0.08); }
+    html:not(.dark) .hover\:text-teal-400:hover { color: #0d9488; }
+    html:not(.dark) .hover\:bg-teal-500\/10:hover { background-color: rgba(13,148,136,0.08); }
+
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161,98,7,0.08); }
+    html:not(.dark) .border-primary\/30 { border-color: rgba(161,98,7,0.25); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161,98,7,0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .text-red-400 { color: #b91c1c; }
+    html:not(.dark) .bg-red-900\/20 { background-color: rgba(185,28,28,0.08); }
+    html:not(.dark) .border-red-500\/30 { border-color: rgba(185,28,28,0.25); }
+    html:not(.dark) .bg-blue-900\/20 { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37,99,235,0.25); }
+    html:not(.dark) .bg-amber-900\/20 { background-color: rgba(217,119,6,0.10); }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,0.95); }
+
+    .dark .border-dark-600 { border-color: #374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+
+    @keyframes wf-pulse { 0%,100% { opacity:.55 } 50% { opacity:1 } }
+    @media (prefers-reduced-motion: no-preference) {
+      .wf-a { animation: wf-pulse 2.6s ease-in-out infinite; }
+      .wf-a:nth-child(2){animation-delay:.25s} .wf-a:nth-child(3){animation-delay:.5s}
+      .wf-a:nth-child(4){animation-delay:.75s}
+    }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🧭</span><span class="font-bold text-lg hidden sm:inline">Consultor de IA</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors">
+            <span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors">
+            <span class="sm:hidden">T2</span><span class="hidden sm:inline">Mapear</span></a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors">
+            <span class="sm:hidden">T3</span><span class="hidden sm:inline">Auditar</span></a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-amber-400 bg-amber-500/10">
+            <span class="sm:hidden">T4</span><span class="hidden sm:inline">Planos</span></a>
+          <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors">
+            <span class="sm:hidden">T5</span><span class="hidden sm:inline">Entrega</span></a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- BREADCRUMB -->
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-amber-400">Início</a><span>/</span>
+      <a href="index.html" class="hover:text-amber-400">Trilha 4</a><span>/</span>
+      <span class="text-amber-400">Módulo 4.1</span>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <header class="bg-gradient-to-br from-amber-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-amber-500/20 text-amber-400 text-xs font-semibold rounded-full mb-4">MÓDULO 4.1</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">💰 Da oportunidade ao business case: ROI e custo total</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">Antes de aprovar qualquer iniciativa de IA, o decisor precisa de um número: a conta fecha? ROI = ganho − (build + operação) ajustado a risco — e o custo total inclui o que vem depois do lançamento.</p>
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-amber-400">6</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-amber-400">~45</div><div class="text-xs text-neutral-400">Minutos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-amber-400">Plano</div><div class="text-xs text-neutral-400">Nível</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-amber-400">Negócio</div><div class="text-xs text-neutral-400">Tipo</div></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <p class="text-neutral-300 mb-8 leading-relaxed text-lg">
+      A oportunidade existe. Agora a pergunta muda: <strong class="text-amber-400">a conta fecha?</strong> Sem resposta objetiva, o projeto compete com tudo mais na fila de orçamento — e perde para o que tem um número na frente. Este módulo ensina a construir esse número de forma honesta.
+    </p>
+
+    <!-- SVG: equação do ROI -->
+    <div class="rounded-2xl border border-amber-500/30 bg-dark-900/40 p-3 sm:p-4 mb-12 overflow-hidden">
+      <svg viewBox="0 0 820 180" class="w-full h-auto" role="img" aria-label="Equação do ROI de IA: ganho menos custo de build menos custo de operação, tudo ajustado pelo fator de risco. O resultado positivo indica retorno.">
+        <defs>
+          <linearGradient id="m41-grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fbbf24"/><stop offset="1" stop-color="#f59e0b"/></linearGradient>
+          <filter id="m41-glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="2.8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <pattern id="m41-grid" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="1.3" fill="#f59e0b" opacity="0.12"/></pattern>
+        </defs>
+        <rect x="0" y="0" width="820" height="180" fill="url(#m41-grid)"/>
+        <!-- Ganho -->
+        <g class="wf-a" filter="url(#m41-glow)">
+          <rect x="20" y="50" width="140" height="80" rx="12" fill="#1f1604" stroke="url(#m41-grad)" stroke-width="2.5"/>
+        </g>
+        <text x="90" y="88" text-anchor="middle" fill="#fbbf24" font-family="Inter,sans-serif" font-weight="700" font-size="14">Ganho</text>
+        <text x="90" y="108" text-anchor="middle" fill="#fcd9a0" font-family="Inter,sans-serif" font-size="10.5">receita + economia</text>
+        <!-- − -->
+        <text x="186" y="98" text-anchor="middle" fill="#9aa4b2" font-family="Inter,sans-serif" font-size="28" font-weight="700">−</text>
+        <!-- Build -->
+        <g class="wf-a">
+          <rect x="206" y="50" width="140" height="80" rx="12" fill="#1f1604" stroke="#f59e0b" stroke-width="2"/>
+        </g>
+        <text x="276" y="88" text-anchor="middle" fill="#fbbf24" font-family="Inter,sans-serif" font-weight="700" font-size="14">Build</text>
+        <text x="276" y="108" text-anchor="middle" fill="#fcd9a0" font-family="Inter,sans-serif" font-size="10.5">dev + dados + projeto</text>
+        <!-- − -->
+        <text x="372" y="98" text-anchor="middle" fill="#9aa4b2" font-family="Inter,sans-serif" font-size="28" font-weight="700">−</text>
+        <!-- Operação -->
+        <g class="wf-a">
+          <rect x="392" y="50" width="140" height="80" rx="12" fill="#1f1604" stroke="#f59e0b" stroke-width="2"/>
+        </g>
+        <text x="462" y="88" text-anchor="middle" fill="#fbbf24" font-family="Inter,sans-serif" font-weight="700" font-size="14">Operação</text>
+        <text x="462" y="108" text-anchor="middle" fill="#fcd9a0" font-family="Inter,sans-serif" font-size="10.5">API + manutenção + supervisão</text>
+        <!-- × risco -->
+        <text x="558" y="98" text-anchor="middle" fill="#9aa4b2" font-family="Inter,sans-serif" font-size="22" font-weight="700">×</text>
+        <!-- Risco -->
+        <g class="wf-a" filter="url(#m41-glow)">
+          <rect x="578" y="50" width="130" height="80" rx="12" fill="#0e1b26" stroke="#38bdf8" stroke-width="2.5"/>
+        </g>
+        <text x="643" y="88" text-anchor="middle" fill="#38bdf8" font-family="Inter,sans-serif" font-weight="700" font-size="14">Risco</text>
+        <text x="643" y="108" text-anchor="middle" fill="#9ad6ff" font-family="Inter,sans-serif" font-size="10.5">fator de desconto</text>
+        <!-- = ROI -->
+        <text x="730" y="98" text-anchor="middle" fill="#9aa4b2" font-family="Inter,sans-serif" font-size="22" font-weight="700">=</text>
+        <text x="790" y="92" text-anchor="middle" fill="#fbbf24" font-family="Inter,sans-serif" font-weight="700" font-size="16">ROI</text>
+        <text x="790" y="110" text-anchor="middle" fill="#fcd9a0" font-family="Inter,sans-serif" font-size="10">ajustado</text>
+        <text x="410" y="162" text-anchor="middle" fill="#9aa4b2" font-family="Inter,sans-serif" font-size="11.5">medir ANTES: a linha de base é o que torna o "depois" comparável</text>
+      </svg>
+      <p class="text-center text-xs text-neutral-500 mt-2">Equação do ROI de IA — cada componente precisa de número real, não estimativa otimista.</p>
+    </div>
+
+    <!-- TÓPICO 1 -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl">1</span>
+        <h2 class="text-2xl font-bold">🧮 Componentes do ROI</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">ROI não é apenas "economizamos X horas". É uma <strong class="text-amber-400">conta completa</strong> que inclui o que entra (ganho) e o que sai (custo de construção, custo de operação contínua e o fator de risco que desconta a estimativa pela probabilidade de funcionar).</p>
+
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center"><span class="mr-2">📐</span> A fórmula na prática</h3>
+        <div class="font-mono text-sm bg-dark-900/60 rounded-lg p-4 text-neutral-300 border border-dark-600">
+          <div class="text-amber-400 font-bold mb-2">ROI = (ganho − custo_build − custo_operação) × (1 − probabilidade_fracasso)</div>
+          <div class="text-neutral-500 text-xs mt-2">Se ganho = R$120k/ano, build = R$50k, operação = R$20k/ano, e há 30% de chance de falhar:<br>
+          ROI ano 1 = (120 − 50 − 20) × 0,70 = R$35k — positivo, mas não empolgante.</div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+          <div class="text-amber-400 font-bold mb-2">Ganho</div>
+          <ul class="text-sm text-neutral-400 space-y-1">
+            <li>• Redução de custo operacional</li>
+            <li>• Receita gerada ou protegida</li>
+            <li>• Erros evitados × custo do erro</li>
+            <li>• Tempo liberado × custo da hora</li>
+          </ul>
+        </div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+          <div class="text-amber-400 font-bold mb-2">Custo total</div>
+          <ul class="text-sm text-neutral-400 space-y-1">
+            <li>• Desenvolvimento e configuração</li>
+            <li>• APIs e infraestrutura de nuvem</li>
+            <li>• Manutenção e monitoramento</li>
+            <li>• Supervisão humana contínua</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Dica prática</h3>
+        <p class="text-neutral-300">Sempre peça ao cliente o custo atual do processo que vai automatizar — em tempo e dinheiro. Essa é a âncora do ganho. Sem ela, você está estimando no ar.</p>
+      </div>
+    </section>
+
+    <!-- TÓPICO 2 -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl">2</span>
+        <h2 class="text-2xl font-bold">💸 Custo total da IA</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">O erro mais caro em projetos de IA é calcular apenas o custo de desenvolvimento e esquecer os custos <strong class="text-amber-400">recorrentes e crescentes</strong> que vêm depois: APIs por token, infraestrutura escalada, manutenção quando o modelo muda, e a supervisão humana que nenhum sistema de IA elimina completamente.</p>
+
+      <!-- Timeline de custos -->
+      <div class="space-y-4 mb-6">
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-amber-500/20 flex items-center justify-center"><span class="text-amber-400 font-bold text-sm">D0</span></div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold text-white mb-1">Custo de construção (one-time)</h4>
+            <p class="text-sm text-neutral-400">Desenvolvimento, configuração de pipelines, integração de sistemas, treinamento de equipe, custo do piloto.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-amber-500/20 flex items-center justify-center"><span class="text-amber-400 font-bold text-sm">M+1</span></div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold text-white mb-1">Custo operacional mensal (recorrente)</h4>
+            <p class="text-sm text-neutral-400">APIs de LLM, banco de vetores, armazenamento, computação, monitoramento de drift, revisão humana de saídas.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-amber-500/20 flex items-center justify-center"><span class="text-amber-400 font-bold text-sm">M+6</span></div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold text-white mb-1">Custo de manutenção (periódico)</h4>
+            <p class="text-sm text-neutral-400">Atualização de prompts quando o modelo muda de versão, reajuste quando os dados derivam, bug fixes, documentação.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+        <h3 class="text-lg font-semibold text-red-400 mb-3 flex items-center"><span class="mr-2">⚠️</span> Alerta</h3>
+        <p class="text-neutral-300">Projetos que ignoram o custo de supervisão humana frequentemente ficam no vermelho no mês 6. A IA não roda sozinha em produção — alguém sempre precisa revisar, corrigir e manter.</p>
+      </div>
+    </section>
+
+    <!-- TÓPICO 3 -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl">3</span>
+        <h2 class="text-2xl font-bold">📉 Linha de base: medir o "antes"</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">A linha de base é a <strong class="text-amber-400">fotografia do processo antes de qualquer mudança</strong>. Sem ela, qualquer melhoria é percepção. Com ela, você tem o comparador que transforma "achamos que melhorou" em "melhorou X% em relação ao baseline documentado".</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-amber-900/20 rounded-xl border border-amber-500/30 p-6">
+          <h4 class="font-bold text-amber-400 mb-4">✓ Com linha de base</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>Antes: 4h/dia de trabalho manual de triagem</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>Depois: 40min/dia com revisão humana</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>Redução de 83% — número defensável</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>Base para o próximo contrato</span></li>
+          </ul>
+        </div>
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-4">✗ Sem linha de base</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Ficou muito mais rápido"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"A equipe adorou a solução"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Sem número para o CFO aprovar expansão</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Sem evidência para o próximo pitch</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Dica prática</h3>
+        <p class="text-neutral-300">Trate a coleta da linha de base como o primeiro entregável do projeto — antes de qualquer desenvolvimento. Se o cliente não tem os dados, ajudá-lo a medir o processo atual é um serviço de valor em si.</p>
+      </div>
+    </section>
+
+    <!-- TÓPICO 4 -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl">4</span>
+        <h2 class="text-2xl font-bold">⏳ Payback e horizonte</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Payback é quando o investimento volta. O horizonte é o limite de validade da conta — IA muda rápido e soluções têm <strong class="text-amber-400">vida útil menor do que o software tradicional</strong>. Um projeto com payback de 36 meses em IA provavelmente nunca chega lá intacto.</p>
+
+      <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center"><span class="mr-2">📊</span> Exemplo de cálculo</h3>
+        <div class="space-y-2 text-neutral-300 text-sm font-mono">
+          <div>Custo de build: R$ 60.000</div>
+          <div>Economia mensal: R$ 8.000 (após custo operacional)</div>
+          <div class="text-amber-400 font-bold">Payback simples: 60.000 / 8.000 = 7,5 meses ✓ viável</div>
+          <div class="text-neutral-500 mt-2">Com fator de risco 0,75: payback real ≈ 10 meses — ainda dentro do horizonte recomendado de 12 meses.</div>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Regra prática</h3>
+        <p class="text-neutral-300">Para projetos de IA em consultoria, payback acima de 18 meses é sinal de alerta. O contexto muda, o modelo muda, a equipe muda. Priorize casos que fecham a conta em 12 meses.</p>
+      </div>
+    </section>
+
+    <!-- TÓPICO 5 -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl">5</span>
+        <h2 class="text-2xl font-bold">🎯 Métricas de negócio vs. métricas de modelo</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">O modelo tem 94% de acurácia. O decisor não sabe o que isso significa para ele — e não deveria precisar saber. O consultor <strong class="text-amber-400">traduz</strong> métricas de modelo em linguagem de resultado de negócio.</p>
+
+      <div class="overflow-x-auto mb-6">
+        <table class="w-full text-sm border-collapse">
+          <thead>
+            <tr class="bg-dark-700">
+              <th class="text-left p-3 text-amber-400 border border-dark-600">Métrica de modelo</th>
+              <th class="text-left p-3 text-amber-400 border border-dark-600">O que significa</th>
+              <th class="text-left p-3 text-amber-400 border border-dark-600">Métrica de negócio</th>
+            </tr>
+          </thead>
+          <tbody class="text-neutral-300">
+            <tr class="border-b border-dark-600">
+              <td class="p-3 border border-dark-600">Acurácia 94%</td>
+              <td class="p-3 border border-dark-600">6 em 100 previsões erram</td>
+              <td class="p-3 border border-dark-600">Custo médio de cada erro × 6 = R$X/mês evitado</td>
+            </tr>
+            <tr class="border-b border-dark-600">
+              <td class="p-3 border border-dark-600">Latência p95 &lt; 2s</td>
+              <td class="p-3 border border-dark-600">95% das chamadas em &lt;2s</td>
+              <td class="p-3 border border-dark-600">SLA de atendimento atendido; NPS protegido</td>
+            </tr>
+            <tr>
+              <td class="p-3 border border-dark-600">Recall 89%</td>
+              <td class="p-3 border border-dark-600">11% dos casos relevantes não detectados</td>
+              <td class="p-3 border border-dark-600">R$Y de receita em risco por oportunidades perdidas</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Dica prática</h3>
+        <p class="text-neutral-300">Prepare dois conjuntos de slides: um técnico (para a equipe que implementa) e um de negócio (para quem aprova e renova). Nunca use o técnico na reunião executiva.</p>
+      </div>
+    </section>
+
+    <!-- TÓPICO 6 -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl">6</span>
+        <h2 class="text-2xl font-bold">🧾 Business case de uma página</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">O business case de uma página é o artefato que torna a aprovação possível. Cabe em uma página porque o decisor lê em dois minutos — e a <strong class="text-amber-400">restrição de tamanho força clareza</strong>: se não cabe, o pensamento ainda está confuso.</p>
+
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center"><span class="mr-2">📄</span> Estrutura do business case de 1 página</h3>
+        <div class="space-y-3">
+          <div class="flex items-start space-x-3 bg-dark-900/40 rounded-lg p-3">
+            <span class="text-amber-400 font-bold text-sm w-24 flex-shrink-0">Problema</span>
+            <p class="text-neutral-300 text-sm">O que está custando dinheiro ou impedindo crescimento. Com número da linha de base.</p>
+          </div>
+          <div class="flex items-start space-x-3 bg-dark-900/40 rounded-lg p-3">
+            <span class="text-amber-400 font-bold text-sm w-24 flex-shrink-0">Solução</span>
+            <p class="text-neutral-300 text-sm">O que vai ser feito, em linguagem leiga. Sem jargão técnico.</p>
+          </div>
+          <div class="flex items-start space-x-3 bg-dark-900/40 rounded-lg p-3">
+            <span class="text-amber-400 font-bold text-sm w-24 flex-shrink-0">Valor</span>
+            <p class="text-neutral-300 text-sm">Ganho esperado em R$, payback em meses, e como vai ser medido.</p>
+          </div>
+          <div class="flex items-start space-x-3 bg-dark-900/40 rounded-lg p-3">
+            <span class="text-amber-400 font-bold text-sm w-24 flex-shrink-0">Investimento</span>
+            <p class="text-neutral-300 text-sm">Custo total de build + 12 meses de operação. Sem subestimar.</p>
+          </div>
+          <div class="flex items-start space-x-3 bg-dark-900/40 rounded-lg p-3">
+            <span class="text-amber-400 font-bold text-sm w-24 flex-shrink-0">Riscos</span>
+            <p class="text-neutral-300 text-sm">Top 2-3 riscos e como vão ser mitigados. Sem varrer para baixo do tapete.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+        <h3 class="text-lg font-semibold text-red-400 mb-3 flex items-center"><span class="mr-2">⚠️</span> Atenção</h3>
+        <p class="text-neutral-300">O business case otimista que esconde custos e riscos fecha o primeiro contrato — e destrói a relação quando o projeto chega à realidade. Seja conservador nos ganhos e honesto nos custos. A confiança é o ativo que você está construindo.</p>
+      </div>
+    </section>
+
+    <!-- RESUMO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-amber-900/40 via-dark-800 to-dark-800 rounded-xl border border-amber-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">🎒</span> Resumo do módulo</h2>
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3"><span class="text-amber-400 mt-1">✓</span><div><strong class="text-white">ROI = ganho − (build + operação) × (1 − risco)</strong><span class="text-neutral-400"> — cada componente precisa de número real.</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-amber-400 mt-1">✓</span><div><strong class="text-white">O custo total inclui o pós-lançamento</strong><span class="text-neutral-400"> — APIs, manutenção e supervisão humana continuam custando.</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-amber-400 mt-1">✓</span><div><strong class="text-white">Medir o "antes" é obrigatório</strong><span class="text-neutral-400"> — sem linha de base, não há "depois" comparável.</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-amber-400 mt-1">✓</span><div><strong class="text-white">Traduzir métricas de modelo para negócio</strong><span class="text-neutral-400"> — o decisor compra resultado, não acurácia.</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-amber-400 mt-1">✓</span><div><strong class="text-white">Uma página, cinco blocos</strong><span class="text-neutral-400"> — se não cabe, o pensamento está confuso.</span></div></div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+          <h3 class="font-semibold text-amber-400 mb-2">Próximo módulo:</h3>
+          <p class="text-neutral-300">4.2 — Roadmap por ondas: sequenciar e priorizar</p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Voltar para Trilha</a>
+          <a href="modulo-4-2.html" class="flex-1 text-center px-6 py-3 bg-amber-600 text-white rounded-lg font-semibold hover:bg-amber-500 transition-colors">Próximo Módulo →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>Consultor de IA · Módulo 4.1 · <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a> · 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark');
+    } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

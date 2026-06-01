@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 1.4 · Quando NÃO usar IA | Consultor de IA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: {
+      primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .bg-emerald-500\/20 { background-color: rgba(5,150,105,0.12); }
+    html:not(.dark) .bg-emerald-500\/10 { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5,150,105,0.25); }
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124,58,237,0.08); }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(217,119,6,0.09); }
+    html:not(.dark) .hover\:text-teal-400:hover { color: #0d9488; }
+    html:not(.dark) .hover\:bg-teal-500\/10:hover { background-color: rgba(13,148,136,0.08); }
+
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161,98,7,0.08); }
+    html:not(.dark) .border-primary\/30 { border-color: rgba(161,98,7,0.25); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161,98,7,0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .text-red-400 { color: #b91c1c; }
+    html:not(.dark) .bg-red-900\/20 { background-color: rgba(185,28,28,0.08); }
+    html:not(.dark) .border-red-500\/30 { border-color: rgba(185,28,28,0.25); }
+    html:not(.dark) .bg-blue-900\/20 { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37,99,235,0.25); }
+    html:not(.dark) .bg-emerald-900\/20 { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,0.95); }
+
+    .dark .border-dark-600 { border-color: #374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🧭</span><span class="font-bold text-lg hidden sm:inline">Consultor de IA</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-emerald-400 bg-emerald-500/10">
+            <span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors">
+            <span class="sm:hidden">T2</span><span class="hidden sm:inline">Mapear</span></a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors">
+            <span class="sm:hidden">T3</span><span class="hidden sm:inline">Auditar</span></a>
+          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors">
+            <span class="sm:hidden">T4</span><span class="hidden sm:inline">Planos</span></a>
+          <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors">
+            <span class="sm:hidden">T5</span><span class="hidden sm:inline">Entrega</span></a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- BREADCRUMB -->
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-emerald-400">Início</a><span>/</span>
+      <a href="index.html" class="hover:text-emerald-400">Trilha 1</a><span>/</span>
+      <span class="text-emerald-400">Módulo 1.4</span>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <header class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-4">MÓDULO 1.4</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🚦 Quando NÃO usar IA — e como isso constrói confiança</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">Saber dizer "isso não precisa de IA" é o sinal mais forte de competência. Clientes queimados por promessas infladas reconhecem e valorizam contenção — e voltam.</p>
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">6</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">~40</div><div class="text-xs text-neutral-400">Minutos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">Base</div><div class="text-xs text-neutral-400">Nível</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">Critério</div><div class="text-xs text-neutral-400">Tipo</div></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- INTRO + SVG -->
+    <p class="text-neutral-300 mb-8 leading-relaxed text-lg">
+      O consultor que sabe quando <strong class="text-emerald-400">não usar IA</strong> é mais valioso do que o que sabe aplicá-la em tudo. Dizer "não precisa" quando não precisa é o ato que mais constrói credibilidade de longo prazo — e o que mais diferencia o consultor do vendedor de ferramenta.
+    </p>
+
+    <div class="rounded-2xl border border-emerald-500/30 bg-dark-900/40 p-3 sm:p-4 mb-12 overflow-hidden">
+      <svg viewBox="0 0 820 200" class="w-full h-auto" role="img" aria-label="Fluxo de decisão: o problema chega ao consultor, que avalia três critérios — volume, variabilidade e risco. Resultado: base determinística, workflow com IA, ou rejeição. O caminho mais comum leva à base.">
+        <defs>
+          <linearGradient id="m14-grad" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#34d399"/><stop offset="1" stop-color="#10b981"/></linearGradient>
+          <filter id="m14-glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <pattern id="m14-grid" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="1.3" fill="#10b981" opacity="0.10"/></pattern>
+          <marker id="m14-ah" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#34d399"/></marker>
+          <marker id="m14-ahr" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#f87171"/></marker>
+        </defs>
+        <rect x="0" y="0" width="820" height="200" fill="url(#m14-grid)"/>
+
+        <!-- Problema -->
+        <g filter="url(#m14-glow)">
+          <rect x="20" y="75" width="110" height="50" rx="10" fill="#0e2018" stroke="url(#m14-grad)" stroke-width="2"/>
+        </g>
+        <text x="75" y="96" text-anchor="middle" fill="#34d399" font-weight="700" font-size="12" font-family="Inter,sans-serif">Problema</text>
+        <text x="75" y="114" text-anchor="middle" fill="#a7f3d0" font-size="11" font-family="Inter,sans-serif">do cliente</text>
+
+        <line x1="132" y1="100" x2="160" y2="100" stroke="#34d399" stroke-width="1.5" marker-end="url(#m14-ah)"/>
+
+        <!-- Decisor -->
+        <rect x="162" y="65" width="130" height="70" rx="10" fill="#1a1a0e" stroke="#fbbf24" stroke-width="2"/>
+        <text x="227" y="88" text-anchor="middle" fill="#fbbf24" font-weight="700" font-size="12" font-family="Inter,sans-serif">Critérios</text>
+        <text x="227" y="105" text-anchor="middle" fill="#fde68a" font-size="10" font-family="Inter,sans-serif">volume? variab.?</text>
+        <text x="227" y="120" text-anchor="middle" fill="#fde68a" font-size="10" font-family="Inter,sans-serif">risco? custo?</text>
+
+        <!-- Seta para base (verde - resolve sem IA) -->
+        <line x1="294" y1="88" x2="370" y2="58" stroke="#34d399" stroke-width="1.5" marker-end="url(#m14-ah)"/>
+        <text x="330" y="63" text-anchor="middle" fill="#6ee7b7" font-size="10" font-family="Inter,sans-serif">simples</text>
+
+        <!-- Seta para meio (azul - workflow com IA) -->
+        <line x1="294" y1="100" x2="370" y2="100" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#m14-ah)"/>
+        <text x="330" y="96" text-anchor="middle" fill="#7dd3fc" font-size="10" font-family="Inter,sans-serif">linguagem</text>
+
+        <!-- Seta para topo (vermelho - não use IA ainda) -->
+        <line x1="294" y1="115" x2="370" y2="150" stroke="#f87171" stroke-width="1.5" marker-end="url(#m14-ahr)"/>
+        <text x="326" y="148" text-anchor="middle" fill="#fca5a5" font-size="10" font-family="Inter,sans-serif">risco alto/escasso</text>
+
+        <!-- Resultados -->
+        <rect x="373" y="35" width="160" height="46" rx="8" fill="#0e2018" stroke="#34d399" stroke-width="2"/>
+        <text x="453" y="56" text-anchor="middle" fill="#34d399" font-weight="700" font-size="12" font-family="Inter,sans-serif">🧱 Base determinística</text>
+        <text x="453" y="72" text-anchor="middle" fill="#a7f3d0" font-size="10" font-family="Inter,sans-serif">rápido, barato, confiável</text>
+
+        <rect x="373" y="77" width="160" height="46" rx="8" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/>
+        <text x="453" y="97" text-anchor="middle" fill="#7dd3fc" font-weight="700" font-size="12" font-family="Inter,sans-serif">🤖 Workflow com IA</text>
+        <text x="453" y="113" text-anchor="middle" fill="#bae6fd" font-size="10" font-family="Inter,sans-serif">quando linguagem importa</text>
+
+        <rect x="373" y="127" width="160" height="46" rx="8" fill="#1f0707" stroke="#f87171" stroke-width="2"/>
+        <text x="453" y="147" text-anchor="middle" fill="#f87171" font-weight="700" font-size="12" font-family="Inter,sans-serif">🚫 Não usar IA agora</text>
+        <text x="453" y="163" text-anchor="middle" fill="#fca5a5" font-size="10" font-family="Inter,sans-serif">resolver o problema real</text>
+
+        <text x="410" y="195" text-anchor="middle" fill="#9ca3af" font-size="11" font-family="Inter,sans-serif">a maioria dos casos cai na base — e está certo assim</text>
+      </svg>
+      <p class="text-center text-xs text-neutral-500 mt-2">Diagrama ilustrativo — o fluxo de decisão: o caminho mais inteligente nem sempre passa pela IA.</p>
+    </div>
+
+    <!-- TÓPICO 1 -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">1</span>
+        <h2 class="text-2xl font-bold">🚫 Os sinais de que IA é a resposta errada</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Há padrões confiáveis que indicam que <strong class="text-emerald-400">IA vai criar mais problema do que resolver</strong>. Três em particular se repetem: volume baixo, regra fixa e risco alto. Qualquer um deles por si só é motivo para descer a pirâmide.</p>
+
+      <div class="space-y-4 mb-6">
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-red-500/20 flex items-center justify-center"><span class="text-red-400 font-bold">!</span></div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+            <h4 class="font-semibold text-white mb-2">Volume baixo</h4>
+            <p class="text-sm text-neutral-400 mb-2">Sinal: menos de ~200 ocorrências por mês</p>
+            <p class="text-neutral-300 text-sm">Custo de build e manutenção da solução de IA supera o benefício. Uma planilha ou regra manual é mais rápida e mais barata — e não aluci.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-red-500/20 flex items-center justify-center"><span class="text-red-400 font-bold">!</span></div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+            <h4 class="font-semibold text-white mb-2">Regra fixa</h4>
+            <p class="text-sm text-neutral-400 mb-2">Sinal: toda decisão cabe em um if/else</p>
+            <p class="text-neutral-300 text-sm">Se a lógica de decisão é determinística e não muda, IA é overhead desnecessário. Use código, não LLM. Mais rápido, mais barato, sem alucinação.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-red-500/20 flex items-center justify-center"><span class="text-red-400 font-bold">!</span></div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+            <h4 class="font-semibold text-white mb-2">Risco alto com erro inaceitável</h4>
+            <p class="text-sm text-neutral-400 mb-2">Sinal: erro do sistema causa dano legal, financeiro ou de saúde</p>
+            <p class="text-neutral-300 text-sm">LLMs alucinam. Numa decisão médica, financeira ou jurídica, o custo de um erro de IA supera o benefício da automação. Aqui a IA pode ser auxiliar — nunca o decisor final.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> O teste rápido de campo</h3>
+        <p class="text-neutral-300">Antes de qualquer proposta de IA, responda: "Se essa IA errar 5% das vezes, o impacto é tolerável?" Se a resposta for não — ou se os números de volume não justificam o build — desça a pirâmide.</p>
+      </div>
+    </section>
+
+    <!-- TÓPICO 2 -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">2</span>
+        <h2 class="text-2xl font-bold">🗃️ Às vezes a resposta é reestruturar o banco de dados</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Uma das descobertas mais frequentes no diagnóstico de operações: o problema que o cliente atribui a "falta de IA" é na verdade <strong class="text-emerald-400">dado mal estruturado, espalhado ou inacessível</strong>. Limpar e centralizar os dados resolve — sem IA, sem custo de LLM, com resultado imediato.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+          <h4 class="font-bold text-emerald-400 mb-4">✓ Diagnósticos que revelam problema de dados</h4>
+          <ul class="space-y-3 text-neutral-300">
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Informação duplicada em 3 planilhas com versões diferentes</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Relatórios feitos manualmente todo mês por falta de query</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Busca demorada porque dado não tem índice ou está em PDF</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Decisão adiada porque ninguém sabe qual versão é a correta</span></li>
+          </ul>
+        </div>
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-4">✗ O que acontece quando ignora o dado</h4>
+          <ul class="space-y-3 text-neutral-300">
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>IA treinada em dado errado entrega resultado errado</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>RAG com documentos desatualizados alucina com confiança</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Custo de LLM acumula; problema de dados persiste</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Projeto de IA vira projeto de limpeza de dados mal planejado</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center"><span class="mr-2">📊</span> Dado ruim, IA ruim</h3>
+        <p class="text-neutral-300">Modelos de linguagem amplificam o que está nos dados. Dados inconsistentes → outputs inconsistentes. A recomendação mais honesta e mais valiosa que um consultor pode dar é: "antes de qualquer IA, vamos arrumar os dados". Isso economiza meses e muito dinheiro.</p>
+      </div>
+    </section>
+
+    <!-- TÓPICO 3 -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">3</span>
+        <h2 class="text-2xl font-bold">🧰 Às vezes é um SaaS ou um fluxo determinístico simples</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">O mercado de SaaS resolveu muitos problemas de operação que até 5 anos atrás precisariam de desenvolvimento customizado. <strong class="text-emerald-400">Recomendar um SaaS certo é tão valioso quanto implementar IA</strong> — e muito mais barato e rápido.</p>
+
+      <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center"><span class="mr-2">🛠️</span> O kit de alternativas à IA</h3>
+        <ul class="space-y-3 text-neutral-300">
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>Automação low-code</strong> — Zapier, n8n, Make: integram sistemas e automatizam fluxos sem LLM.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>SaaS especializado</strong> — para cada área de negócio existe produto pronto; use-o antes de construir.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>Dashboard e BI</strong> — Metabase, Power BI, Looker: visibilidade em dados existentes sem modelo de ML.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>Script simples</strong> — Python ou SQL resolvem 80% dos casos de transformação de dados sem IA.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>Processo redesenhado</strong> — às vezes o problema é o fluxo de trabalho, não a tecnologia.</span></li>
+        </ul>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> O critério de "construir vs. comprar"</h3>
+        <p class="text-neutral-300">Pergunte sempre: "existe SaaS que resolve isso com feature suficiente?" Se sim, configure-o antes de construir. Construir tem custo de build, manutenção e evolução. Comprar tem custo previsível e suporte incluso — e libera tempo para projetos que realmente precisam de customização.</p>
+      </div>
+    </section>
+
+    <!-- TÓPICO 4 -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">4</span>
+        <h2 class="text-2xl font-bold">🤝 Dizer "não precisa de IA" aumenta a confiança</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Clientes experientes já foram queimados por consultores que empurraram soluções caras para problemas simples. Quando você diz "isso não precisa de IA", eles <strong class="text-emerald-400">ouvem "esse cara está do meu lado"</strong> — não "esse cara não sabe vender".</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+          <h4 class="font-bold text-emerald-400 mb-4">✓ O que o cliente pensa</h4>
+          <ul class="space-y-3 text-neutral-300">
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>"Ele me economizou dinheiro que eu teria gastado errado"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>"Se ele disse que não precisa aqui, quando disser que precisa, eu acredito"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>"Vou ligar de novo quando tiver o próximo problema"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>"Vou recomendar para outros que precisam"</span></li>
+          </ul>
+        </div>
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-4">✗ O que acontece com o "sim" automático</h4>
+          <ul class="space-y-3 text-neutral-300">
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Projeto de IA para problema simples entrega resultado decepcionante</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Cliente associa IA a custo alto e resultado baixo</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Reputação do consultor fica ligada ao fracasso do projeto</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Não volta, não indica, pode virar detrator público</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 5 -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">5</span>
+        <h2 class="text-2xl font-bold">⚖️ Custo de manutenção e fragilidade do que tem IA</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Todo sistema com IA tem uma característica que sistemas determinísticos não têm: <strong class="text-emerald-400">pode degradar silenciosamente</strong>. Modelos ficam desatualizados, prompts param de funcionar com novos modelos, dados de contexto envelhecem. O custo total de posse de uma solução com IA é sistematicamente subestimado.</p>
+
+      <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center"><span class="mr-2">📊</span> O custo total de posse (TCO) com IA</h3>
+        <ul class="space-y-3 text-neutral-300">
+          <li><strong>Custo de API:</strong> escala com volume — pode surpreender quando o uso cresce.</li>
+          <li><strong>Supervisão humana:</strong> alguém precisa monitorar outputs e tratar exceções.</li>
+          <li><strong>Manutenção de prompts:</strong> prompts precisam ser revisados quando o modelo ou os dados mudam.</li>
+          <li><strong>Atualização de contexto:</strong> bases de conhecimento (RAG) ficam desatualizadas e precisam de ingestão recorrente.</li>
+          <li><strong>Debugging:</strong> erros de IA são mais difíceis de diagnosticar do que erros de lógica determinística.</li>
+        </ul>
+      </div>
+
+      <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center"><span class="mr-2">💰</span> Como apresentar TCO ao cliente</h3>
+        <p class="text-neutral-300 mb-3">Mostre ao cliente uma estimativa de custo de operação mensal, não só o custo de build. Use uma tabela simples:</p>
+        <ul class="space-y-2 text-neutral-300 text-sm">
+          <li><span class="text-emerald-400">→</span> Custo de API/mês (baseado em volume estimado)</li>
+          <li><span class="text-emerald-400">→</span> Horas de supervisão/mês × custo hora</li>
+          <li><span class="text-emerald-400">→</span> Horas de manutenção trimestral ÷ 3 meses</li>
+          <li><span class="text-emerald-400">→</span> Total mensal: compare com a alternativa mais simples</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- TÓPICO 6 -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">6</span>
+        <h2 class="text-2xl font-bold">✅ Checklist: este caso justifica subir a pirâmide?</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Este checklist é a ferramenta prática que fecha o módulo. Use-o em todo diagnóstico antes de recomendar qualquer solução acima da base determinística. <strong class="text-emerald-400">Se a maioria das respostas for "não", fique na base</strong>.</p>
+
+      <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center"><span class="mr-2">✅</span> Checklist: vale subir para workflow com IA?</h3>
+        <ul class="space-y-3 text-neutral-300">
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">□</span><span>O problema envolve linguagem natural, imagem ou dado não estruturado?</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">□</span><span>O volume é suficiente para amortizar o custo de build em ≤12 meses?</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">□</span><span>Existe dado de qualidade suficiente para treinar/contextualizar o modelo?</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">□</span><span>O erro tolerável é ≥ 5% (para a maioria dos casos) ou há humano no loop?</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">□</span><span>Não existe SaaS que já resolve isso com qualidade suficiente?</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">□</span><span>A organização tem capacidade de monitorar e manter a solução?</span></li>
+        </ul>
+      </div>
+
+      <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center"><span class="mr-2">🛰️</span> Checklist adicional: vale subir para agentes?</h3>
+        <ul class="space-y-3 text-neutral-300">
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">□</span><span>A tarefa tem múltiplos passos cujo sequenciamento não é conhecido em design time?</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">□</span><span>O agente precisa chamar ferramentas externas (APIs, banco, busca)?</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">□</span><span>O benefício justifica 3-6 meses de desenvolvimento e manutenção contínua?</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">□</span><span>Existe plano de fallback para quando o agente errar ou travar?</span></li>
+        </ul>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Use o checklist com o cliente</h3>
+        <p class="text-neutral-300">Preencher o checklist junto com o cliente tem dois benefícios: ele entende os critérios (evita expectativas incorretas) e você tem registro de por que escolheu o nível X — essencial se alguém questionar a decisão depois.</p>
+      </div>
+    </section>
+
+    <!-- RESUMO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-emerald-900/40 via-dark-800 to-dark-800 rounded-xl border border-emerald-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">🎒</span> Resumo do módulo</h2>
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Três sinais de que IA é errada</strong><span class="text-neutral-400"> — volume baixo, regra fixa, risco alto demais para erro de modelo.</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Dado ruim primeiro</strong><span class="text-neutral-400"> — muitos "problemas de IA" são problemas de estrutura de dados. Resolva o dado antes da IA.</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">SaaS e determinístico são respostas válidas</strong><span class="text-neutral-400"> — e frequentemente melhores do que IA customizada.</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">"Não precisa de IA" constrói confiança</strong><span class="text-neutral-400"> — o cliente que você economizou volta e indica.</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Use o checklist</strong><span class="text-neutral-400"> — critérios claros, decisão defensável, expectativas alinhadas.</span></div></div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+          <h3 class="font-semibold text-emerald-400 mb-2">Próxima etapa:</h3>
+          <p class="text-neutral-300">Trilha 2 — Mapear: descobrir a restrição real em campo</p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Voltar para Trilha</a>
+          <a href="../trilha2/index.html" class="flex-1 text-center px-6 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-500 transition-colors">Próxima trilha: Mapear →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>Consultor de IA · Módulo 1.4 · <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a> · 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark');
+    } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

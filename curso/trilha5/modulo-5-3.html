@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 5.3 · Kit de entregáveis | Consultor de IA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: {
+      primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    /* acento teal (T5) */
+    html:not(.dark) .text-teal-400 { color: #0d9488; }
+    html:not(.dark) .bg-teal-500\/20 { background-color: rgba(13,148,136,0.12); }
+    html:not(.dark) .bg-teal-500\/10 { background-color: rgba(13,148,136,0.08); }
+    html:not(.dark) .border-teal-500\/30 { border-color: rgba(13,148,136,0.25); }
+    html:not(.dark) .hover\:text-teal-400:hover { color: #0d9488; }
+    html:not(.dark) .hover\:bg-teal-500\/10:hover { background-color: rgba(13,148,136,0.08); }
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124,58,237,0.08); }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(217,119,6,0.09); }
+
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161,98,7,0.08); }
+    html:not(.dark) .border-primary\/30 { border-color: rgba(161,98,7,0.25); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161,98,7,0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .text-red-400 { color: #b91c1c; }
+    html:not(.dark) .bg-red-900\/20 { background-color: rgba(185,28,28,0.08); }
+    html:not(.dark) .border-red-500\/30 { border-color: rgba(185,28,28,0.25); }
+    html:not(.dark) .bg-blue-900\/20 { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37,99,235,0.25); }
+    html:not(.dark) .bg-teal-900\/20 { background-color: rgba(13,148,136,0.08); }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,0.95); }
+
+    .dark .border-dark-600 { border-color: #374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🧭</span><span class="font-bold text-lg hidden sm:inline">Consultor de IA</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors">
+            <span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors">
+            <span class="sm:hidden">T2</span><span class="hidden sm:inline">Mapear</span></a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors">
+            <span class="sm:hidden">T3</span><span class="hidden sm:inline">Auditar</span></a>
+          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors">
+            <span class="sm:hidden">T4</span><span class="hidden sm:inline">Planos</span></a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-teal-400 bg-teal-500/10">
+            <span class="sm:hidden">T5</span><span class="hidden sm:inline">Entrega</span></a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- BREADCRUMB -->
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-teal-400">Início</a><span>/</span>
+      <a href="index.html" class="hover:text-teal-400">Trilha 5</a><span>/</span>
+      <span class="text-teal-400">Módulo 5.3</span>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <header class="bg-gradient-to-br from-teal-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-teal-500/20 text-teal-400 text-xs font-semibold rounded-full mb-4">MÓDULO 5.3</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🧰 Kit de entregáveis do consultor</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">Templates reutilizáveis que transformam cada projeto em base para o próximo. A diferença entre artesão e prática escalável está nos ativos que você constrói ao longo do caminho.</p>
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-teal-400">6</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-teal-400">~40</div><div class="text-xs text-neutral-400">Minutos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-teal-400">Prático</div><div class="text-xs text-neutral-400">Nível</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-teal-400">Templates</div><div class="text-xs text-neutral-400">Tipo</div></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <p class="text-neutral-300 mb-8 leading-relaxed text-lg">
+      O consultor artesão recria tudo do zero para cada cliente. O consultor com prática escalável entra no segundo projeto 30% mais rápido, no terceiro 50% mais, porque tem templates que funcionam. Cada entregável que você cria bem uma vez pode virar ativo para sempre.
+    </p>
+
+    <!-- SVG: kit de 5 entregáveis como caixas empilháveis -->
+    <div class="rounded-2xl border border-teal-500/30 bg-dark-900/40 p-3 sm:p-4 mb-12 overflow-hidden">
+      <svg viewBox="0 0 820 220" class="w-full h-auto" role="img" aria-label="Kit de entregáveis do consultor: 5 documentos em sequência — questionário de readiness, mapa de oportunidades, roadmap, one-pager executivo e registro de risco. Cada um alimenta o seguinte.">
+        <defs>
+          <linearGradient id="m53-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2dd4bf"/><stop offset="1" stop-color="#14b8a6"/></linearGradient>
+          <filter id="m53-glow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <pattern id="m53-grid" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="1.3" fill="#14b8a6" opacity="0.10"/></pattern>
+          <marker id="m53-ah" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L7,4 L0,8 L2,4 Z" fill="#2dd4bf"/></marker>
+        </defs>
+        <rect x="0" y="0" width="820" height="220" fill="url(#m53-grid)"/>
+
+        <!-- documento 1 -->
+        <g filter="url(#m53-glow)">
+          <rect x="20" y="60" width="130" height="100" rx="10" fill="#0c1f1c" stroke="url(#m53-g1)" stroke-width="2.5"/>
+          <line x1="35" y1="92" x2="135" y2="92" stroke="#2dd4bf" stroke-width="1" opacity="0.4"/>
+          <line x1="35" y1="107" x2="120" y2="107" stroke="#2dd4bf" stroke-width="1" opacity="0.3"/>
+          <line x1="35" y1="122" x2="110" y2="122" stroke="#2dd4bf" stroke-width="1" opacity="0.25"/>
+        </g>
+        <text x="85" y="78" text-anchor="middle" fill="#2dd4bf" font-family="Inter,sans-serif" font-weight="700" font-size="10.5">Questionário</text>
+        <text x="85" y="91" text-anchor="middle" fill="#99f6e4" font-family="Inter,sans-serif" font-size="9.5">de Readiness</text>
+        <text x="85" y="150" text-anchor="middle" fill="#5eead4" font-family="Inter,sans-serif" font-size="9">pré-reunião</text>
+
+        <line x1="150" y1="110" x2="175" y2="110" stroke="#2dd4bf" stroke-width="1.5" marker-end="url(#m53-ah)"/>
+
+        <!-- documento 2 -->
+        <rect x="177" y="55" width="130" height="110" rx="10" fill="#0c1f1c" stroke="#2dd4bf" stroke-width="2" opacity="0.9"/>
+        <text x="242" y="78" text-anchor="middle" fill="#2dd4bf" font-family="Inter,sans-serif" font-weight="700" font-size="10.5">Mapa de</text>
+        <text x="242" y="93" text-anchor="middle" fill="#99f6e4" font-family="Inter,sans-serif" font-size="9.5">Oportunidades</text>
+        <text x="242" y="155" text-anchor="middle" fill="#5eead4" font-family="Inter,sans-serif" font-size="9">+ matriz V×V</text>
+
+        <line x1="307" y1="110" x2="332" y2="110" stroke="#2dd4bf" stroke-width="1.5" marker-end="url(#m53-ah)"/>
+
+        <!-- documento 3 -->
+        <rect x="334" y="48" width="130" height="124" rx="10" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/>
+        <text x="399" y="71" text-anchor="middle" fill="#38bdf8" font-family="Inter,sans-serif" font-weight="700" font-size="10.5">Roadmap</text>
+        <text x="399" y="86" text-anchor="middle" fill="#9ad6ff" font-family="Inter,sans-serif" font-size="9.5">por ondas</text>
+        <text x="399" y="160" text-anchor="middle" fill="#bfe6ff" font-family="Inter,sans-serif" font-size="9">+ business case</text>
+
+        <line x1="464" y1="110" x2="489" y2="110" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#m53-ah)"/>
+
+        <!-- documento 4 -->
+        <rect x="491" y="55" width="130" height="110" rx="10" fill="#0c1f1c" stroke="#2dd4bf" stroke-width="2" opacity="0.9"/>
+        <text x="556" y="78" text-anchor="middle" fill="#2dd4bf" font-family="Inter,sans-serif" font-weight="700" font-size="10.5">One-pager</text>
+        <text x="556" y="93" text-anchor="middle" fill="#99f6e4" font-family="Inter,sans-serif" font-size="9.5">Executivo</text>
+        <text x="556" y="155" text-anchor="middle" fill="#5eead4" font-family="Inter,sans-serif" font-size="9">C-level aprova</text>
+
+        <line x1="621" y1="110" x2="646" y2="110" stroke="#2dd4bf" stroke-width="1.5" marker-end="url(#m53-ah)"/>
+
+        <!-- documento 5 -->
+        <g filter="url(#m53-glow)">
+          <rect x="648" y="60" width="140" height="100" rx="10" fill="#0c1f1c" stroke="url(#m53-g1)" stroke-width="2.5"/>
+        </g>
+        <text x="718" y="83" text-anchor="middle" fill="#2dd4bf" font-family="Inter,sans-serif" font-weight="700" font-size="10.5">Registro de</text>
+        <text x="718" y="98" text-anchor="middle" fill="#99f6e4" font-family="Inter,sans-serif" font-size="9.5">Risco + Gov.</text>
+        <text x="718" y="150" text-anchor="middle" fill="#5eead4" font-family="Inter,sans-serif" font-size="9">blindar projeto</text>
+
+        <text x="410" y="198" text-anchor="middle" fill="#94a3b8" font-family="Inter,sans-serif" font-size="11">cada documento é template reutilizável — primeiro cliente paga, os outros se beneficiam</text>
+      </svg>
+      <p class="text-center text-xs text-neutral-500 mt-2">Diagrama ilustrativo — sequência de entregáveis do kit de consultoria de IA.</p>
+    </div>
+
+    <!-- TÓPICO 1 -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-teal-500/20 text-teal-400 font-bold text-xl">1</span>
+        <h2 class="text-2xl font-bold">📋 Questionário de readiness</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">O questionário é o primeiro entregável — enviado antes da primeira reunião. Chegar informado não é só eficiência: <strong class="text-teal-400">é o primeiro sinal de que você é profissional</strong>. O cliente percebe imediatamente que não está conversando com alguém improvisando.</p>
+
+      <div class="bg-gradient-to-br from-teal-900/30 to-dark-800 rounded-xl border border-teal-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-teal-400 mb-4">O que o questionário cobre</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <p class="text-sm font-semibold text-neutral-300 mb-2">Dados e infraestrutura</p>
+            <ul class="text-sm text-neutral-400 space-y-1">
+              <li>• Quais sistemas usam (ERP, CRM, BI)?</li>
+              <li>• Dados estão estruturados ou dispersos?</li>
+              <li>• Histórico disponível? Quantos anos?</li>
+            </ul>
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-neutral-300 mb-2">Processos e dores</p>
+            <ul class="text-sm text-neutral-400 space-y-1">
+              <li>• Qual processo consome mais tempo?</li>
+              <li>• Onde os erros custam mais?</li>
+              <li>• Já tentaram IA antes? O que aconteceu?</li>
+            </ul>
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-neutral-300 mb-2">Cultura e prontidão</p>
+            <ul class="text-sm text-neutral-400 space-y-1">
+              <li>• Time já usa alguma ferramenta de IA?</li>
+              <li>• Há resistência interna à mudança?</li>
+              <li>• Quem são os decision makers?</li>
+            </ul>
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-neutral-300 mb-2">Expectativas</p>
+            <ul class="text-sm text-neutral-400 space-y-1">
+              <li>• Qual resultado ideal em 6 meses?</li>
+              <li>• Qual o orçamento disponível?</li>
+              <li>• Qual o prazo mais crítico?</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6">
+        <h3 class="text-lg font-semibold text-primary mb-3">💡 Regra de ouro do questionário</h3>
+        <p class="text-neutral-300">Máximo 15 perguntas, respostas em 20 minutos. Se for mais longo, o cliente procrastina e você perde o momentum. Perguntas abertas para descoberta, fechadas para qualificação rápida.</p>
+      </div>
+    </section>
+
+    <!-- TÓPICO 2 -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-teal-500/20 text-teal-400 font-bold text-xl">2</span>
+        <h2 class="text-2xl font-bold">🗺️ Mapa de oportunidades + matriz valor×viabilidade</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">O mapa lista todos os casos de uso potenciais de IA identificados na descoberta. A matriz posiciona cada um em dois eixos: <strong class="text-teal-400">valor para o negócio × viabilidade técnica</strong>. O quadrante certo é onde você começa.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+          <h4 class="font-semibold text-white mb-4">Os 4 quadrantes</h4>
+          <div class="space-y-3">
+            <div class="flex items-start space-x-3">
+              <span class="text-teal-400 font-bold flex-shrink-0">Q1</span>
+              <div>
+                <p class="font-medium text-sm text-teal-400">Alto valor + Alta viabilidade</p>
+                <p class="text-xs text-neutral-400">→ Começa aqui. Quick wins.</p>
+              </div>
+            </div>
+            <div class="flex items-start space-x-3">
+              <span class="text-neutral-400 font-bold flex-shrink-0">Q2</span>
+              <div>
+                <p class="font-medium text-sm text-neutral-300">Alto valor + Baixa viabilidade</p>
+                <p class="text-xs text-neutral-400">→ Projetos de médio/longo prazo</p>
+              </div>
+            </div>
+            <div class="flex items-start space-x-3">
+              <span class="text-neutral-400 font-bold flex-shrink-0">Q3</span>
+              <div>
+                <p class="font-medium text-sm text-neutral-300">Baixo valor + Alta viabilidade</p>
+                <p class="text-xs text-neutral-400">→ Só se sobrar capacidade</p>
+              </div>
+            </div>
+            <div class="flex items-start space-x-3">
+              <span class="text-red-400 font-bold flex-shrink-0">Q4</span>
+              <div>
+                <p class="font-medium text-sm text-red-400">Baixo valor + Baixa viabilidade</p>
+                <p class="text-xs text-neutral-400">→ Não faça. Nem planeje.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-teal-900/20 rounded-xl border border-teal-500/30 p-6">
+          <h4 class="font-semibold text-teal-400 mb-4">Por que a matriz funciona</h4>
+          <ul class="space-y-3 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-teal-400 mt-1">•</span><span>Torna objetiva uma decisão que muitas vezes é política</span></li>
+            <li class="flex items-start space-x-2"><span class="text-teal-400 mt-1">•</span><span>Facilita alinhamento entre áreas com interesses diferentes</span></li>
+            <li class="flex items-start space-x-2"><span class="text-teal-400 mt-1">•</span><span>Documenta a lógica da priorização — protege você e o cliente</span></li>
+            <li class="flex items-start space-x-2"><span class="text-teal-400 mt-1">•</span><span>É visual — qualquer executivo entende em 30 segundos</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 3 -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-teal-500/20 text-teal-400 font-bold text-xl">3</span>
+        <h2 class="text-2xl font-bold">🌊 Roadmap por ondas + business case 1 página</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">O roadmap transforma o mapa de oportunidades em um plano de execução com janelas de tempo. O business case de uma página traduz cada onda para a linguagem de quem aprova orçamento. <strong class="text-teal-400">Executivos aprovam projetos que cabem em uma folha.</strong></p>
+
+      <div class="space-y-4 mb-6">
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-teal-500/20 flex items-center justify-center"><span class="text-teal-400 font-bold">1</span></div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+            <h4 class="font-semibold text-white mb-2">🌊 Onda 1 — 90 dias</h4>
+            <p class="text-neutral-300 text-sm">Casos de uso Q1 da matriz: alto valor, alta viabilidade. Entrega resultado visível rápido e constrói momentum interno.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-teal-500/20 flex items-center justify-center"><span class="text-teal-400 font-bold">2</span></div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+            <h4 class="font-semibold text-white mb-2">🌊 Onda 2 — 6 meses</h4>
+            <p class="text-neutral-300 text-sm">Casos de maior complexidade ou que dependem da infraestrutura da onda 1. Plantar fundação enquanto colhe resultado da primeira onda.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-teal-500/20 flex items-center justify-center"><span class="text-teal-400 font-bold">3</span></div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+            <h4 class="font-semibold text-white mb-2">🌊 Onda 3 — 12 meses</h4>
+            <p class="text-neutral-300 text-sm">Visão de longo prazo. Projetos que precisam de maturidade cultural e dado acumulado. Ancora a ambição sem comprometer com prazos impossíveis.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3">📊 Estrutura do business case de 1 página</h3>
+        <div class="grid grid-cols-2 gap-4 text-sm">
+          <div><span class="text-blue-400 font-semibold">Problema:</span><p class="text-neutral-400 mt-1">o que está custando ou bloqueando</p></div>
+          <div><span class="text-blue-400 font-semibold">Solução:</span><p class="text-neutral-400 mt-1">o que vai mudar com IA</p></div>
+          <div><span class="text-blue-400 font-semibold">ROI estimado:</span><p class="text-neutral-400 mt-1">economia, receita ou risco evitado</p></div>
+          <div><span class="text-blue-400 font-semibold">Prazo de payback:</span><p class="text-neutral-400 mt-1">quantos meses para se pagar</p></div>
+          <div><span class="text-blue-400 font-semibold">Riscos:</span><p class="text-neutral-400 mt-1">o que pode dar errado e mitigação</p></div>
+          <div><span class="text-blue-400 font-semibold">Próximo passo:</span><p class="text-neutral-400 mt-1">o que precisa de aprovação agora</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 4 -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-teal-500/20 text-teal-400 font-bold text-xl">4</span>
+        <h2 class="text-2xl font-bold">📊 One-pager executivo</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">O one-pager é o documento que viaja sem você — é enviado para o CEO antes de uma reunião, circula entre VPs, chega ao board. <strong class="text-teal-400">Precisa ser legível por alguém que lê no celular entre duas reuniões.</strong></p>
+
+      <div class="bg-gradient-to-br from-teal-900/30 to-dark-800 rounded-xl border border-teal-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-teal-400 mb-4">Template do one-pager executivo</h3>
+        <div class="space-y-4">
+          <div class="bg-dark-800/60 rounded-lg p-4">
+            <p class="text-xs text-teal-400 font-semibold uppercase tracking-wide mb-1">Situação atual</p>
+            <p class="text-sm text-neutral-300">O que está acontecendo hoje — números concretos quando possível.</p>
+          </div>
+          <div class="bg-dark-800/60 rounded-lg p-4">
+            <p class="text-xs text-teal-400 font-semibold uppercase tracking-wide mb-1">Oportunidade</p>
+            <p class="text-sm text-neutral-300">O que é possível mudar com IA — resultado esperado em linguagem de negócio.</p>
+          </div>
+          <div class="bg-dark-800/60 rounded-lg p-4">
+            <p class="text-xs text-teal-400 font-semibold uppercase tracking-wide mb-1">Abordagem</p>
+            <p class="text-sm text-neutral-300">Como vai ser feito — fases, prazo, responsáveis. Máximo 5 linhas.</p>
+          </div>
+          <div class="bg-dark-800/60 rounded-lg p-4">
+            <p class="text-xs text-teal-400 font-semibold uppercase tracking-wide mb-1">ROI + próximo passo</p>
+            <p class="text-sm text-neutral-300">O retorno esperado e a decisão que precisa ser tomada agora.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6">
+        <h3 class="text-lg font-semibold text-primary mb-3">💡 Teste do one-pager</h3>
+        <p class="text-neutral-300">Leia em voz alta. Deve levar menos de 2 minutos. Se demorar mais, está longo demais. O executivo lê entre reuniões — se não couber no ritmo dele, não vai ser lido.</p>
+      </div>
+    </section>
+
+    <!-- TÓPICO 5 -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-teal-500/20 text-teal-400 font-bold text-xl">5</span>
+        <h2 class="text-2xl font-bold">🛡️ Registro de risco e nota de governança</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Projetos de IA têm riscos específicos que consultores de outras áreas muitas vezes ignoram: <strong class="text-teal-400">viés algorítmico, privacidade de dados, falhas silenciosas, deriva de modelo</strong>. Documentar antes é mais profissional e mais barato que remediar depois.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+          <h4 class="font-semibold text-white mb-4">📋 Registro de risco (5 colunas)</h4>
+          <div class="space-y-2 text-sm">
+            <div class="flex space-x-2"><span class="text-teal-400 font-semibold w-24 flex-shrink-0">Risco</span><span class="text-neutral-400">descrição do que pode acontecer</span></div>
+            <div class="flex space-x-2"><span class="text-teal-400 font-semibold w-24 flex-shrink-0">Prob.</span><span class="text-neutral-400">baixa / média / alta</span></div>
+            <div class="flex space-x-2"><span class="text-teal-400 font-semibold w-24 flex-shrink-0">Impacto</span><span class="text-neutral-400">baixo / médio / alto</span></div>
+            <div class="flex space-x-2"><span class="text-teal-400 font-semibold w-24 flex-shrink-0">Mitigação</span><span class="text-neutral-400">o que fazer para reduzir</span></div>
+            <div class="flex space-x-2"><span class="text-teal-400 font-semibold w-24 flex-shrink-0">Dono</span><span class="text-neutral-400">quem monitora</span></div>
+          </div>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+          <h4 class="font-semibold text-white mb-4">⚖️ Nota de governança (3 seções)</h4>
+          <div class="space-y-2 text-sm">
+            <div><span class="text-teal-400 font-semibold">Quem decide:</span><span class="text-neutral-400 ml-2">sponsor, comitê, ou consultor?</span></div>
+            <div><span class="text-teal-400 font-semibold">Quem executa:</span><span class="text-neutral-400 ml-2">time interno, consultor, parceiro?</span></div>
+            <div><span class="text-teal-400 font-semibold">Como escalar:</span><span class="text-neutral-400 ml-2">se algo der errado, quem chama?</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+        <h3 class="text-lg font-semibold text-red-400 mb-3 flex items-center"><span class="mr-2">⚠️</span> Riscos específicos de IA que todo consultor deve mapear</h3>
+        <ul class="space-y-2 text-neutral-300 text-sm">
+          <li class="flex items-start space-x-2"><span class="text-red-400">•</span><span><strong>Viés de dados:</strong> modelo treinado em dados históricos que refletem práticas injustas</span></li>
+          <li class="flex items-start space-x-2"><span class="text-red-400">•</span><span><strong>Falha silenciosa:</strong> modelo que degradou e ninguém percebeu</span></li>
+          <li class="flex items-start space-x-2"><span class="text-red-400">•</span><span><strong>Dependência de fornecedor:</strong> API que muda preço ou política sem aviso</span></li>
+          <li class="flex items-start space-x-2"><span class="text-red-400">•</span><span><strong>Privacidade:</strong> dados de clientes usados para treinar modelos sem consentimento</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- TÓPICO 6 -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-teal-500/20 text-teal-400 font-bold text-xl">6</span>
+        <h2 class="text-2xl font-bold">♻️ Produtizar e reusar entregáveis</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">A diferença entre artesão e prática escalável não é talento — é ativos. <strong class="text-teal-400">Cada entregável customizado para um cliente é um template em potencial</strong>. O primeiro projeto financia a criação; todos os outros se beneficiam.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-teal-900/20 rounded-xl border border-teal-500/30 p-6">
+          <h4 class="font-bold text-teal-400 mb-4">✓ Prática com ativos</h4>
+          <ul class="space-y-3 text-neutral-300">
+            <li class="flex items-start space-x-2"><span class="text-teal-400">✓</span><span>Cada projeto melhora o template existente</span></li>
+            <li class="flex items-start space-x-2"><span class="text-teal-400">✓</span><span>Onboarding de novo cliente: 30% mais rápido</span></li>
+            <li class="flex items-start space-x-2"><span class="text-teal-400">✓</span><span>Consistência entre entregas (menos erro)</span></li>
+            <li class="flex items-start space-x-2"><span class="text-teal-400">✓</span><span>Pode terceirizar partes com instrução clara</span></li>
+          </ul>
+        </div>
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-4">✗ Prática sem ativos</h4>
+          <ul class="space-y-3 text-neutral-300">
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Começa do zero em todo novo cliente</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Qualidade varia por cansaço e contexto</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Não consegue delegar — sabe só na cabeça</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Horas aumentam com a quantidade de clientes</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6">
+        <h3 class="text-lg font-semibold text-primary mb-3">💡 Como começar a produtizar hoje</h3>
+        <p class="text-neutral-300">Ao terminar um projeto, abra cada entregável e remova os dados específicos do cliente. O que sobra é o template. Adicione comentários explicando a lógica de cada seção. Em 6 projetos você terá um kit completo que funciona como vantagem competitiva real.</p>
+      </div>
+    </section>
+
+    <!-- RESUMO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-teal-900/40 via-dark-800 to-dark-800 rounded-xl border border-teal-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">🎒</span> Resumo do módulo</h2>
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3"><span class="text-teal-400 mt-1">✓</span><div><strong class="text-white">Questionário de readiness</strong><span class="text-neutral-400"> — chega informado antes da reunião, demonstra profissionalismo.</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-teal-400 mt-1">✓</span><div><strong class="text-white">Matriz valor×viabilidade</strong><span class="text-neutral-400"> — priorização objetiva e visual que alinha equipes.</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-teal-400 mt-1">✓</span><div><strong class="text-white">Roadmap por ondas + business case</strong><span class="text-neutral-400"> — plano sequencial com ROI que executivos aprovam.</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-teal-400 mt-1">✓</span><div><strong class="text-white">One-pager executivo</strong><span class="text-neutral-400"> — viaja sem você, lido em 2 minutos, decisão facilitada.</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-teal-400 mt-1">✓</span><div><strong class="text-white">Registro de risco</strong><span class="text-neutral-400"> — documenta riscos antes, blinda consultor e cliente.</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-teal-400 mt-1">✓</span><div><strong class="text-white">Produtizar é a alavanca</strong><span class="text-neutral-400"> — primeiro cliente financia o template, todos os outros se beneficiam.</span></div></div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+          <h3 class="font-semibold text-teal-400 mb-2">Próximo módulo:</h3>
+          <p class="text-neutral-300">5.4 — Adoção, change management e escalar a prática: o gargalo real não é tecnologia, é gente</p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="modulo-5-2.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Módulo Anterior</a>
+          <a href="modulo-5-4.html" class="flex-1 text-center px-6 py-3 bg-teal-600 text-white rounded-lg font-semibold hover:bg-teal-500 transition-colors">Próximo Módulo →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>Consultor de IA · Módulo 5.3 · <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a> · 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark');
+    } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

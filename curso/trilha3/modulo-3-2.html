@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 3.2 · Modelos de maturidade em IA | Consultor de IA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: {
+      primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    /* acento purple (T3) */
+    html:not(.dark) .text-purple-400 { color: #7c3aed; }
+    html:not(.dark) .bg-purple-500\/20 { background-color: rgba(124,58,237,0.12); }
+    html:not(.dark) .bg-purple-500\/10 { background-color: rgba(124,58,237,0.08); }
+    html:not(.dark) .border-purple-500\/30 { border-color: rgba(124,58,237,0.25); }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124,58,237,0.08); }
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(217,119,6,0.09); }
+    html:not(.dark) .hover\:text-teal-400:hover { color: #0d9488; }
+    html:not(.dark) .hover\:bg-teal-500\/10:hover { background-color: rgba(13,148,136,0.08); }
+
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161,98,7,0.08); }
+    html:not(.dark) .border-primary\/30 { border-color: rgba(161,98,7,0.25); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161,98,7,0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .text-red-400 { color: #b91c1c; }
+    html:not(.dark) .bg-red-900\/20 { background-color: rgba(185,28,28,0.08); }
+    html:not(.dark) .border-red-500\/30 { border-color: rgba(185,28,28,0.25); }
+    html:not(.dark) .bg-blue-900\/20 { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37,99,235,0.25); }
+    html:not(.dark) .bg-emerald-900\/20 { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5,150,105,0.25); }
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,0.95); }
+
+    .dark .border-dark-600 { border-color: #374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+
+    @keyframes wf-pulse { 0%,100% { opacity:.55 } 50% { opacity:1 } }
+    @media (prefers-reduced-motion: no-preference) {
+      .wf-a { animation: wf-pulse 2.8s ease-in-out infinite; }
+      .wf-a:nth-child(2){animation-delay:.3s} .wf-a:nth-child(3){animation-delay:.6s}
+      .wf-a:nth-child(4){animation-delay:.9s} .wf-a:nth-child(5){animation-delay:1.2s}
+    }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🧭</span><span class="font-bold text-lg hidden sm:inline">Consultor de IA</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors">
+            <span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors">
+            <span class="sm:hidden">T2</span><span class="hidden sm:inline">Mapear</span></a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-400 bg-purple-500/10">
+            <span class="sm:hidden">T3</span><span class="hidden sm:inline">Auditar</span></a>
+          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors">
+            <span class="sm:hidden">T4</span><span class="hidden sm:inline">Planos</span></a>
+          <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors">
+            <span class="sm:hidden">T5</span><span class="hidden sm:inline">Entrega</span></a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- BREADCRUMB -->
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-purple-400">Início</a><span>/</span>
+      <a href="index.html" class="hover:text-purple-400">Trilha 3</a><span>/</span>
+      <span class="text-purple-400">Módulo 3.2</span>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <header class="bg-gradient-to-br from-purple-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-semibold rounded-full mb-4">MÓDULO 3.2</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">📶 Modelos de maturidade em IA</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">Do ad-hoc ao transformacional — não como ranking de prestígio, mas como mapa de onde a organização está e qual é o próximo passo realista. Pular estágios é a receita do fracasso.</p>
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">6</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">~40</div><div class="text-xs text-neutral-400">Minutos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">Audit</div><div class="text-xs text-neutral-400">Nível</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">Diagnós.</div><div class="text-xs text-neutral-400">Tipo</div></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- INTRO -->
+    <p class="text-neutral-300 mb-8 leading-relaxed text-lg">
+      Modelos de maturidade existem para um propósito específico: <strong class="text-purple-400">criar linguagem compartilhada</strong> sobre onde a organização está hoje e onde precisa chegar. Usá-los como troféu ("precisamos ser nível 5") é o erro. Usá-los como espelho ("estamos no nível 2 — o que isso significa para o projeto?") é o trabalho.
+    </p>
+
+    <!-- SVG: Escada de maturidade -->
+    <div class="rounded-2xl border border-purple-500/30 bg-dark-900/40 p-3 sm:p-4 mb-12 overflow-hidden">
+      <svg viewBox="0 0 820 230" class="w-full h-auto" role="img" aria-label="Escada de 5 degraus de maturidade em IA: Ad-hoc, Consciente, Ativo, Operacional, Transformacional. Degraus sobem da esquerda para a direita em roxo com brilho neon.">
+        <defs>
+          <linearGradient id="m32-grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c084fc"/><stop offset="1" stop-color="#a855f7"/></linearGradient>
+          <filter id="m32-glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <pattern id="m32-grid" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="1.3" fill="#a855f7" opacity="0.12"/></pattern>
+          <marker id="m32-ah" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#38bdf8"/></marker>
+        </defs>
+        <rect x="0" y="0" width="820" height="230" fill="url(#m32-grid)"/>
+        <!-- Seta de progressão ciano -->
+        <line x1="60" y1="190" x2="760" y2="190" stroke="#38bdf8" stroke-width="1.5" opacity="0.4" marker-end="url(#m32-ah)"/>
+        <text x="410" y="215" text-anchor="middle" fill="#38bdf8" font-family="Inter,sans-serif" font-size="11" opacity="0.7">progressão de maturidade →</text>
+        <!-- Degraus (5) — cada degrau sobe 32px, largura 120px, espaçamento 14px -->
+        <!-- Degrau 1: Ad-hoc -->
+        <g class="wf-a" filter="url(#m32-glow)">
+          <rect x="50" y="146" width="120" height="44" rx="8" fill="#1a1230" stroke="#7c3aed" stroke-width="2"/>
+        </g>
+        <text x="110" y="165" text-anchor="middle" fill="#c084fc" font-family="Inter,sans-serif" font-weight="700" font-size="13">1. Ad-hoc</text>
+        <text x="110" y="182" text-anchor="middle" fill="#d8b4fe" font-family="Inter,sans-serif" font-size="10">experimentação</text>
+        <!-- Degrau 2: Consciente -->
+        <g class="wf-a">
+          <rect x="184" y="114" width="120" height="44" rx="8" fill="#1a1230" stroke="#9333ea" stroke-width="2"/>
+        </g>
+        <text x="244" y="133" text-anchor="middle" fill="#c084fc" font-family="Inter,sans-serif" font-weight="700" font-size="13">2. Consciente</text>
+        <text x="244" y="150" text-anchor="middle" fill="#d8b4fe" font-family="Inter,sans-serif" font-size="10">visão sem estrutura</text>
+        <!-- Degrau 3: Ativo -->
+        <g class="wf-a">
+          <rect x="318" y="82" width="120" height="44" rx="8" fill="#1a1230" stroke="#a855f7" stroke-width="2"/>
+        </g>
+        <text x="378" y="101" text-anchor="middle" fill="#c084fc" font-family="Inter,sans-serif" font-weight="700" font-size="13">3. Ativo</text>
+        <text x="378" y="118" text-anchor="middle" fill="#d8b4fe" font-family="Inter,sans-serif" font-size="10">projetos com resultado</text>
+        <!-- Degrau 4: Operacional -->
+        <g class="wf-a">
+          <rect x="452" y="50" width="120" height="44" rx="8" fill="#1a1230" stroke="#c084fc" stroke-width="2.5"/>
+        </g>
+        <text x="512" y="69" text-anchor="middle" fill="#c084fc" font-family="Inter,sans-serif" font-weight="700" font-size="13">4. Operacional</text>
+        <text x="512" y="86" text-anchor="middle" fill="#d8b4fe" font-family="Inter,sans-serif" font-size="10">IA em múlt. processos</text>
+        <!-- Degrau 5: Transformacional -->
+        <g class="wf-a" filter="url(#m32-glow)">
+          <rect x="586" y="18" width="164" height="44" rx="8" fill="#1a1230" stroke="url(#m32-grad)" stroke-width="3"/>
+        </g>
+        <text x="668" y="37" text-anchor="middle" fill="#e9d5ff" font-family="Inter,sans-serif" font-weight="700" font-size="13">5. Transformacional</text>
+        <text x="668" y="54" text-anchor="middle" fill="#38bdf8" font-family="Inter,sans-serif" font-size="10">IA = vantagem central</text>
+      </svg>
+      <p class="text-center text-xs text-neutral-500 mt-2">Os 5 estágios de maturidade — cada degrau requer a base do anterior.</p>
+    </div>
+
+    <!-- TÓPICO 1 -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">1</span>
+        <h2 class="text-2xl font-bold">🔍 O que são modelos de maturidade</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Modelos de maturidade descrevem <strong class="text-purple-400">estágios progressivos</strong> de capacidade organizacional. Na IA, o mais usado no Brasil é inspirado nos frameworks de maturidade de dados e no CMMI — vai de operação ad-hoc (nível 1) a IA como vantagem competitiva central (nível 5).</p>
+
+      <div class="bg-gradient-to-br from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center"><span class="mr-2">🧭</span> Espelho, não troféu</h3>
+        <p class="text-neutral-300 mb-4">O modelo é uma ferramenta de diagnóstico, não um ranking competitivo. Uma organização no nível 2 não é "pior" — está exatamente onde deveria estar dado seu histórico e investimentos. O trabalho é ir para o nível 3, não fingir estar no 5.</p>
+        <ul class="space-y-2 text-neutral-300 text-sm">
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span><strong>Erro:</strong> liderança quer "ir para o 5 em 6 meses" sem base nos estágios anteriores.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span><strong>Correto:</strong> identificar o nível atual com honestidade e propor o próximo passo viável.</span></li>
+        </ul>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-purple-400 font-bold mb-1">Vocabulário</div><p class="text-sm text-neutral-400">linguagem compartilhada</p></div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-purple-400 font-bold mb-1">Diagnóstico</div><p class="text-sm text-neutral-400">onde estamos hoje</p></div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-purple-400 font-bold mb-1">Direção</div><p class="text-sm text-neutral-400">próximo passo realista</p></div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-purple-400 font-bold mb-1">Ancoragem</div><p class="text-sm text-neutral-400">roadmap sequenciado</p></div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 2 -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">2</span>
+        <h2 class="text-2xl font-bold">1️⃣ Estágios 1 e 2 — Ad-hoc e Consciente</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">A maioria das PMEs brasileiras está neste intervalo. É onde o consultor encontra mais trabalho de <strong class="text-purple-400">preparação de fundação</strong> — e onde mais projetos de IA prematuros falham por pular essa base.</p>
+
+      <div class="space-y-4 mb-6">
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center"><span class="text-purple-400 font-bold text-lg">1</span></div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+            <h4 class="font-semibold text-white mb-2">Nível 1 — Ad-hoc</h4>
+            <p class="text-sm text-neutral-400 mb-3">A maioria das PMEs</p>
+            <p class="text-neutral-300 text-sm mb-3">Experimentos isolados de IA por indivíduos motivados. Sem dados estruturados para IA, sem visão clara, sem investimento dedicado. O que funciona funciona por acidente — nada é replicável ou escalável.</p>
+            <p class="text-sm text-purple-400 font-semibold">Recomendação do consultor: inventariar dados, documentar processos críticos e identificar o primeiro caso de uso mais simples.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center"><span class="text-purple-400 font-bold text-lg">2</span></div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+            <h4 class="font-semibold text-white mb-2">Nível 2 — Consciente</h4>
+            <p class="text-sm text-neutral-400 mb-3">Liderança engajada, sem estrutura</p>
+            <p class="text-neutral-300 text-sm mb-3">A liderança entende que IA é importante. Há conversas, talvez algum projeto-piloto, mas sem orçamento dedicado, sem equipe e sem dados estruturados para suportar projeto de verdade.</p>
+            <p class="text-sm text-purple-400 font-semibold">Recomendação do consultor: ajudar a construir o business case para o primeiro projeto com ROI claro — transforma "achamos importante" em compromisso com orçamento.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 3 -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">3</span>
+        <h2 class="text-2xl font-bold">3️⃣ Estágio 3 — Ativo</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">O estágio 3 é o <strong class="text-purple-400">ponto de inflexão</strong>: a organização tem projetos rodando, primeiros resultados documentados e base para expandir. É onde o consultor pode gerar mais impacto — e onde o risco de errar a estratégia é maior.</p>
+
+      <div class="bg-gradient-to-br from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center"><span class="mr-2">⚡</span> Sinais de que a organização está no nível 3</h3>
+        <ul class="space-y-2 text-neutral-300">
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">✓</span><span>Pelo menos 1-2 casos de uso de IA em produção com KPIs definidos</span></li>
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">✓</span><span>Dados estruturados para o caso de uso em execução</span></li>
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">✓</span><span>Equipe técnica (interna ou terceirizada) com responsabilidade clara</span></li>
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">✓</span><span>Orçamento dedicado aprovado para IA</span></li>
+        </ul>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> O que o consultor faz no nível 3</h3>
+        <p class="text-neutral-300">Ajuda a expandir o que funciona (replicar o caso de uso vencedor para outros processos), estabelece governança básica antes de escalar, e documenta os aprendizados dos primeiros projetos como base para o roadmap de longo prazo.</p>
+      </div>
+    </section>
+
+    <!-- TÓPICO 4 -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">4</span>
+        <h2 class="text-2xl font-bold">4️⃣ Estágios 4 e 5 — Operacional e Transformacional</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Os estágios mais avançados exigem <strong class="text-purple-400">capacidade interna robusta</strong>. Organizações aqui já não dependem de consultores externos para operar — dependem para inovar e para casos especializados.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+          <h4 class="font-bold text-purple-400 mb-4">Nível 4 — Operacional</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li>• IA em múltiplos processos críticos</li>
+            <li>• MLOps: deploy, monitoramento e re-treinamento automatizados</li>
+            <li>• KPIs de IA vinculados a KPIs de negócio</li>
+            <li>• Governança formal com políticas documentadas</li>
+            <li>• Time interno de dados/IA estabelecido</li>
+          </ul>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+          <h4 class="font-bold text-purple-400 mb-4">Nível 5 — Transformacional</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li>• IA como diferencial competitivo central</li>
+            <li>• Novos modelos de negócio habilitados por IA</li>
+            <li>• Dados como ativo estratégico valorizado</li>
+            <li>• IA no produto/serviço principal da empresa</li>
+            <li>• Capacidade de pesquisa e inovação interna</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center"><span class="mr-2">📌</span> Realidade do mercado brasileiro</h3>
+        <p class="text-neutral-300">A esmagadora maioria das empresas brasileiras está nos níveis 1-3. Poucos médios negócios chegam ao 4. O nível 5 é reservado a empresas de tecnologia nativas digitais e grandes corporações com anos de investimento. Calibrar expectativas com essa realidade é parte do trabalho honesto do consultor.</p>
+      </div>
+    </section>
+
+    <!-- TÓPICO 5 -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">5</span>
+        <h2 class="text-2xl font-bold">⚠️ Armadilhas do modelo de maturidade</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">O modelo de maturidade é útil quando usado corretamente. Quando mal usado, pode <strong class="text-purple-400">criar mais problemas do que resolver</strong> — seja por ambição desmedida da liderança, seja por subestimação do consultor.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-4">✗ Mau uso do modelo</h4>
+          <ul class="space-y-3 text-neutral-300">
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Usar como benchmark ("nosso concorrente está no 4, queremos ir para o 4")</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Pular do nível 1 direto para projetos de nível 4</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Declarar nível mais alto para impressionar investidores</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Tratar o modelo como checkbox e não como diagnóstico real</span></li>
+          </ul>
+        </div>
+        <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+          <h4 class="font-bold text-emerald-400 mb-4">✓ Bom uso do modelo</h4>
+          <ul class="space-y-3 text-neutral-300">
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Diagnóstico honesto com base em evidências, não percepção</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Meta = avançar um estágio, não saltar para o topo</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Usar como base para roadmap sequenciado</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Revisitar o diagnóstico a cada 6 meses</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 6 -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">6</span>
+        <h2 class="text-2xl font-bold">🗺️ Usar o modelo como input para o roadmap</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">O modelo de maturidade é a entrada, não a saída. A saída é o <strong class="text-purple-400">roadmap sequenciado por ondas</strong> — cada onda leva a organização um nível acima, construída sobre os fundamentos do nível anterior.</p>
+
+      <div class="bg-gradient-to-br from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center"><span class="mr-2">🔗</span> Da avaliação ao próximo passo</h3>
+        <div class="space-y-3 text-sm">
+          <div class="flex items-center space-x-3 bg-dark-700/50 rounded-lg p-3">
+            <span class="w-16 text-center font-bold text-purple-400 flex-shrink-0">Nível 1</span>
+            <span class="text-neutral-400">→</span>
+            <span class="text-neutral-300">Focar em qualidade de dados e documentação de processos antes de qualquer IA</span>
+          </div>
+          <div class="flex items-center space-x-3 bg-dark-700/50 rounded-lg p-3">
+            <span class="w-16 text-center font-bold text-purple-400 flex-shrink-0">Nível 2</span>
+            <span class="text-neutral-400">→</span>
+            <span class="text-neutral-300">Construir business case para o primeiro projeto de IA com ROI mensurável</span>
+          </div>
+          <div class="flex items-center space-x-3 bg-dark-700/50 rounded-lg p-3">
+            <span class="w-16 text-center font-bold text-purple-400 flex-shrink-0">Nível 3</span>
+            <span class="text-neutral-400">→</span>
+            <span class="text-neutral-300">Expandir o caso de uso vencedor e instalar governança básica</span>
+          </div>
+          <div class="flex items-center space-x-3 bg-dark-700/50 rounded-lg p-3">
+            <span class="w-16 text-center font-bold text-purple-400 flex-shrink-0">Nível 4</span>
+            <span class="text-neutral-400">→</span>
+            <span class="text-neutral-300">Estabelecer MLOps, monitoramento contínuo e time interno dedicado</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Dica prática</h3>
+        <p class="text-neutral-300">Apresente o nível atual como resultado de uma avaliação compartilhada — não como veredicto do consultor. Quando o cliente chegou à conclusão com você, a aceitação da recomendação é muito maior.</p>
+      </div>
+    </section>
+
+    <!-- RESUMO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-purple-900/40 via-dark-800 to-dark-800 rounded-xl border border-purple-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">🎒</span> Resumo do módulo</h2>
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">5 estágios progressivos</strong><span class="text-neutral-400"> — Ad-hoc → Consciente → Ativo → Operacional → Transformacional.</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">Espelho, não troféu</strong><span class="text-neutral-400"> — o modelo serve para diagnosticar e sequenciar, não para competir.</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">Maioria das PMEs está no 1-2</strong><span class="text-neutral-400"> — calibrar expectativas é parte do trabalho.</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">Próximo nível = próximo passo</strong><span class="text-neutral-400"> — o roadmap avança um estágio por vez, com fundações construídas.</span></div></div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+          <h3 class="font-semibold text-purple-400 mb-2">Próximo módulo:</h3>
+          <p class="text-neutral-300">3.3 — Auditoria de dados e infraestrutura: inventário, qualidade, LGPD e prontidão para RAG/treino</p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="modulo-3-1.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Módulo anterior</a>
+          <a href="modulo-3-3.html" class="flex-1 text-center px-6 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-500 transition-colors">Próximo Módulo →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>Consultor de IA · Módulo 3.2 · <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a> · 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark');
+    } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

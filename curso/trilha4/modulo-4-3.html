@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 4.3 · Nível da pirâmide | Consultor de IA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: {
+      primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    /* acento amber (T4) */
+    html:not(.dark) .text-amber-400 { color: #92400e; }
+    html:not(.dark) .bg-amber-500\/20 { background-color: rgba(217,119,6,0.14); }
+    html:not(.dark) .bg-amber-500\/10 { background-color: rgba(217,119,6,0.09); }
+    html:not(.dark) .border-amber-500\/30 { border-color: rgba(217,119,6,0.28); }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(217,119,6,0.09); }
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124,58,237,0.08); }
+    html:not(.dark) .hover\:text-teal-400:hover { color: #0d9488; }
+    html:not(.dark) .hover\:bg-teal-500\/10:hover { background-color: rgba(13,148,136,0.08); }
+
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161,98,7,0.08); }
+    html:not(.dark) .border-primary\/30 { border-color: rgba(161,98,7,0.25); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161,98,7,0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .text-red-400 { color: #b91c1c; }
+    html:not(.dark) .bg-red-900\/20 { background-color: rgba(185,28,28,0.08); }
+    html:not(.dark) .border-red-500\/30 { border-color: rgba(185,28,28,0.25); }
+    html:not(.dark) .bg-blue-900\/20 { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37,99,235,0.25); }
+    html:not(.dark) .bg-amber-900\/20 { background-color: rgba(217,119,6,0.10); }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,0.95); }
+
+    .dark .border-dark-600 { border-color: #374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+
+    @keyframes wf-pulse { 0%,100% { opacity:.55 } 50% { opacity:1 } }
+    @media (prefers-reduced-motion: no-preference) {
+      .wf-a { animation: wf-pulse 2.6s ease-in-out infinite; }
+      .wf-a:nth-child(2){animation-delay:.25s} .wf-a:nth-child(3){animation-delay:.5s}
+      .wf-a:nth-child(4){animation-delay:.75s}
+    }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🧭</span><span class="font-bold text-lg hidden sm:inline">Consultor de IA</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors">
+            <span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors">
+            <span class="sm:hidden">T2</span><span class="hidden sm:inline">Mapear</span></a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors">
+            <span class="sm:hidden">T3</span><span class="hidden sm:inline">Auditar</span></a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-amber-400 bg-amber-500/10">
+            <span class="sm:hidden">T4</span><span class="hidden sm:inline">Planos</span></a>
+          <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors">
+            <span class="sm:hidden">T5</span><span class="hidden sm:inline">Entrega</span></a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- BREADCRUMB -->
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-amber-400">Início</a><span>/</span>
+      <a href="index.html" class="hover:text-amber-400">Trilha 4</a><span>/</span>
+      <span class="text-amber-400">Módulo 4.3</span>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <header class="bg-gradient-to-br from-amber-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-amber-500/20 text-amber-400 text-xs font-semibold rounded-full mb-4">MÓDULO 4.3</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🪜 Escolher o nível da pirâmide para cada caso</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">A pirâmide de soluções aplicada ao caso concreto: quando determinístico basta, quando IA num passo é o caminho, quando agente se justifica — e por que registrar a decisão.</p>
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-amber-400">6</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-amber-400">~45</div><div class="text-xs text-neutral-400">Minutos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-amber-400">Plano</div><div class="text-xs text-neutral-400">Nível</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-amber-400">Decisão</div><div class="text-xs text-neutral-400">Tipo</div></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <p class="text-neutral-300 mb-8 leading-relaxed text-lg">
+      Toda recomendação de IA começa com uma pergunta: <strong class="text-amber-400">qual é o nível mais baixo da pirâmide que resolve esse problema?</strong> Subir desnecessariamente é o principal motivo de projetos caros que entregam menos que o esperado.
+    </p>
+
+    <!-- SVG: pirâmide de soluções amber - escada de degraus com custo $→$$$$$ -->
+    <div class="rounded-2xl border border-amber-500/30 bg-dark-900/40 p-3 sm:p-4 mb-12 overflow-hidden">
+      <svg viewBox="0 0 760 250" class="w-full h-auto" role="img" aria-label="Pirâmide de soluções em três andares: base determinístico (custo baixo, risco baixo), meio workflow com IA num passo (custo médio, risco médio), topo agente autônomo (custo alto, risco alto). A regra: comece na base, suba só quando precisar.">
+        <defs>
+          <linearGradient id="m43-grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fbbf24"/><stop offset="1" stop-color="#f59e0b"/></linearGradient>
+          <linearGradient id="m43-cyan" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#0ea5e9"/></linearGradient>
+          <filter id="m43-glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <pattern id="m43-grid" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="1.3" fill="#f59e0b" opacity="0.12"/></pattern>
+          <marker id="m43-ah" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#fbbf24"/></marker>
+        </defs>
+        <rect x="0" y="0" width="760" height="250" fill="url(#m43-grid)"/>
+
+        <!-- Eixo Y: custo -->
+        <line x1="52" y1="20" x2="52" y2="220" stroke="#64748b" stroke-width="1.5" opacity="0.6"/>
+        <polygon points="52,14 48,26 56,26" fill="#64748b"/>
+        <text x="40" y="120" fill="#94a3b8" font-size="11" font-family="Inter,sans-serif" transform="rotate(-90 40 120)" text-anchor="middle">custo · risco ↑</text>
+
+        <!-- Degrau 1: Agente (topo) -->
+        <g class="wf-a" filter="url(#m43-glow)">
+          <rect x="260" y="20" width="200" height="56" rx="10" fill="#0e1b26" stroke="url(#m43-cyan)" stroke-width="2.5"/>
+        </g>
+        <text x="360" y="46" text-anchor="middle" fill="#38bdf8" font-family="Inter,sans-serif" font-weight="700" font-size="14">🛰️ Agente</text>
+        <text x="360" y="63" text-anchor="middle" fill="#9ad6ff" font-family="Inter,sans-serif" font-size="10">autonomia · ferramentas · $$$$$</text>
+
+        <!-- Degrau 2: IA num passo (meio) -->
+        <g class="wf-a">
+          <rect x="180" y="94" width="360" height="56" rx="10" fill="#1f1604" stroke="url(#m43-grad)" stroke-width="2.5"/>
+        </g>
+        <text x="360" y="120" text-anchor="middle" fill="#fbbf24" font-family="Inter,sans-serif" font-weight="700" font-size="14">🤖 IA num passo</text>
+        <text x="360" y="137" text-anchor="middle" fill="#fcd9a0" font-family="Inter,sans-serif" font-size="10">linguagem · imagem · previsão · $$$</text>
+
+        <!-- Degrau 3: Determinístico (base) -->
+        <g class="wf-a">
+          <rect x="80" y="168" width="560" height="56" rx="10" fill="#1f1604" stroke="#f59e0b" stroke-width="2"/>
+        </g>
+        <text x="360" y="194" text-anchor="middle" fill="#fbbf24" font-family="Inter,sans-serif" font-weight="700" font-size="14">🧱 Determinístico — regras, automação, SaaS</text>
+        <text x="360" y="211" text-anchor="middle" fill="#fcd9a0" font-family="Inter,sans-serif" font-size="10">previsível · barato · confiável · $</text>
+
+        <!-- Seta "comece aqui" -->
+        <text x="680" y="195" text-anchor="middle" fill="#fbbf24" font-family="Inter,sans-serif" font-size="11" font-weight="600">comece</text>
+        <text x="680" y="210" text-anchor="middle" fill="#fbbf24" font-family="Inter,sans-serif" font-size="11" font-weight="600">aqui ↓</text>
+      </svg>
+      <p class="text-center text-xs text-neutral-500 mt-2">Pirâmide de soluções amber — o andar mais baixo que resolve é sempre a melhor resposta.</p>
+    </div>
+
+    <!-- TÓPICO 1 -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl">1</span>
+        <h2 class="text-2xl font-bold">🧱 Quando determinístico basta</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">A maioria dos casos de uso que chegam como "projeto de IA" se resolvem na base: com regras, automações, integrações ou um SaaS melhor. <strong class="text-amber-400">Isso não é fraqueza — é a recomendação mais valiosa</strong>.</p>
+
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center"><span class="mr-2">✅</span> Sinais de que determinístico basta</h3>
+        <ul class="space-y-2 text-neutral-300">
+          <li class="flex items-start space-x-2"><span class="text-amber-400 mt-1">•</span><span>As regras são claras, explícitas e não mudam com frequência</span></li>
+          <li class="flex items-start space-x-2"><span class="text-amber-400 mt-1">•</span><span>O problema exige 100% de acerto (ou acerto verificável e auditável)</span></li>
+          <li class="flex items-start space-x-2"><span class="text-amber-400 mt-1">•</span><span>O volume é baixo e a frequência não justifica automação sofisticada</span></li>
+          <li class="flex items-start space-x-2"><span class="text-amber-400 mt-1">•</span><span>Não há dados históricos suficientes para treinar ou validar IA</span></li>
+          <li class="flex items-start space-x-2"><span class="text-amber-400 mt-1">•</span><span>Um SaaS existente já resolve o problema a custo menor</span></li>
+        </ul>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-amber-900/20 rounded-xl border border-amber-500/30 p-6">
+          <h4 class="font-bold text-amber-400 mb-3">Exemplos na base</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li>• Triagem de e-mails por remetente e palavras-chave</li>
+            <li>• Cálculo de desconto por faixa de volume</li>
+            <li>• Roteamento de tickets por categoria fixa</li>
+            <li>• Geração de relatório mensal com template</li>
+          </ul>
+        </div>
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-3">Quando IA "substituiu" determinístico — e errou</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li>• Classificar categorias fixas com LLM (regra faz igual, a R$0)</li>
+            <li>• Gerar relatório com LLM (template resolve igual)</li>
+            <li>• "Entender" formulário estruturado (parse de JSON já resolve)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 2 -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl">2</span>
+        <h2 class="text-2xl font-bold">🤖 Quando o caso pede IA num passo</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">O meio da pirâmide é onde IA agrega de verdade: linguagem natural, imagens, previsões probabilísticas, ambiguidade. O fluxo <strong class="text-amber-400">continua determinístico antes e depois</strong> — IA entra cirurgicamente onde regra não resolve.</p>
+
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center"><span class="mr-2">📐</span> O padrão wrapper determinístico</h3>
+        <div class="font-mono text-sm bg-dark-900/60 rounded-lg p-4 text-neutral-300 border border-dark-600 space-y-1">
+          <div class="text-neutral-500">// Entrada estruturada</div>
+          <div class="text-amber-400">recebe_texto_do_cliente()</div>
+          <div class="text-neutral-500 ml-4">↓ determinístico: limpa, normaliza, valida</div>
+          <div class="text-amber-400 ml-4">chama_ia(texto_limpo)  <span class="text-neutral-500">// ← único passo com IA</span></div>
+          <div class="text-neutral-500 ml-8">↓ IA: classifica intenção</div>
+          <div class="text-amber-400 ml-4">valida_saída_da_ia(resultado)</div>
+          <div class="text-neutral-500 ml-4">↓ determinístico: roteia, registra, notifica</div>
+          <div class="text-amber-400">entrega_resultado_ao_sistema()</div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+          <div class="text-amber-400 font-bold mb-2 text-sm">✓ Ideal para IA num passo</div>
+          <ul class="text-xs text-neutral-400 space-y-1">
+            <li>• Classificar intenção em texto livre</li>
+            <li>• Extrair entidades de documentos</li>
+            <li>• Resumir longos textos</li>
+            <li>• Detectar sentimento em avaliações</li>
+            <li>• Prever churn com features numéricas</li>
+          </ul>
+        </div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+          <div class="text-amber-400 font-bold mb-2 text-sm">Vantagens do padrão</div>
+          <ul class="text-xs text-neutral-400 space-y-1">
+            <li>• Fluxo testável end-to-end</li>
+            <li>• Módulo de IA substituível</li>
+            <li>• Fallback para humano bem definido</li>
+            <li>• Custo de API controlado</li>
+            <li>• Auditável: sabe onde o erro aconteceu</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 3 -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl">3</span>
+        <h2 class="text-2xl font-bold">🛰️ Quando justifica um agente</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Agentes são indicados para casos que exigem <strong class="text-amber-400">múltiplas decisões autônomas encadeadas</strong> com ferramentas. São raros na consultoria típica — e devem ser.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-amber-900/20 rounded-xl border border-amber-500/30 p-6">
+          <h4 class="font-bold text-amber-400 mb-4">Critérios para justificar agente</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>Múltiplas decisões sequenciais impossíveis de pré-definir</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>Ferramentas (APIs, código, buscas) necessárias para resolver</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>O custo do erro por ação é tolerável e reversível</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>Supervisão humana disponível para revisar</span></li>
+          </ul>
+        </div>
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-4">Sinais de que agente é excesso</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>O fluxo tem passos bem definidos (workflow resolve)</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>O erro tem custo alto ou é irreversível</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>A equipe não tem capacidade de supervisionar</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>A principal justificativa é "parece mais avançado"</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Dica prática</h3>
+        <p class="text-neutral-300">Na maioria dos projetos de consultoria, o máximo necessário é IA num passo. Se alguém sugerir agente, pergunte: "O que acontece quando o agente tomar uma decisão errada?" Se não houver resposta satisfatória, a resposta é workflow com IA.</p>
+      </div>
+    </section>
+
+    <!-- TÓPICO 4 -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl">4</span>
+        <h2 class="text-2xl font-bold">📐 Custo × risco × tempo por nível</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Cada andar da pirâmide tem um perfil distinto de custo, risco e tempo. Apresentar esse comparativo ao cliente — com estimativas reais — é <strong class="text-amber-400">parte do business case</strong>.</p>
+
+      <div class="overflow-x-auto mb-6">
+        <table class="w-full text-sm border-collapse">
+          <thead>
+            <tr class="bg-dark-700">
+              <th class="text-left p-3 text-amber-400 border border-dark-600">Nível</th>
+              <th class="text-left p-3 text-amber-400 border border-dark-600">Custo build</th>
+              <th class="text-left p-3 text-amber-400 border border-dark-600">Custo operação</th>
+              <th class="text-left p-3 text-amber-400 border border-dark-600">Risco</th>
+              <th class="text-left p-3 text-amber-400 border border-dark-600">Tempo médio</th>
+            </tr>
+          </thead>
+          <tbody class="text-neutral-300">
+            <tr class="border-b border-dark-600">
+              <td class="p-3 border border-dark-600 font-medium text-amber-400">🧱 Determinístico</td>
+              <td class="p-3 border border-dark-600">$</td>
+              <td class="p-3 border border-dark-600">$ (quase zero)</td>
+              <td class="p-3 border border-dark-600 text-emerald-400">Baixo</td>
+              <td class="p-3 border border-dark-600">1–4 sem</td>
+            </tr>
+            <tr class="border-b border-dark-600">
+              <td class="p-3 border border-dark-600 font-medium text-amber-400">🤖 IA num passo</td>
+              <td class="p-3 border border-dark-600">$$$</td>
+              <td class="p-3 border border-dark-600">$$ (API + monitor)</td>
+              <td class="p-3 border border-dark-600 text-yellow-400">Médio</td>
+              <td class="p-3 border border-dark-600">4–12 sem</td>
+            </tr>
+            <tr>
+              <td class="p-3 border border-dark-600 font-medium text-amber-400">🛰️ Agente</td>
+              <td class="p-3 border border-dark-600">$$$$$</td>
+              <td class="p-3 border border-dark-600">$$$$ (API + supervisão)</td>
+              <td class="p-3 border border-dark-600 text-red-400">Alto</td>
+              <td class="p-3 border border-dark-600">12–24 sem</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center"><span class="mr-2">📊</span> Como usar a tabela com o cliente</h3>
+        <p class="text-neutral-300">Apresente as três opções lado a lado com números reais do contexto do cliente. Deixe que ele veja a diferença. Na maioria dos casos, o andar mais baixo que resolve o problema será escolhido — sem precisar argumentar.</p>
+      </div>
+    </section>
+
+    <!-- TÓPICO 5 -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl">5</span>
+        <h2 class="text-2xl font-bold">🧪 Híbrido: determinístico com IA cirúrgica</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">O padrão mais maduro e recomendável para produção: manter a <strong class="text-amber-400">lógica de negócio em código determinístico</strong> e usar IA apenas no ponto onde regra não resolve — como módulo substituível, com fallback explícito.</p>
+
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center"><span class="mr-2">⚙️</span> Por que o híbrido é mais robusto</h3>
+        <div class="space-y-3">
+          <div class="flex items-start space-x-3 bg-dark-900/40 rounded-lg p-3">
+            <span class="text-amber-400 font-bold text-sm w-32 flex-shrink-0">Testabilidade</span>
+            <p class="text-neutral-300 text-sm">O fluxo determinístico é testável com testes unitários. O módulo de IA é testável separadamente com um conjunto de casos.</p>
+          </div>
+          <div class="flex items-start space-x-3 bg-dark-900/40 rounded-lg p-3">
+            <span class="text-amber-400 font-bold text-sm w-32 flex-shrink-0">Substituibilidade</span>
+            <p class="text-neutral-300 text-sm">Se um modelo melhor aparecer, só o módulo de IA muda — o restante do sistema fica intacto.</p>
+          </div>
+          <div class="flex items-start space-x-3 bg-dark-900/40 rounded-lg p-3">
+            <span class="text-amber-400 font-bold text-sm w-32 flex-shrink-0">Fallback</span>
+            <p class="text-neutral-300 text-sm">Se a IA estiver indisponível, o fluxo pode continuar com regra ou escalada para humano — sem parar tudo.</p>
+          </div>
+          <div class="flex items-start space-x-3 bg-dark-900/40 rounded-lg p-3">
+            <span class="text-amber-400 font-bold text-sm w-32 flex-shrink-0">Auditabilidade</span>
+            <p class="text-neutral-300 text-sm">Sabe exatamente onde a IA foi chamada, com qual entrada e com qual saída. Fundamental para compliance.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 6 -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl">6</span>
+        <h2 class="text-2xl font-bold">✅ Decidir o nível e registrar o porquê</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">A decisão de qual nível usar deve ser <strong class="text-amber-400">explícita e documentada</strong>. Não precisa ser longa — três perguntas bastam. O registro protege o consultor, alinha o time e permite revisão inteligente quando o contexto muda.</p>
+
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center"><span class="mr-2">📝</span> Template de registro de decisão</h3>
+        <div class="font-mono text-sm bg-dark-900/60 rounded-lg p-4 text-neutral-300 border border-dark-600 space-y-2">
+          <div><span class="text-amber-400">Caso de uso:</span> Triagem de e-mails de suporte</div>
+          <div><span class="text-amber-400">Nível escolhido:</span> IA num passo (classificação de intenção)</div>
+          <div><span class="text-amber-400">Por que não determinístico:</span> vocabulário do cliente é variável demais para regras fixas cobrirem bem</div>
+          <div><span class="text-amber-400">Por que não agente:</span> o roteamento após a classificação é determinístico e bem definido</div>
+          <div><span class="text-amber-400">Critério para revisar:</span> se acurácia cair abaixo de 85% ou custo de API superar R$500/mês</div>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Dica prática</h3>
+        <p class="text-neutral-300">Trate o registro de decisão como parte do entregável do projeto — não como burocracia. Ele é o que transforma um projeto de consultoria num ativo de conhecimento para o cliente e para você.</p>
+      </div>
+    </section>
+
+    <!-- RESUMO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-amber-900/40 via-dark-800 to-dark-800 rounded-xl border border-amber-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">🎒</span> Resumo do módulo</h2>
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3"><span class="text-amber-400 mt-1">✓</span><div><strong class="text-white">Comece na base</strong><span class="text-neutral-400"> — determinístico resolve a maioria dos casos com menos custo e risco.</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-amber-400 mt-1">✓</span><div><strong class="text-white">IA num passo para linguagem e ambiguidade</strong><span class="text-neutral-400"> — cirúrgico, com wrapper determinístico.</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-amber-400 mt-1">✓</span><div><strong class="text-white">Agente é exceção, não regra</strong><span class="text-neutral-400"> — justificar explicitamente, com custo e plano de supervisão.</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-amber-400 mt-1">✓</span><div><strong class="text-white">Híbrido é o padrão maduro</strong><span class="text-neutral-400"> — determinístico como container, IA como módulo substituível.</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-amber-400 mt-1">✓</span><div><strong class="text-white">Registrar a decisão</strong><span class="text-neutral-400"> — nível escolhido, por que não os outros, critério de revisão.</span></div></div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+          <h3 class="font-semibold text-amber-400 mb-2">Próximo módulo:</h3>
+          <p class="text-neutral-300">4.4 — Piloto, prova de conceito e métricas de sucesso</p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="modulo-4-2.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Módulo 4.2</a>
+          <a href="modulo-4-4.html" class="flex-1 text-center px-6 py-3 bg-amber-600 text-white rounded-lg font-semibold hover:bg-amber-500 transition-colors">Próximo Módulo →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>Consultor de IA · Módulo 4.3 · <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a> · 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark');
+    } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 1.1 · O rótulo e a janela | Consultor de IA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: {
+      primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .bg-emerald-500\/20 { background-color: rgba(5,150,105,0.12); }
+    html:not(.dark) .bg-emerald-500\/10 { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5,150,105,0.25); }
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124,58,237,0.08); }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(217,119,6,0.09); }
+    html:not(.dark) .hover\:text-teal-400:hover { color: #0d9488; }
+    html:not(.dark) .hover\:bg-teal-500\/10:hover { background-color: rgba(13,148,136,0.08); }
+
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161,98,7,0.08); }
+    html:not(.dark) .border-primary\/30 { border-color: rgba(161,98,7,0.25); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161,98,7,0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .text-red-400 { color: #b91c1c; }
+    html:not(.dark) .bg-red-900\/20 { background-color: rgba(185,28,28,0.08); }
+    html:not(.dark) .border-red-500\/30 { border-color: rgba(185,28,28,0.25); }
+    html:not(.dark) .bg-blue-900\/20 { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37,99,235,0.25); }
+    html:not(.dark) .bg-emerald-900\/20 { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,0.95); }
+
+    .dark .border-dark-600 { border-color: #374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🧭</span><span class="font-bold text-lg hidden sm:inline">Consultor de IA</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-emerald-400 bg-emerald-500/10">
+            <span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors">
+            <span class="sm:hidden">T2</span><span class="hidden sm:inline">Mapear</span></a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors">
+            <span class="sm:hidden">T3</span><span class="hidden sm:inline">Auditar</span></a>
+          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors">
+            <span class="sm:hidden">T4</span><span class="hidden sm:inline">Planos</span></a>
+          <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors">
+            <span class="sm:hidden">T5</span><span class="hidden sm:inline">Entrega</span></a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- BREADCRUMB -->
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-emerald-400">Início</a><span>/</span>
+      <a href="index.html" class="hover:text-emerald-400">Trilha 1</a><span>/</span>
+      <span class="text-emerald-400">Módulo 1.1</span>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <header class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-4">MÓDULO 1.1</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🪧 O rótulo "Consultor de IA": a janela e o prazo de validade</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">"Consultor de IA" é um dos títulos mais fortes dos negócios agora — e tem prazo de validade. Use a janela enquanto ela está aberta. Só não confunda o rótulo com o trabalho.</p>
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">6</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">~40</div><div class="text-xs text-neutral-400">Minutos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">Base</div><div class="text-xs text-neutral-400">Nível</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">Posicio.</div><div class="text-xs text-neutral-400">Tipo</div></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- INTRO + SVG -->
+    <p class="text-neutral-300 mb-8 leading-relaxed text-lg">
+      Neste momento, se posicionar como <strong class="text-emerald-400">consultor de IA</strong> é uma vantagem real: há demanda nas buscas, orçamento disponível e empresas procurando ativamente quem entre, analise a operação e diga o que de fato fazer com a tecnologia. Mas o rótulo é a parte temporária — e nós já vimos esse ciclo antes.
+    </p>
+
+    <div class="rounded-2xl border border-emerald-500/30 bg-dark-900/40 p-3 sm:p-4 mb-12 overflow-hidden">
+      <svg viewBox="0 0 820 200" class="w-full h-auto" role="img" aria-label="Linha do tempo: a tecnologia surge como especialidade com qualificativo, e com o tempo o qualificativo desaparece e vira competência básica. Excel, Internet e agora IA seguem o mesmo ciclo.">
+        <defs>
+          <linearGradient id="m11-grad" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#34d399"/><stop offset="1" stop-color="#10b981"/></linearGradient>
+          <filter id="m11-glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="2.6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <pattern id="m11-grid" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="1.3" fill="#10b981" opacity="0.12"/></pattern>
+          <marker id="m11-ah" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#34d399"/></marker>
+        </defs>
+        <rect x="0" y="0" width="820" height="200" fill="url(#m11-grid)"/>
+        <line x1="40" y1="100" x2="780" y2="100" stroke="#34d399" stroke-width="2" opacity="0.5" marker-end="url(#m11-ah)"/>
+        <g font-family="Inter,sans-serif">
+          <g filter="url(#m11-glow)"><rect x="60" y="62" width="190" height="76" rx="12" fill="#0e2018" stroke="url(#m11-grad)" stroke-width="2.5"/></g>
+          <text x="155" y="92" text-anchor="middle" fill="#34d399" font-weight="700" font-size="15">"Especialista em</text>
+          <text x="155" y="112" text-anchor="middle" fill="#34d399" font-weight="700" font-size="15">Excel para X"</text>
+          <text x="155" y="130" text-anchor="middle" fill="#a7f3d0" font-size="11">ontem</text>
+
+          <rect x="315" y="62" width="190" height="76" rx="12" fill="#0e1b26" stroke="#38bdf8" stroke-width="2.5"/>
+          <text x="410" y="92" text-anchor="middle" fill="#7dd3fc" font-weight="700" font-size="15">"Agência de</text>
+          <text x="410" y="112" text-anchor="middle" fill="#7dd3fc" font-weight="700" font-size="15">marketing na internet"</text>
+          <text x="410" y="130" text-anchor="middle" fill="#bae6fd" font-size="11">virou só "marketing"</text>
+
+          <g filter="url(#m11-glow)"><rect x="570" y="62" width="190" height="76" rx="12" fill="#1f1604" stroke="#fbbf24" stroke-width="2.5"/></g>
+          <text x="665" y="92" text-anchor="middle" fill="#fbbf24" font-weight="700" font-size="15">"Consultor de IA"</text>
+          <text x="665" y="112" text-anchor="middle" fill="#fcd9a0" font-size="12">hoje → vira só</text>
+          <text x="665" y="130" text-anchor="middle" fill="#fcd9a0" font-size="12">"consultor" amanhã</text>
+
+          <text x="410" y="180" text-anchor="middle" fill="#9aa4b2" font-size="12.5">o qualificativo sempre desaparece quando a ferramenta vira padrão</text>
+        </g>
+      </svg>
+      <p class="text-center text-xs text-neutral-500 mt-2">Diagrama ilustrativo — o ciclo do qualificativo: Excel → Internet → IA.</p>
+    </div>
+
+    <!-- TÓPICO 1 -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">1</span>
+        <h2 class="text-2xl font-bold">🚪 Por que "consultor de IA" vende agora</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Há uma <strong class="text-emerald-400">convergência rara</strong> de três forças: atenção, dinheiro e urgência. As empresas sabem que a IA é importante, têm medo de ficar para trás e ainda não sabem por onde começar — o que cria espaço exatamente para quem entra, analisa e prescreve.</p>
+
+      <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center"><span class="mr-2">⚡</span> As três forças por trás da demanda</h3>
+        <ul class="space-y-2 text-neutral-300">
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>Demanda nas buscas</strong> — executivos procuram ativamente "como usar IA na minha empresa".</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>Orçamento disponível</strong> — IA virou prioridade de diretoria, com verba destinada.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>Urgência</strong> — medo de ficar para trás acelera a decisão de contratar.</span></li>
+        </ul>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Dica prática</h3>
+        <p class="text-neutral-300">Use o rótulo no seu posicionamento de mercado — ele funciona e abre portas. Mas trate-o como <strong>chamariz de entrada</strong>: o que fecha e renova contrato é o resultado que você entrega depois de cruzar a porta.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold mb-1">Atenção</div><p class="text-sm text-neutral-400">o tema está no topo da agenda</p></div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold mb-1">Orçamento</div><p class="text-sm text-neutral-400">há verba alocada para IA</p></div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold mb-1">Urgência</div><p class="text-sm text-neutral-400">medo de ficar para trás</p></div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-emerald-400 font-bold mb-1">Lacuna</div><p class="text-sm text-neutral-400">poucos sabem por onde começar</p></div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 2 -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">2</span>
+        <h2 class="text-2xl font-bold">⏳ O prazo de validade do rótulo</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">A IA vai se infiltrar em praticamente tudo. Em alguns anos, o qualificativo "de IA" vai desaparecer. Consultores que <strong class="text-emerald-400">não forem nativos em IA</strong> não vão perder negócio por não ter "IA" no título — vão perder porque serão consultores ruins.</p>
+
+      <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center"><span class="mr-2">📊</span> O que isso significa para a carreira</h3>
+        <ul class="space-y-2 text-neutral-300">
+          <li><strong>Curto prazo:</strong> o rótulo é vantagem competitiva — adote-o.</li>
+          <li><strong>Médio prazo:</strong> IA vira competência básica esperada de qualquer consultor.</li>
+          <li><strong>Longo prazo:</strong> o diferencial volta a ser a qualidade do diagnóstico e do julgamento.</li>
+        </ul>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">🧭</span> A leitura estratégica</h3>
+        <p class="text-neutral-300">Invista na janela agora, mas construa o ativo que dura: a capacidade de achar o problema certo e prescrever a solução mais simples. Esse é o músculo que ainda estará valendo quando o rótulo já não significar nada.</p>
+      </div>
+    </section>
+
+    <!-- TÓPICO 3 -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">3</span>
+        <h2 class="text-2xl font-bold">📈 O ciclo Excel / Internet</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Já vimos esse filme. Toda tecnologia transformadora passa pela mesma curva: nasce como <strong class="text-emerald-400">especialidade rara</strong>, vira diferencial, depois expectativa, e por fim padrão invisível que ninguém anuncia mais.</p>
+
+      <div class="space-y-6 mb-6">
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center"><span class="text-emerald-400 font-bold">1</span></div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+            <h4 class="font-semibold text-white mb-2">📊 O Excel</h4>
+            <p class="text-sm text-neutral-400 mb-3">Anos 90</p>
+            <p class="text-neutral-300 text-sm">Alguns se apresentavam como "especialistas em Excel para contabilidade". Hoje seria estranho — saber planilha é o básico esperado, não um cargo.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center"><span class="text-emerald-400 font-bold">2</span></div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+            <h4 class="font-semibold text-white mb-2">🌐 A internet</h4>
+            <p class="text-sm text-neutral-400 mb-3">Anos 2000</p>
+            <p class="text-neutral-300 text-sm">Agências se posicionavam como "marketing na internet". Hoje, isso é simplesmente marketing — o "na internet" virou redundante.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center"><span class="text-emerald-400 font-bold">3</span></div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+            <h4 class="font-semibold text-white mb-2">🧠 A IA</h4>
+            <p class="text-sm text-neutral-400 mb-3">Agora</p>
+            <p class="text-neutral-300 text-sm">"Consultor de IA" está exatamente onde Excel e internet estiveram. O qualificativo vai evaporar — e a IA vai virar parte da caixa de ferramentas de todo consultor.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 4 -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">4</span>
+        <h2 class="text-2xl font-bold">🎯 Rótulo como porta, não identidade</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">A armadilha é adotar o rótulo e passar a acreditar que a resposta <strong class="text-emerald-400">sempre</strong> precisa envolver IA. O rótulo te coloca na sala; o que te mantém lá é resolver o problema real — com ou sem IA.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+          <h4 class="font-bold text-emerald-400 mb-4">✓ Rótulo como porta</h4>
+          <ul class="space-y-3 text-neutral-300">
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Usa "consultor de IA" para atrair e abrir conversas</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Entra, diagnostica e prescreve a melhor solução</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Recomenda não-IA quando é o certo</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>É lembrado pelo resultado, não pelo título</span></li>
+          </ul>
+        </div>
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-4">✗ Rótulo como identidade</h4>
+          <ul class="space-y-3 text-neutral-300">
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Acredita que toda resposta precisa de IA</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Empurra IA mesmo onde não cabe</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Vende a ferramenta, não o resultado</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Perde a confiança no primeiro projeto que falha</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 5 -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">5</span>
+        <h2 class="text-2xl font-bold">🧱 O que sobra quando todos sabem de IA</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Quando todo mundo souber falar de IA — e isso vai acontecer — o diferencial será a <strong class="text-emerald-400">disciplina de resolver o problema real com a solução mais simples possível</strong>. Falar de IA será commodity; resolver com critério, não.</p>
+
+      <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center"><span class="mr-2">🏛️</span> O ativo durável do consultor</h3>
+        <p class="text-neutral-300 mb-4">Três competências que não saem de moda:</p>
+        <ul class="space-y-2 text-neutral-300">
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>Diagnosticar</strong> — achar a restrição real, não o sintoma aparente.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>Priorizar</strong> — escolher onde o esforço gera mais resultado.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>Prescrever com contenção</strong> — a solução mais simples que funciona.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- TÓPICO 6 -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">6</span>
+        <h2 class="text-2xl font-bold">🧭 Posicionar sem prometer IA para tudo</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">A mensagem mais forte não é "eu coloco IA em tudo", e sim "eu resolvo o seu problema com a melhor ferramenta — às vezes IA, às vezes não". Clientes já se queimaram com promessas infladas; <strong class="text-emerald-400">a contenção vira credibilidade</strong>.</p>
+
+      <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center"><span class="mr-2">🗣️</span> Como soa um bom posicionamento</h3>
+        <p class="text-neutral-300 mb-3 italic">"Ajudo empresas a encontrar onde a IA gera resultado de verdade — e a evitar gastar onde ela não cabe. Começo entendendo a operação antes de recomendar qualquer tecnologia."</p>
+        <p class="text-neutral-400 text-sm">Repare: vende julgamento e resultado, usa a palavra IA como ímã, mas não promete IA como resposta universal.</p>
+      </div>
+
+      <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+        <h3 class="text-lg font-semibold text-red-400 mb-3 flex items-center"><span class="mr-2">⚠️</span> Atenção</h3>
+        <p class="text-neutral-300">Prometer "IA para tudo" pode fechar o primeiro contrato mais rápido — e destruir a relação no primeiro projeto que não entrega. Confiança perdida raramente volta.</p>
+      </div>
+    </section>
+
+    <!-- RESUMO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-emerald-900/40 via-dark-800 to-dark-800 rounded-xl border border-emerald-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">🎒</span> Resumo do módulo</h2>
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">O rótulo funciona agora</strong><span class="text-neutral-400"> — há demanda, orçamento e urgência. Use-o.</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Mas tem prazo de validade</strong><span class="text-neutral-400"> — o qualificativo "de IA" vai desaparecer, como sumiu com Excel e internet.</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Rótulo é porta, não identidade</strong><span class="text-neutral-400"> — não acredite que toda resposta precisa de IA.</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">O ativo durável é o julgamento</strong><span class="text-neutral-400"> — resolver o problema real com a solução mais simples que funciona.</span></div></div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+          <h3 class="font-semibold text-emerald-400 mb-2">Próximo módulo:</h3>
+          <p class="text-neutral-300">1.2 — O trabalho que não muda: achar a restrição real e prescrever</p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Voltar para Trilha</a>
+          <a href="modulo-1-2.html" class="flex-1 text-center px-6 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-500 transition-colors">Próximo Módulo →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>Consultor de IA · Módulo 1.1 · <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a> · 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark');
+    } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

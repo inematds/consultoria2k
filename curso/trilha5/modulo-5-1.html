@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 5.1 · Escopo e proposta | Consultor de IA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: {
+      primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    /* acento teal (T5) */
+    html:not(.dark) .text-teal-400 { color: #0d9488; }
+    html:not(.dark) .bg-teal-500\/20 { background-color: rgba(13,148,136,0.12); }
+    html:not(.dark) .bg-teal-500\/10 { background-color: rgba(13,148,136,0.08); }
+    html:not(.dark) .border-teal-500\/30 { border-color: rgba(13,148,136,0.25); }
+    html:not(.dark) .hover\:text-teal-400:hover { color: #0d9488; }
+    html:not(.dark) .hover\:bg-teal-500\/10:hover { background-color: rgba(13,148,136,0.08); }
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124,58,237,0.08); }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(217,119,6,0.09); }
+
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161,98,7,0.08); }
+    html:not(.dark) .border-primary\/30 { border-color: rgba(161,98,7,0.25); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161,98,7,0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .text-red-400 { color: #b91c1c; }
+    html:not(.dark) .bg-red-900\/20 { background-color: rgba(185,28,28,0.08); }
+    html:not(.dark) .border-red-500\/30 { border-color: rgba(185,28,28,0.25); }
+    html:not(.dark) .bg-blue-900\/20 { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37,99,235,0.25); }
+    html:not(.dark) .bg-teal-900\/20 { background-color: rgba(13,148,136,0.08); }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,0.95); }
+
+    .dark .border-dark-600 { border-color: #374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🧭</span><span class="font-bold text-lg hidden sm:inline">Consultor de IA</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors">
+            <span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors">
+            <span class="sm:hidden">T2</span><span class="hidden sm:inline">Mapear</span></a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors">
+            <span class="sm:hidden">T3</span><span class="hidden sm:inline">Auditar</span></a>
+          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors">
+            <span class="sm:hidden">T4</span><span class="hidden sm:inline">Planos</span></a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-teal-400 bg-teal-500/10">
+            <span class="sm:hidden">T5</span><span class="hidden sm:inline">Entrega</span></a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- BREADCRUMB -->
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-teal-400">Início</a><span>/</span>
+      <a href="index.html" class="hover:text-teal-400">Trilha 5</a><span>/</span>
+      <span class="text-teal-400">Módulo 5.1</span>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <header class="bg-gradient-to-br from-teal-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-teal-500/20 text-teal-400 text-xs font-semibold rounded-full mb-4">MÓDULO 5.1</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">📄 Escopo e proposta: SOW e expectativas</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">Uma proposta que vende resultado, não horas. Como definir escopo, entregáveis, o que está fora e quando dizer não — antes que o cliente peça mais do que o combinado.</p>
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-teal-400">6</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-teal-400">~45</div><div class="text-xs text-neutral-400">Minutos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-teal-400">Prático</div><div class="text-xs text-neutral-400">Nível</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-teal-400">Negócio</div><div class="text-xs text-neutral-400">Tipo</div></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <p class="text-neutral-300 mb-8 leading-relaxed text-lg">
+      A proposta é o primeiro documento de confiança entre consultor e cliente. Uma proposta ruim — focada em horas, vaga nos entregáveis, muda sem restrições — é a principal causa de projetos que terminam em desgaste. Uma proposta boa alinha os dois lados antes que o trabalho comece.
+    </p>
+
+    <!-- SVG: estrutura da proposta como fluxo -->
+    <div class="rounded-2xl border border-teal-500/30 bg-dark-900/40 p-3 sm:p-4 mb-12 overflow-hidden">
+      <svg viewBox="0 0 820 180" class="w-full h-auto" role="img" aria-label="Fluxo de uma proposta eficaz: começa pelo resultado esperado, depois escopo e entregáveis, depois fora-de-escopo, depois fases e marcos, e termina em critérios de aceite. Cada bloco alimenta o próximo.">
+        <defs>
+          <linearGradient id="m51-g1" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2dd4bf"/><stop offset="1" stop-color="#14b8a6"/></linearGradient>
+          <filter id="m51-glow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <pattern id="m51-grid" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="1.3" fill="#14b8a6" opacity="0.11"/></pattern>
+          <marker id="m51-ah" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L7,4 L0,8 L2,4 Z" fill="#2dd4bf"/></marker>
+        </defs>
+        <rect x="0" y="0" width="820" height="180" fill="url(#m51-grid)"/>
+        <!-- blocos -->
+        <g filter="url(#m51-glow)"><rect x="20" y="55" width="130" height="70" rx="10" fill="#0c1f1c" stroke="url(#m51-g1)" stroke-width="2"/></g>
+        <text x="85" y="84" text-anchor="middle" fill="#2dd4bf" font-family="Inter,sans-serif" font-weight="700" font-size="12">Resultado</text>
+        <text x="85" y="101" text-anchor="middle" fill="#99f6e4" font-family="Inter,sans-serif" font-size="10.5">esperado</text>
+        <text x="85" y="117" text-anchor="middle" fill="#5eead4" font-family="Inter,sans-serif" font-size="10">o porquê</text>
+        <line x1="150" y1="90" x2="172" y2="90" stroke="#2dd4bf" stroke-width="1.5" marker-end="url(#m51-ah)"/>
+
+        <rect x="174" y="55" width="130" height="70" rx="10" fill="#0c1f1c" stroke="#2dd4bf" stroke-width="1.8" opacity="0.85"/>
+        <text x="239" y="84" text-anchor="middle" fill="#2dd4bf" font-family="Inter,sans-serif" font-weight="700" font-size="12">Escopo +</text>
+        <text x="239" y="101" text-anchor="middle" fill="#99f6e4" font-family="Inter,sans-serif" font-size="10.5">Entregáveis</text>
+        <text x="239" y="117" text-anchor="middle" fill="#5eead4" font-family="Inter,sans-serif" font-size="10">o que entra</text>
+        <line x1="304" y1="90" x2="326" y2="90" stroke="#2dd4bf" stroke-width="1.5" marker-end="url(#m51-ah)"/>
+
+        <rect x="328" y="55" width="130" height="70" rx="10" fill="#0e1b26" stroke="#38bdf8" stroke-width="1.8"/>
+        <text x="393" y="84" text-anchor="middle" fill="#38bdf8" font-family="Inter,sans-serif" font-weight="700" font-size="12">Fora-de-</text>
+        <text x="393" y="101" text-anchor="middle" fill="#9ad6ff" font-family="Inter,sans-serif" font-size="10.5">escopo</text>
+        <text x="393" y="117" text-anchor="middle" fill="#bfe6ff" font-family="Inter,sans-serif" font-size="10">o que não entra</text>
+        <line x1="458" y1="90" x2="480" y2="90" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#m51-ah)"/>
+
+        <rect x="482" y="55" width="130" height="70" rx="10" fill="#0c1f1c" stroke="#2dd4bf" stroke-width="1.8" opacity="0.85"/>
+        <text x="547" y="84" text-anchor="middle" fill="#2dd4bf" font-family="Inter,sans-serif" font-weight="700" font-size="12">Fases e</text>
+        <text x="547" y="101" text-anchor="middle" fill="#99f6e4" font-family="Inter,sans-serif" font-size="10.5">marcos</text>
+        <text x="547" y="117" text-anchor="middle" fill="#5eead4" font-family="Inter,sans-serif" font-size="10">o quando</text>
+        <line x1="612" y1="90" x2="634" y2="90" stroke="#2dd4bf" stroke-width="1.5" marker-end="url(#m51-ah)"/>
+
+        <g filter="url(#m51-glow)"><rect x="636" y="55" width="150" height="70" rx="10" fill="#0c1f1c" stroke="url(#m51-g1)" stroke-width="2"/></g>
+        <text x="711" y="84" text-anchor="middle" fill="#2dd4bf" font-family="Inter,sans-serif" font-weight="700" font-size="12">Critérios de</text>
+        <text x="711" y="101" text-anchor="middle" fill="#99f6e4" font-family="Inter,sans-serif" font-size="10.5">aceite</text>
+        <text x="711" y="117" text-anchor="middle" fill="#5eead4" font-family="Inter,sans-serif" font-size="10">o que é "pronto"</text>
+        <text x="410" y="160" text-anchor="middle" fill="#94a3b8" font-family="Inter,sans-serif" font-size="11.5">cada bloco resolve uma dúvida diferente — juntos eliminam conflito</text>
+      </svg>
+      <p class="text-center text-xs text-neutral-500 mt-2">Diagrama ilustrativo — anatomia de uma proposta sem ambiguidade.</p>
+    </div>
+
+    <!-- TÓPICO 1 -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-teal-500/20 text-teal-400 font-bold text-xl">1</span>
+        <h2 class="text-2xl font-bold">🧾 Anatomia de uma proposta que vende resultado</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">A maioria das propostas começa com "vou fazer X horas de Y". A proposta que fecha contrato começa com <strong class="text-teal-400">"seu problema é Z, o resultado esperado é W, aqui está como chegar lá"</strong>. Cliente compra resultado, não horas.</p>
+
+      <div class="bg-gradient-to-br from-teal-900/30 to-dark-800 rounded-xl border border-teal-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-teal-400 mb-4 flex items-center"><span class="mr-2">📐</span> Estrutura de uma proposta eficaz</h3>
+        <ul class="space-y-2 text-neutral-300">
+          <li class="flex items-start space-x-2"><span class="text-teal-400 mt-1">1.</span><span><strong>Contexto</strong> — o problema do cliente em uma frase. Mostra que você entendeu.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-teal-400 mt-1">2.</span><span><strong>Resultado esperado</strong> — o que muda na operação ou no número. Concreto e mensurável.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-teal-400 mt-1">3.</span><span><strong>Abordagem</strong> — como você vai chegar lá. Fases, entregáveis, metodologia.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-teal-400 mt-1">4.</span><span><strong>O que está incluso</strong> — escopo fechado, entregáveis nomeados.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-teal-400 mt-1">5.</span><span><strong>O que não está incluso</strong> — fora-de-escopo explícito.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-teal-400 mt-1">6.</span><span><strong>Preço e condições</strong> — por projeto, por fase ou retainer. Nunca apenas por hora.</span></li>
+        </ul>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Dica prática</h3>
+        <p class="text-neutral-300">Comece a proposta pela linha de resultado: <em>"Ao final deste projeto, você terá [resultado concreto]."</em> Se não consegue preencher essa frase antes de começar a escrever, você ainda não entendeu o problema suficientemente bem.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-teal-400 font-bold mb-1">Contexto</div><p class="text-sm text-neutral-400">mostra que você escutou</p></div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-teal-400 font-bold mb-1">Resultado</div><p class="text-sm text-neutral-400">o porquê de tudo</p></div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-teal-400 font-bold mb-1">Abordagem</div><p class="text-sm text-neutral-400">o como estruturado</p></div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-teal-400 font-bold mb-1">Limites</div><p class="text-sm text-neutral-400">escopo + fora-de-escopo</p></div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 2 -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-teal-500/20 text-teal-400 font-bold text-xl">2</span>
+        <h2 class="text-2xl font-bold">🎯 Escopo, entregáveis e fora-de-escopo</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Scope creep não é um evento — é um processo gradual. Começa com um pedido pequeno ("você consegue incluir isso?") e vai crescendo até o projeto ficar inviável. O antídoto está na proposta: <strong class="text-teal-400">escrever o que está fora é tão importante quanto escrever o que está dentro</strong>.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-teal-900/20 rounded-xl border border-teal-500/30 p-6">
+          <h4 class="font-bold text-teal-400 mb-4">✓ Escopo bem definido</h4>
+          <ul class="space-y-3 text-neutral-300">
+            <li class="flex items-start space-x-2"><span class="text-teal-400">✓</span><span>Entregáveis nomeados com critério de aceite</span></li>
+            <li class="flex items-start space-x-2"><span class="text-teal-400">✓</span><span>Fora-de-escopo listado explicitamente</span></li>
+            <li class="flex items-start space-x-2"><span class="text-teal-400">✓</span><span>Processo de change request documentado</span></li>
+            <li class="flex items-start space-x-2"><span class="text-teal-400">✓</span><span>Ambas as partes assinam o entendimento</span></li>
+          </ul>
+        </div>
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-4">✗ Escopo vago</h4>
+          <ul class="space-y-3 text-neutral-300">
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Ajudar com IA" sem especificar o quê</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Sem fora-de-escopo = tudo pode ser pedido</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Mudanças aceitas verbalmente sem registro</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Projeto sem fim definido</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center"><span class="mr-2">📊</span> A regra do fora-de-escopo</h3>
+        <p class="text-neutral-300">Toda vez que o cliente pede algo que não está na proposta, você tem duas opções: incluir gratuitamente (e criar expectativa de que tudo pode ser pedido) ou tratar como change request com preço separado. A segunda opção parece mais difícil — mas é a que mantém a relação saudável.</p>
+      </div>
+    </section>
+
+    <!-- TÓPICO 3 -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-teal-500/20 text-teal-400 font-bold text-xl">3</span>
+        <h2 class="text-2xl font-bold">🗓️ Fases e marcos — assessment, plano, execução</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Dividir o engajamento em fases serve para os dois lados: o cliente tem checkpoints onde pode avaliar se continua; você tem momentos naturais de renovação e expansão. <strong class="text-teal-400">Uma fase concluída bem é a melhor venda para a fase seguinte.</strong></p>
+
+      <div class="space-y-6 mb-6">
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-teal-500/20 flex items-center justify-center"><span class="text-teal-400 font-bold">1</span></div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+            <h4 class="font-semibold text-white mb-2">🔍 Fase 1 — Assessment / diagnóstico</h4>
+            <p class="text-sm text-neutral-400 mb-3">~2 a 4 semanas · produto: relatório de prioridades</p>
+            <p class="text-neutral-300 text-sm">Mapeia o estado atual, identifica oportunidades, prioriza casos de uso. Escopo pequeno e preço acessível — reduz o risco percebido pelo cliente de contratar alguém novo.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-teal-500/20 flex items-center justify-center"><span class="text-teal-400 font-bold">2</span></div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+            <h4 class="font-semibold text-white mb-2">🗺️ Fase 2 — Plano / roadmap</h4>
+            <p class="text-sm text-neutral-400 mb-3">~2 a 3 semanas · produto: roadmap + business case</p>
+            <p class="text-neutral-300 text-sm">Transforma as oportunidades em um plano de execução com ondas, ROI estimado e riscos. Dá ao cliente o que precisa para conseguir aprovação interna do orçamento.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-teal-500/20 flex items-center justify-center"><span class="text-teal-400 font-bold">3</span></div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+            <h4 class="font-semibold text-white mb-2">⚙️ Fase 3 — Execução</h4>
+            <p class="text-sm text-neutral-400 mb-3">~1 a 6 meses · produto: solução implantada e adotada</p>
+            <p class="text-neutral-300 text-sm">Implementa os casos priorizados, com acompanhamento de adoção e métricas de valor. O maior projeto, que só acontece porque a confiança foi construída nas fases anteriores.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Por que a escada funciona</h3>
+        <p class="text-neutral-300">O cliente que fez o assessment com você já pagou para te ver trabalhar. Ele tem evidência do seu método, não apenas promessa. Vender a fase 2 para quem aprovou a fase 1 é infinitamente mais fácil do que vender do zero para um desconhecido.</p>
+      </div>
+    </section>
+
+    <!-- TÓPICO 4 -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-teal-500/20 text-teal-400 font-bold text-xl">4</span>
+        <h2 class="text-2xl font-bold">🤝 Expectativas: o que o cliente precisa fazer também</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">O consultor entrega melhor quando o cliente faz a parte dele. <strong class="text-teal-400">Projetos não falham por incompetência do consultor — muitas vezes falham porque o cliente não estava disponível</strong>: demorou para validar, não forneceu acesso, stakeholders não participaram das reuniões críticas.</p>
+
+      <div class="bg-gradient-to-br from-teal-900/30 to-dark-800 rounded-xl border border-teal-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-teal-400 mb-4">O que pedir do cliente na proposta</h3>
+        <ul class="space-y-3 text-neutral-300">
+          <li class="flex items-start space-x-2"><span class="text-teal-400 mt-1">•</span><span><strong>Acesso a dados e sistemas</strong> — sem isso o diagnóstico é baseado em suposição.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-teal-400 mt-1">•</span><span><strong>Disponibilidade de stakeholders</strong> — pelo menos 2h por semana de alguém com autoridade de decisão.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-teal-400 mt-1">•</span><span><strong>Validações no prazo</strong> — atraso na revisão atrasa a entrega. Isso é seu também.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-teal-400 mt-1">•</span><span><strong>Sponsor designado</strong> — alguém com autoridade que defende o projeto internamente.</span></li>
+        </ul>
+      </div>
+
+      <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+        <h3 class="text-lg font-semibold text-red-400 mb-3 flex items-center"><span class="mr-2">⚠️</span> Sinal de alerta</h3>
+        <p class="text-neutral-300">Se o cliente não quer nomear um sponsor ou não consegue garantir 2h de disponibilidade por semana, o projeto vai travar. Isso precisa ser resolvido antes da assinatura, não depois do primeiro mês.</p>
+      </div>
+    </section>
+
+    <!-- TÓPICO 5 -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-teal-500/20 text-teal-400 font-bold text-xl">5</span>
+        <h2 class="text-2xl font-bold">📐 SOW e critérios de aceite</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">O Statement of Work (SOW) transforma a proposta em acordo operacional. O critério de aceite responde a uma pergunta simples: <strong class="text-teal-400">como os dois sabem que o entregável está pronto?</strong> Sem resposta objetiva para essa pergunta, o projeto nunca termina.</p>
+
+      <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4">Exemplos de critérios de aceite objetivos</h3>
+        <ul class="space-y-2 text-neutral-300">
+          <li><strong>✓ Claro:</strong> "Relatório entregue e aprovado em reunião de revisão com presença do sponsor."</li>
+          <li><strong>✓ Claro:</strong> "Modelo com acurácia ≥ 85% no conjunto de teste fornecido pelo cliente."</li>
+          <li><strong>✓ Claro:</strong> "Dashboard publicado com acesso de 5 usuários designados pelo cliente."</li>
+          <li class="mt-3"><strong>✗ Vago:</strong> "Cliente satisfeito com o resultado."</li>
+          <li><strong>✗ Vago:</strong> "Solução funcionando conforme esperado."</li>
+        </ul>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-teal-400 font-bold mb-1">Objetivo</div><p class="text-sm text-neutral-400">mensurável ou verificável</p></div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-teal-400 font-bold mb-1">Binário</div><p class="text-sm text-neutral-400">sim ou não, não "mais ou menos"</p></div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-teal-400 font-bold mb-1">Acordado</div><p class="text-sm text-neutral-400">cliente assina antes de começar</p></div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-teal-400 font-bold mb-1">Finito</div><p class="text-sm text-neutral-400">há um "pronto" definido</p></div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 6 -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-teal-500/20 text-teal-400 font-bold text-xl">6</span>
+        <h2 class="text-2xl font-bold">🚩 Sinais de projeto ou cliente para recusar</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Recusar um projeto é contraintuitivo — parece perder dinheiro. Na prática, projetos errados custam mais do que trazem: drenam energia, ocupam capacidade que poderia ir para bons projetos e, se terminarem mal, mandam sinal ruim ao mercado. <strong class="text-teal-400">Saber recusar é parte do posicionamento.</strong></p>
+
+      <div class="bg-gradient-to-br from-teal-900/30 to-dark-800 rounded-xl border border-teal-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-teal-400 mb-4">🚩 Red flags antes de assinar</h3>
+        <ul class="space-y-3 text-neutral-300">
+          <li class="flex items-start space-x-2"><span class="text-red-400 mt-1">✗</span><span><strong>Escopo impossível</strong> — resultado prometido não é atingível com os recursos disponíveis.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-red-400 mt-1">✗</span><span><strong>Sem sponsor</strong> — ninguém internamente tem autoridade ou interesse no projeto.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-red-400 mt-1">✗</span><span><strong>Dados inexistentes ou inacessíveis</strong> — o projeto depende de dados que o cliente não tem ou não pode fornecer.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-red-400 mt-1">✗</span><span><strong>Cliente quer resultado sem envolvimento</strong> — "me entrega tudo pronto" sem disponibilidade de tempo ou decisão.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-red-400 mt-1">✗</span><span><strong>Preço abaixo do mínimo</strong> — o que o cliente quer pagar não cobre o custo do relacionamento.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-red-400 mt-1">✗</span><span><strong>Desalinhamento de valores</strong> — você não conseguiria recomendar o resultado que o cliente quer alcançar.</span></li>
+        </ul>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Como recusar sem queimar a relação</h3>
+        <p class="text-neutral-300">Seja específico sobre o motivo: "Para eu poder entregar o resultado que você espera, precisaria de X — e no momento vocês não têm isso disponível. Não faria sentido assinar agora." Isso mantém a porta aberta para quando o contexto mudar — e posiciona você como honesto, não como quem perdeu interesse.</p>
+      </div>
+    </section>
+
+    <!-- RESUMO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-teal-900/40 via-dark-800 to-dark-800 rounded-xl border border-teal-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">🎒</span> Resumo do módulo</h2>
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3"><span class="text-teal-400 mt-1">✓</span><div><strong class="text-white">Proposta começa pelo resultado</strong><span class="text-neutral-400"> — horas são consequência, não ponto de partida.</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-teal-400 mt-1">✓</span><div><strong class="text-white">Fora-de-escopo é tão importante quanto escopo</strong><span class="text-neutral-400"> — é onde a maioria dos conflitos nasce.</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-teal-400 mt-1">✓</span><div><strong class="text-white">Fases reduzem risco percebido</strong><span class="text-neutral-400"> — e criam momentos naturais de expansão da relação.</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-teal-400 mt-1">✓</span><div><strong class="text-white">Critérios de aceite objetivos</strong><span class="text-neutral-400"> — sem eles o projeto nunca termina oficialmente.</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-teal-400 mt-1">✓</span><div><strong class="text-white">Saber recusar é posicionamento</strong><span class="text-neutral-400"> — projetos ruins custam mais do que não os fazendo.</span></div></div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+          <h3 class="font-semibold text-teal-400 mb-2">Próximo módulo:</h3>
+          <p class="text-neutral-300">5.2 — Precificação do engajamento: modelos de preço, escada de ofertas e como cobrar pelo diagnóstico</p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Voltar para Trilha 5</a>
+          <a href="modulo-5-2.html" class="flex-1 text-center px-6 py-3 bg-teal-600 text-white rounded-lg font-semibold hover:bg-teal-500 transition-colors">Próximo Módulo →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>Consultor de IA · Módulo 5.1 · <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a> · 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark');
+    } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

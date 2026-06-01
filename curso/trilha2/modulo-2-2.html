@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 2.2 · Processos e Gargalos | Consultor de IA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: {
+      primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    /* acento blue (T2) */
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .bg-blue-500\/20 { background-color: rgba(37,99,235,0.12); }
+    html:not(.dark) .bg-blue-500\/10 { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37,99,235,0.25); }
+    html:not(.dark) .hover\:bg-blue-500\/30:hover { background-color: rgba(37,99,235,0.2); }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124,58,237,0.08); }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(217,119,6,0.09); }
+    html:not(.dark) .hover\:text-teal-400:hover { color: #0d9488; }
+    html:not(.dark) .hover\:bg-teal-500\/10:hover { background-color: rgba(13,148,136,0.08); }
+
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161,98,7,0.08); }
+    html:not(.dark) .border-primary\/30 { border-color: rgba(161,98,7,0.25); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161,98,7,0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .text-red-400 { color: #b91c1c; }
+    html:not(.dark) .bg-red-900\/20 { background-color: rgba(185,28,28,0.08); }
+    html:not(.dark) .border-red-500\/30 { border-color: rgba(185,28,28,0.25); }
+    html:not(.dark) .bg-blue-900\/20 { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37,99,235,0.25); }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,0.95); }
+
+    .dark .border-dark-600 { border-color: #374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+
+    @keyframes wf-pulse { 0%,100% { opacity:.55 } 50% { opacity:1 } }
+    @media (prefers-reduced-motion: no-preference) {
+      .wf-a { animation: wf-pulse 2.8s ease-in-out infinite; }
+      .wf-a:nth-child(2){animation-delay:.4s} .wf-a:nth-child(3){animation-delay:.8s}
+    }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🧭</span><span class="font-bold text-lg hidden sm:inline">Consultor de IA</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors">
+            <span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-400 bg-blue-500/10">
+            <span class="sm:hidden">T2</span><span class="hidden sm:inline">Mapear</span></a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors">
+            <span class="sm:hidden">T3</span><span class="hidden sm:inline">Auditar</span></a>
+          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors">
+            <span class="sm:hidden">T4</span><span class="hidden sm:inline">Planos</span></a>
+          <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors">
+            <span class="sm:hidden">T5</span><span class="hidden sm:inline">Entrega</span></a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-blue-400">Início</a><span>/</span>
+      <a href="index.html" class="hover:text-blue-400">Trilha 2</a><span>/</span>
+      <span class="text-blue-400">Módulo 2.2</span>
+    </div>
+  </nav>
+
+  <header class="bg-gradient-to-br from-blue-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-4">MÓDULO 2.2</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🗺️ Mapeamento de processos e gargalos</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">Desenhar o fluxo real de ponta a ponta, medir cada etapa e encontrar a restrição que limita todo o sistema. A Theory of Constraints aplicada ao diagnóstico de IA.</p>
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">6</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">~45</div><div class="text-xs text-neutral-400">Minutos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">Mapeam.</div><div class="text-xs text-neutral-400">Nível</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">Analítico</div><div class="text-xs text-neutral-400">Tipo</div></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <p class="text-neutral-300 mb-8 leading-relaxed text-lg">
+      <strong class="text-blue-400">Sem o mapa, qualquer solução de IA é chute</strong>. O mapeamento de processos transforma impressões sobre "onde está lento" em evidência sobre onde está o gargalo real — e só o gargalo real vale a pena atacar primeiro.
+    </p>
+
+    <!-- SVG: value stream com gargalo destacado -->
+    <div class="rounded-2xl border border-blue-500/30 bg-dark-900/40 p-3 sm:p-4 mb-12 overflow-hidden">
+      <svg viewBox="0 0 860 220" class="w-full h-auto" role="img" aria-label="Value stream map simplificado: cinco etapas sequenciais com tempos. A etapa 3 é o gargalo (destacada em vermelho ciano), com o maior tempo de fila e processamento, limitando o throughput de todo o fluxo.">
+        <defs>
+          <linearGradient id="m22-grad" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#60a5fa"/><stop offset="1" stop-color="#3b82f6"/></linearGradient>
+          <filter id="m22-glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="3.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <pattern id="m22-grid" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="1.3" fill="#3b82f6" opacity="0.12"/></pattern>
+          <marker id="m22-ah" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#60a5fa"/></marker>
+        </defs>
+        <rect x="0" y="0" width="860" height="220" fill="url(#m22-grid)"/>
+        <!-- Etapa 1 -->
+        <g class="wf-a"><rect x="20" y="70" width="120" height="60" rx="10" fill="#0e1622" stroke="#60a5fa" stroke-width="1.8"/></g>
+        <text x="80" y="97" text-anchor="middle" fill="#60a5fa" font-family="Inter,sans-serif" font-weight="700" font-size="12">Entrada</text>
+        <text x="80" y="115" text-anchor="middle" fill="#bfdbfe" font-family="Inter,sans-serif" font-size="10">5 min</text>
+        <path d="M140,100 L175,100" stroke="#60a5fa" stroke-width="1.5" marker-end="url(#m22-ah)"/>
+        <!-- Etapa 2 -->
+        <g class="wf-a"><rect x="177" y="70" width="120" height="60" rx="10" fill="#0e1622" stroke="#60a5fa" stroke-width="1.8"/></g>
+        <text x="237" y="97" text-anchor="middle" fill="#60a5fa" font-family="Inter,sans-serif" font-weight="700" font-size="12">Validação</text>
+        <text x="237" y="115" text-anchor="middle" fill="#bfdbfe" font-family="Inter,sans-serif" font-size="10">15 min</text>
+        <path d="M297,100 L332,100" stroke="#60a5fa" stroke-width="1.5" marker-end="url(#m22-ah)"/>
+        <!-- Etapa 3: GARGALO -->
+        <g filter="url(#m22-glow)"><rect x="334" y="56" width="148" height="88" rx="12" fill="#0e1b26" stroke="#38bdf8" stroke-width="3"/></g>
+        <text x="408" y="86" text-anchor="middle" fill="#38bdf8" font-family="Inter,sans-serif" font-weight="700" font-size="13">⚠ Análise</text>
+        <text x="408" y="106" text-anchor="middle" fill="#9ad6ff" font-family="Inter,sans-serif" font-size="11">90 min — GARGALO</text>
+        <text x="408" y="126" text-anchor="middle" fill="#9ad6ff" font-family="Inter,sans-serif" font-size="10">fila: ~4h de espera</text>
+        <path d="M482,100 L518,100" stroke="#60a5fa" stroke-width="1.5" marker-end="url(#m22-ah)"/>
+        <!-- Etapa 4 -->
+        <g class="wf-a"><rect x="520" y="70" width="120" height="60" rx="10" fill="#0e1622" stroke="#60a5fa" stroke-width="1.8"/></g>
+        <text x="580" y="97" text-anchor="middle" fill="#60a5fa" font-family="Inter,sans-serif" font-weight="700" font-size="12">Aprovação</text>
+        <text x="580" y="115" text-anchor="middle" fill="#bfdbfe" font-family="Inter,sans-serif" font-size="10">20 min</text>
+        <path d="M640,100 L675,100" stroke="#60a5fa" stroke-width="1.5" marker-end="url(#m22-ah)"/>
+        <!-- Etapa 5 -->
+        <g class="wf-a"><rect x="677" y="70" width="120" height="60" rx="10" fill="#0e1622" stroke="#60a5fa" stroke-width="1.8"/></g>
+        <text x="737" y="97" text-anchor="middle" fill="#60a5fa" font-family="Inter,sans-serif" font-weight="700" font-size="12">Saída</text>
+        <text x="737" y="115" text-anchor="middle" fill="#bfdbfe" font-family="Inter,sans-serif" font-size="10">8 min</text>
+        <!-- Label -->
+        <text x="430" y="185" text-anchor="middle" fill="#9aa4b2" font-family="Inter,sans-serif" font-size="11.5">melhorar qualquer outra etapa não acelera o resultado — só o gargalo muda o throughput</text>
+      </svg>
+      <p class="text-center text-xs text-neutral-500 mt-2">Diagrama ilustrativo — value stream map simplificado com gargalo identificado.</p>
+    </div>
+
+    <!-- TÓPICO 1 -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">1</span>
+        <h2 class="text-2xl font-bold">🔗 Value stream mapping</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">VSM é uma fotografia do fluxo completo: desde o input (pedido do cliente, documento recebido, dado criado) até o output (entrega, resposta, decisão). O objetivo não é um diagrama bonito — é <strong class="text-blue-400">revelar onde o tempo some</strong>.</p>
+
+      <div class="bg-gradient-to-br from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4">Como construir o VSM</h3>
+        <ol class="space-y-3 text-neutral-300">
+          <li class="flex items-start space-x-3"><span class="text-blue-400 font-bold">1.</span><span>Defina o escopo: qual processo começa e termina o mapa?</span></li>
+          <li class="flex items-start space-x-3"><span class="text-blue-400 font-bold">2.</span><span>Liste todas as etapas em sequência (use post-its ou whiteboard)</span></li>
+          <li class="flex items-start space-x-3"><span class="text-blue-400 font-bold">3.</span><span>Para cada etapa: quem faz, qual sistema usa, quanto tempo leva</span></li>
+          <li class="flex items-start space-x-3"><span class="text-blue-400 font-bold">4.</span><span>Adicione os tempos de espera entre etapas (transferências)</span></li>
+          <li class="flex items-start space-x-3"><span class="text-blue-400 font-bold">5.</span><span>Calcule o lead time total e compare com o tempo de processamento puro</span></li>
+        </ol>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600 text-center">
+          <div class="text-blue-400 font-bold text-2xl mb-1">Lead time</div>
+          <p class="text-sm text-neutral-400">Tempo total do processo (inclui espera)</p>
+        </div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600 text-center">
+          <div class="text-blue-400 font-bold text-2xl mb-1">Cycle time</div>
+          <p class="text-sm text-neutral-400">Tempo de trabalho real em cada etapa</p>
+        </div>
+        <div class="bg-dark-800 rounded-lg p-4 border border-dark-600 text-center">
+          <div class="text-blue-400 font-bold text-2xl mb-1">Eficiência</div>
+          <p class="text-sm text-neutral-400">cycle / lead = % do tempo que agrega valor</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 2 -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">2</span>
+        <h2 class="text-2xl font-bold">⏱️ Medir tempo, espera, retrabalho e custo</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Dados sem medição são anedota. <strong class="text-blue-400">Cada etapa precisa de número</strong> — sem isso, a priorização é baseada em quem grita mais alto na reunião, não em onde o problema realmente está.</p>
+
+      <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4">Métricas por etapa</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-dark-600 text-neutral-400">
+                <th class="text-left py-2 pr-4">Métrica</th>
+                <th class="text-left py-2 pr-4">Como coletar</th>
+                <th class="text-left py-2">Por que importa</th>
+              </tr>
+            </thead>
+            <tbody class="text-neutral-300">
+              <tr class="border-b border-dark-700"><td class="py-2 pr-4 font-medium">Tempo de processamento</td><td class="py-2 pr-4">Cronometrar / perguntar</td><td class="py-2">Onde vai o trabalho humano</td></tr>
+              <tr class="border-b border-dark-700"><td class="py-2 pr-4 font-medium">Tempo de espera (fila)</td><td class="py-2 pr-4">Log de sistema / observar</td><td class="py-2">Onde o tempo some sem trabalho</td></tr>
+              <tr class="border-b border-dark-700"><td class="py-2 pr-4 font-medium">Taxa de retrabalho</td><td class="py-2 pr-4">Histórico de correções</td><td class="py-2">Custo oculto de qualidade</td></tr>
+              <tr><td class="py-2 pr-4 font-medium">Custo unitário</td><td class="py-2 pr-4">Salário × tempo × pessoas</td><td class="py-2">Base do business case</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/40 p-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Dica: a fórmula do custo anual</h3>
+        <p class="text-neutral-300 mb-2">Custo anual da etapa = <strong>frequência diária × custo por ocorrência × dias úteis</strong></p>
+        <p class="text-neutral-400 text-sm">Exemplo: análise manual de 50 documentos/dia × R$12 cada × 250 dias = R$150.000/ano. Esse é o número que justifica investimento em automação.</p>
+      </div>
+    </section>
+
+    <!-- TÓPICO 3 -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">3</span>
+        <h2 class="text-2xl font-bold">🍾 Encontrar o gargalo (Theory of Constraints)</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Eliyahu Goldratt demostrou que todo sistema tem exatamente <strong class="text-blue-400">um gargalo</strong> — a etapa mais lenta que determina a velocidade de todo o fluxo. Melhorar qualquer outra etapa não muda o throughput: só o gargalo pode fazer isso.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6">
+          <h4 class="font-bold text-blue-400 mb-4">Como identificar o gargalo</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-blue-400">✓</span><span>É a etapa com maior fila de espera antes dela</span></li>
+            <li class="flex items-start space-x-2"><span class="text-blue-400">✓</span><span>As etapas anteriores ficam ociosas aguardando ela liberar</span></li>
+            <li class="flex items-start space-x-2"><span class="text-blue-400">✓</span><span>As etapas posteriores ficam esperando ela produzir</span></li>
+            <li class="flex items-start space-x-2"><span class="text-blue-400">✓</span><span>A equipe nessa etapa sempre está ocupada / sobrecarregada</span></li>
+          </ul>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+          <h4 class="font-bold text-white mb-4">Os 5 passos do TOC</h4>
+          <ol class="space-y-2 text-neutral-300 text-sm list-decimal list-inside">
+            <li>Identificar a restrição (o gargalo)</li>
+            <li>Explorar a restrição (tirar máximo sem investir)</li>
+            <li>Subordinar tudo ao gargalo</li>
+            <li>Elevar a restrição (investir para ampliar capacidade)</li>
+            <li>Voltar ao passo 1 — o gargalo migrou</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+        <h3 class="text-lg font-semibold text-red-400 mb-3">O erro clássico: otimizar a etapa errada</h3>
+        <p class="text-neutral-300">Automatizar uma etapa que não é o gargalo só faz ela produzir mais rápido para esperar na fila do gargalo. O resultado é um sistema mais rápido em 80% das etapas e igual no resultado final. É o desperdício mais comum em projetos de IA.</p>
+      </div>
+    </section>
+
+    <!-- TÓPICO 4 -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">4</span>
+        <h2 class="text-2xl font-bold">📊 Dados de volume e frequência</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Volume × frequência é o <strong class="text-blue-400">multiplicador do impacto</strong>. Um processo demorado que acontece 3 vezes por ano raramente justifica automação. Um processo rápido que acontece 500 vezes por dia costuma justificar.</p>
+
+      <div class="bg-gradient-to-br from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4">Perguntas para coletar dados de volume</h3>
+        <ul class="space-y-2 text-neutral-300">
+          <li class="flex items-start space-x-2"><span class="text-blue-400 mt-1">•</span><span>Quantas vezes esse processo acontece por dia/semana/mês?</span></li>
+          <li class="flex items-start space-x-2"><span class="text-blue-400 mt-1">•</span><span>Quais são os picos? Tem sazonalidade?</span></li>
+          <li class="flex items-start space-x-2"><span class="text-blue-400 mt-1">•</span><span>Quantas pessoas estão envolvidas em cada ocorrência?</span></li>
+          <li class="flex items-start space-x-2"><span class="text-blue-400 mt-1">•</span><span>Esse volume cresce, está estável ou diminuindo?</span></li>
+        </ul>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="bg-dark-800 rounded-lg p-5 border border-dark-600">
+          <div class="text-blue-400 font-bold text-lg mb-2">Baixo volume</div>
+          <p class="text-sm text-neutral-400">Menos de 20 ocorrências/mês. Automação raramente vale o investimento. Considere otimização de processo ou checklist.</p>
+        </div>
+        <div class="bg-dark-800 rounded-lg p-5 border border-dark-600">
+          <div class="text-blue-400 font-bold text-lg mb-2">Alto volume</div>
+          <p class="text-sm text-neutral-400">Mais de 100 ocorrências/dia. Automação com IA frequentemente tem ROI em meses. Prioridade alta na matriz.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 5 -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">5</span>
+        <h2 class="text-2xl font-bold">🧮 Trabalho repetitivo vs. baseado em julgamento</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Nem todo trabalho é automatizável da mesma forma. A distinção fundamental: <strong class="text-blue-400">trabalho baseado em regra</strong> (determinístico) vs. <strong class="text-blue-400">baseado em julgamento</strong> (contextual). A IA vive no meio-termo.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-5">
+          <h4 class="font-bold text-blue-400 mb-3">Determinístico</h4>
+          <p class="text-sm text-neutral-400 mb-3">Regras fixas, sem variação</p>
+          <ul class="space-y-1 text-neutral-300 text-sm">
+            <li>• Enviar email quando X</li>
+            <li>• Calcular imposto conforme tabela</li>
+            <li>• Roteamento por tipo de documento</li>
+          </ul>
+          <p class="text-xs text-blue-400 mt-3">→ Automação clássica (RPA, if/else)</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5">
+          <h4 class="font-bold text-white mb-3">Padrão com variação</h4>
+          <p class="text-sm text-neutral-400 mb-3">Padrões reconhecíveis mas variáveis</p>
+          <ul class="space-y-1 text-neutral-300 text-sm">
+            <li>• Classificar categoria de ticket</li>
+            <li>• Resumir documento extenso</li>
+            <li>• Extrair dados de nota fiscal</li>
+          </ul>
+          <p class="text-xs text-blue-400 mt-3">→ IA/LLM (workflow ou agente)</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5">
+          <h4 class="font-bold text-white mb-3">Julgamento contextual</h4>
+          <p class="text-sm text-neutral-400 mb-3">Decisão depende de contexto amplo</p>
+          <ul class="space-y-1 text-neutral-300 text-sm">
+            <li>• Negociar contrato complexo</li>
+            <li>• Decisão jurídica com risco</li>
+            <li>• Diagnóstico médico diferencial</li>
+          </ul>
+          <p class="text-xs text-neutral-400 mt-3">→ Humano (IA pode assistir)</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 6 -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">6</span>
+        <h2 class="text-2xl font-bold">📝 Documentar e validar o mapa com a equipe</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">O mapa que você desenhou sozinho está errado — sempre. <strong class="text-blue-400">Validar com quem executa</strong> é obrigatório antes de transformar o mapa em diagnóstico. E o processo de validação em si é valioso: gera buy-in.</p>
+
+      <div class="bg-gradient-to-br from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4">Workshop de validação do mapa</h3>
+        <div class="space-y-3">
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 font-bold text-sm mt-1">1.</span>
+            <div><strong class="text-white">Mostre o mapa no projetor</strong><p class="text-neutral-400 text-sm">Nunca envie antes — a reação ao ver ao vivo é mais honesta.</p></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 font-bold text-sm mt-1">2.</span>
+            <div><strong class="text-white">Peça para corrigirem em voz alta</strong><p class="text-neutral-400 text-sm">Tenha um marcador na mão. Erros são esperados — você não trabalha lá.</p></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 font-bold text-sm mt-1">3.</span>
+            <div><strong class="text-white">Valide os números de tempo</strong><p class="text-neutral-400 text-sm">"Vocês concordam que essa etapa leva ~X minutos?" — estimativas coletivas são mais precisas que individuais.</p></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 font-bold text-sm mt-1">4.</span>
+            <div><strong class="text-white">Pergunte: "O que falta no mapa?"</strong><p class="text-neutral-400 text-sm">Etapas informais, aprovações por WhatsApp, verificações que "todo mundo faz mas ninguém sabe".</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/40 p-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> O efeito colateral valioso</h3>
+        <p class="text-neutral-300">Quando a equipe corrige e melhora o mapa juntos, eles passam a "dono" do diagnóstico. Isso reduz drasticamente a resistência à mudança quando você apresentar a recomendação — porque foi construída com eles, não imposta sobre eles.</p>
+      </div>
+    </section>
+
+    <!-- RESUMO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-blue-900/40 via-dark-800 to-dark-800 rounded-xl border border-blue-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">🎒</span> Resumo do módulo</h2>
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">VSM revela onde o tempo some</strong><span class="text-neutral-400"> — lead time vs. cycle time mostra a ineficiência real.</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Só o gargalo importa primeiro</strong><span class="text-neutral-400"> — otimizar outra etapa não muda o throughput do sistema.</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Volume × frequência = business case</strong><span class="text-neutral-400"> — sem dados de volume, não há ROI defensável.</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Valide o mapa com a equipe</strong><span class="text-neutral-400"> — o diagrama que você fez sozinho sempre tem erros.</span></div></div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+          <h3 class="font-semibold text-blue-400 mb-2">Próximo módulo:</h3>
+          <p class="text-neutral-300">2.3 — Catálogo de oportunidades de IA por função</p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="modulo-2-1.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Módulo 2.1</a>
+          <a href="modulo-2-3.html" class="flex-1 text-center px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-500 transition-colors">Próximo Módulo →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>Consultor de IA · Módulo 2.2 · <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a> · 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark');
+    } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

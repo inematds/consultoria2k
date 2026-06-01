@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trilha 4 · Planos de execução | Consultor de IA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: {
+      primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+    .modal.hidden { display: none; }
+
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    /* acento amber (T4) */
+    html:not(.dark) .text-amber-400 { color: #92400e; }
+    html:not(.dark) .bg-amber-500\/20 { background-color: rgba(217,119,6,0.14); }
+    html:not(.dark) .bg-amber-500\/10 { background-color: rgba(217,119,6,0.09); }
+    html:not(.dark) .border-amber-500\/30 { border-color: rgba(217,119,6,0.28); }
+    html:not(.dark) .hover\:bg-amber-500\/30:hover { background-color: rgba(217,119,6,0.2); }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(217,119,6,0.09); }
+    html:not(.dark) .group:hover .group-hover\:text-amber-400 { color: #92400e; }
+    /* hover das outras trilhas no nav */
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124,58,237,0.08); }
+    html:not(.dark) .hover\:text-teal-400:hover { color: #0d9488; }
+    html:not(.dark) .hover\:bg-teal-500\/10:hover { background-color: rgba(13,148,136,0.08); }
+
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161,98,7,0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161,98,7,0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .text-red-400 { color: #b91c1c; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,0.95); }
+
+    .dark .border-dark-600 { border-color: #374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+
+    @keyframes wf-pulse { 0%,100% { opacity:.55 } 50% { opacity:1 } }
+    @media (prefers-reduced-motion: no-preference) {
+      .wf-a { animation: wf-pulse 2.8s ease-in-out infinite; }
+      .wf-a:nth-child(2){animation-delay:.3s} .wf-a:nth-child(3){animation-delay:.6s}
+      .wf-a:nth-child(4){animation-delay:.9s}
+    }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🧭</span><span class="font-bold text-lg hidden sm:inline">Consultor de IA</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors">
+            <span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors">
+            <span class="sm:hidden">T2</span><span class="hidden sm:inline">Mapear</span></a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors">
+            <span class="sm:hidden">T3</span><span class="hidden sm:inline">Auditar</span></a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-amber-400 bg-amber-500/10">
+            <span class="sm:hidden">T4</span><span class="hidden sm:inline">Planos</span></a>
+          <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors">
+            <span class="sm:hidden">T5</span><span class="hidden sm:inline">Entrega</span></a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <header class="relative overflow-hidden bg-gradient-to-br from-amber-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-amber-500/20 text-amber-400 text-xs font-semibold rounded-full mb-4">TRILHA 4</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🗺️ Planos de execução</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl mb-8">Da oportunidade ao plano que roda: como construir o business case, sequenciar o roadmap em ondas, escolher o nível certo da pirâmide e validar com piloto antes de escalar. Sempre começa pela base.</p>
+
+      <!-- HERO SVG: fluxo oportunidade → business case → roadmap por ondas -->
+      <div class="rounded-2xl border border-amber-500/30 bg-dark-900/40 p-3 sm:p-4 mb-8 overflow-hidden">
+        <svg viewBox="0 0 760 260" class="w-full h-auto" role="img" aria-label="Fluxo de planos: oportunidade identificada flui para business case de uma página, que alimenta o roadmap em ondas crawl walk run, terminando em piloto e validação.">
+          <defs>
+            <linearGradient id="t4-grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fbbf24"/><stop offset="1" stop-color="#f59e0b"/></linearGradient>
+            <linearGradient id="t4-cyan" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#0ea5e9"/></linearGradient>
+            <filter id="t4-glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            <pattern id="t4-grid" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="1.3" fill="#f59e0b" opacity="0.12"/></pattern>
+            <marker id="t4-ah" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#fbbf24"/></marker>
+            <marker id="t4-ahc" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#38bdf8"/></marker>
+          </defs>
+          <rect x="0" y="0" width="760" height="260" fill="url(#t4-grid)"/>
+
+          <!-- Nó 1: Oportunidade -->
+          <g class="wf-a" filter="url(#t4-glow)">
+            <rect x="20" y="90" width="130" height="80" rx="12" fill="#1f1604" stroke="url(#t4-grad)" stroke-width="2.5"/>
+          </g>
+          <text x="85" y="126" text-anchor="middle" fill="#fbbf24" font-family="Inter,sans-serif" font-weight="700" font-size="13">🔍 Oportunidade</text>
+          <text x="85" y="146" text-anchor="middle" fill="#fcd9a0" font-family="Inter,sans-serif" font-size="10">ROI + custo total</text>
+
+          <!-- Seta 1→2 -->
+          <line x1="150" y1="130" x2="184" y2="130" stroke="#fbbf24" stroke-width="2" marker-end="url(#t4-ah)"/>
+
+          <!-- Nó 2: Business Case -->
+          <g class="wf-a">
+            <rect x="186" y="90" width="130" height="80" rx="12" fill="#1f1604" stroke="url(#t4-grad)" stroke-width="2.5"/>
+          </g>
+          <text x="251" y="126" text-anchor="middle" fill="#fbbf24" font-family="Inter,sans-serif" font-weight="700" font-size="13">🧾 Business Case</text>
+          <text x="251" y="146" text-anchor="middle" fill="#fcd9a0" font-family="Inter,sans-serif" font-size="10">1 página, defensável</text>
+
+          <!-- Seta 2→3 -->
+          <line x1="316" y1="130" x2="350" y2="130" stroke="#fbbf24" stroke-width="2" marker-end="url(#t4-ah)"/>
+
+          <!-- Nó 3: Pirâmide / Nível -->
+          <g class="wf-a">
+            <rect x="352" y="90" width="130" height="80" rx="12" fill="#1f1604" stroke="url(#t4-grad)" stroke-width="2.5"/>
+          </g>
+          <text x="417" y="122" text-anchor="middle" fill="#fbbf24" font-family="Inter,sans-serif" font-weight="700" font-size="13">🪜 Nível certo</text>
+          <text x="417" y="140" text-anchor="middle" fill="#fcd9a0" font-family="Inter,sans-serif" font-size="10">base → IA → agente</text>
+          <text x="417" y="156" text-anchor="middle" fill="#fcd9a0" font-family="Inter,sans-serif" font-size="10">só se pagar</text>
+
+          <!-- Seta 3→4 -->
+          <line x1="482" y1="130" x2="516" y2="130" stroke="#38bdf8" stroke-width="2" marker-end="url(#t4-ahc)"/>
+
+          <!-- Nó 4: Piloto / Validação -->
+          <g class="wf-a" filter="url(#t4-glow)">
+            <rect x="518" y="90" width="130" height="80" rx="12" fill="#0e1b26" stroke="url(#t4-cyan)" stroke-width="2.5"/>
+          </g>
+          <text x="583" y="126" text-anchor="middle" fill="#38bdf8" font-family="Inter,sans-serif" font-weight="700" font-size="13">🧪 Piloto</text>
+          <text x="583" y="146" text-anchor="middle" fill="#9ad6ff" font-family="Inter,sans-serif" font-size="10">go/no-go → escalar</text>
+
+          <!-- Ondas embaixo -->
+          <g font-family="Inter,sans-serif">
+            <rect x="186" y="195" width="38" height="28" rx="6" fill="#1f1604" stroke="#fbbf24" stroke-width="1.5" opacity="0.8"/>
+            <text x="205" y="214" text-anchor="middle" fill="#fbbf24" font-size="10" font-weight="600">crawl</text>
+            <rect x="232" y="195" width="38" height="28" rx="6" fill="#1f1604" stroke="#f59e0b" stroke-width="1.5" opacity="0.9"/>
+            <text x="251" y="214" text-anchor="middle" fill="#fcd9a0" font-size="10" font-weight="600">walk</text>
+            <rect x="278" y="195" width="38" height="28" rx="6" fill="#1f1604" stroke="#fbbf24" stroke-width="2"/>
+            <text x="297" y="214" text-anchor="middle" fill="#fbbf24" font-size="10" font-weight="600">run</text>
+            <text x="251" y="248" text-anchor="middle" fill="#9aa4b2" font-size="11">roadmap em ondas</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="grid grid-cols-4 gap-4 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-amber-400">4</div><div class="text-xs text-neutral-400">Módulos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-amber-400">24</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-amber-400">~3h</div><div class="text-xs text-neutral-400">Duração</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-amber-400">Plano</div><div class="text-xs text-neutral-400">Nível</div></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- MAPA DA TRILHA -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-6">Mapa da trilha</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <a href="#modulo-4-1" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-amber-500/30 p-5 transition-all">
+          <div class="flex items-center justify-between mb-2"><span class="text-amber-400 font-bold text-sm">4.1</span><span class="text-xs text-neutral-500">~45 min</span></div>
+          <h3 class="font-semibold mb-1 group-hover:text-amber-400 transition-colors">💰 ROI e custo total</h3>
+          <p class="text-xs text-neutral-400">Ganho − (build + operação + risco)</p>
+        </a>
+        <a href="#modulo-4-2" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-amber-500/30 p-5 transition-all">
+          <div class="flex items-center justify-between mb-2"><span class="text-amber-400 font-bold text-sm">4.2</span><span class="text-xs text-neutral-500">~45 min</span></div>
+          <h3 class="font-semibold mb-1 group-hover:text-amber-400 transition-colors">🌊 Roadmap por ondas</h3>
+          <p class="text-xs text-neutral-400">Crawl → walk → run, nessa ordem</p>
+        </a>
+        <a href="#modulo-4-3" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-amber-500/30 p-5 transition-all">
+          <div class="flex items-center justify-between mb-2"><span class="text-amber-400 font-bold text-sm">4.3</span><span class="text-xs text-neutral-500">~45 min</span></div>
+          <h3 class="font-semibold mb-1 group-hover:text-amber-400 transition-colors">🪜 Nível da pirâmide</h3>
+          <p class="text-xs text-neutral-400">O mais baixo que resolve vence</p>
+        </a>
+        <a href="#modulo-4-4" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-amber-500/30 p-5 transition-all">
+          <div class="flex items-center justify-between mb-2"><span class="text-amber-400 font-bold text-sm">4.4</span><span class="text-xs text-neutral-500">~45 min</span></div>
+          <h3 class="font-semibold mb-1 group-hover:text-amber-400 transition-colors">🧪 Piloto e métricas</h3>
+          <p class="text-xs text-neutral-400">Definir sucesso antes de começar</p>
+        </a>
+      </div>
+    </section>
+
+    <h2 class="text-2xl font-bold mb-6">Conteúdo detalhado</h2>
+
+    <!-- MÓDULO 4.1 -->
+    <div id="modulo-4-1" class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2"><span class="text-amber-400 font-bold">4.1</span><span class="text-xs text-neutral-500">~45 min</span></div>
+        <h3 class="text-2xl font-bold mb-2">💰 Da oportunidade ao business case: ROI e custo total</h3>
+        <p class="text-neutral-400 text-sm">Como calcular se a iniciativa de IA se paga de verdade: componentes do ROI, custo total de propriedade, linha de base e o business case de uma página que o decisor entende.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <span class="text-lg">🧮</span>
+            <div><span class="font-medium">Componentes do ROI</span><span class="text-neutral-500 text-sm ml-2">- ganho, build, operação, risco</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">ROI = ganho − (custo de build + custo de operação) ajustado a risco. Ganho é o que o problema custa hoje ou o que a solução gera; build é o que você vai gastar para criar; operação é o custo contínuo depois do lançamento; risco é o fator de desconto pela chance de não funcionar.</p></div>
+            <div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sem essa estrutura, estimativas de "economizar X horas" ficam soltas e o decisor não consegue aprovar nem comparar opções. A fórmula dá linguagem comum entre técnicos e negócio.</p></div>
+            <div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">ROI ajustado a risco; custo de oportunidade; fator de desconto por probabilidade de sucesso.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <span class="text-lg">💸</span>
+            <div><span class="font-medium">Custo total da IA</span><span class="text-neutral-500 text-sm ml-2">- APIs, infra, manutenção, supervisão</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O custo total de uma solução de IA inclui: APIs de LLM (cobradas por token), infraestrutura de nuvem, custo de manutenção quando o modelo muda ou os dados derivam, e supervisão humana para revisar saídas. Projetos que ignoram esses custos recorrentes frequentemente ficam no vermelho após o lançamento.</p></div>
+            <div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">A conta não termina no deploy. Saber estimar o custo operacional muda a decisão entre construir, comprar um SaaS pronto, ou simplesmente não usar IA.</p></div>
+            <div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">TCO (total cost of ownership); custo por chamada de API; deriva de modelo; custo de supervisão humana no loop.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <span class="text-lg">📉</span>
+            <div><span class="font-medium">Linha de base: medir o "antes"</span><span class="text-neutral-500 text-sm ml-2">- sem ela, não há "depois"</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Linha de base é a medição do processo atual antes de qualquer mudança: quantas horas leva, qual a taxa de erro, quanto custa por unidade, qual o NPS do fluxo. Sem esse número, qualquer melhoria é percepção, não evidência.</p></div>
+            <div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">A linha de base é o que permite comparar antes e depois de forma objetiva. Projetos que pulam essa etapa não conseguem demonstrar resultado — e perdem o próximo contrato mesmo que tenham entregado valor real.</p></div>
+            <div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Medir antes de mudar; métrica de processo vs. métrica de resultado; documentar o baseline como entregável.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <span class="text-lg">⏳</span>
+            <div><span class="font-medium">Payback e horizonte</span><span class="text-neutral-500 text-sm ml-2">- quando o caso se paga</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Payback é o tempo para recuperar o investimento inicial. Uma solução que custa R$50k para construir e economiza R$5k/mês tem payback de 10 meses. O horizonte define até quando o cálculo é válido — IA muda rápido e soluções têm vida útil.</p></div>
+            <div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Projetos de IA com payback acima de 24 meses raramente chegam lá intactos — o contexto muda antes. Saber calcular payback ajuda a dimensionar o escopo certo e a descartar casos que não fecham a conta.</p></div>
+            <div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Payback simples e descontado; horizonte de validade; depreciação acelerada em IA.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <span class="text-lg">🎯</span>
+            <div><span class="font-medium">Métricas de negócio vs. métricas de modelo</span><span class="text-neutral-500 text-sm ml-2">- o que o decisor precisa ver</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Métricas de modelo (acurácia, F1, latência) medem a qualidade técnica; métricas de negócio (custo por transação, NPS, receita gerada, erros evitados) medem o resultado. O decisor compra o segundo — o primeiro é argumento interno da equipe técnica.</p></div>
+            <div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Apresentar só métricas de modelo para um CFO é o erro mais comum em projetos de IA bem-sucedidos tecnicamente mas rejeitados comercialmente. A tradução é parte do trabalho do consultor.</p></div>
+            <div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Outcome vs. output; KPI de negócio; métricas proxy; o decisor compra resultado, não acurácia.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <span class="text-lg">🧾</span>
+            <div><span class="font-medium">Business case de uma página</span><span class="text-neutral-500 text-sm ml-2">- o que o decisor entende</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Um business case de uma página contém: problema a resolver, solução proposta (em linguagem leiga), investimento total estimado, ganho esperado e quando se paga, riscos principais e como mitigá-los. Cabe em uma página porque o decisor lê em dois minutos.</p></div>
+            <div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">O documento que não cabe em uma página costuma não ter clareza suficiente — a restrição de tamanho força o consultor a tomar posição e eliminar a gordura analítica.</p></div>
+            <div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Estrutura problema-solução-valor-risco; brevidade como sinal de clareza; aprovação como objetivo do documento.</p></div>
+          </div></div>
+        </div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <button onclick="openModal('modal-4-1')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors">Ver em Modal</button>
+        <a href="modulo-4-1.html" class="px-4 py-2 text-sm bg-amber-600 hover:bg-amber-500 text-white rounded-lg transition-colors">Ver Completo</a>
+      </div>
+    </div>
+
+    <!-- MÓDULO 4.2 -->
+    <div id="modulo-4-2" class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2"><span class="text-amber-400 font-bold">4.2</span><span class="text-xs text-neutral-500">~45 min</span></div>
+        <h3 class="text-2xl font-bold mb-2">🌊 Roadmap por ondas: sequenciar e priorizar</h3>
+        <p class="text-neutral-400 text-sm">Provar valor antes de escalar: como estruturar o roadmap em crawl/walk/run, respeitar dependências, sequenciar pelo melhor valor-risco-aprendizado e replanejar com o que o piloto ensinou.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <span class="text-lg">🌊</span>
+            <div><span class="font-medium">Ondas: crawl, walk, run</span><span class="text-neutral-500 text-sm ml-2">- provar valor antes de escalar</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Crawl é a primeira onda: menor escopo possível, aprendizado máximo, risco controlado. Walk aumenta cobertura e automatiza mais — com a confiança do que crawl provou. Run escala com o que walk validou. Pular ondas é a principal causa de rollback caro em projetos de IA.</p></div>
+            <div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">A onda não é só ritmo — é metodologia de redução de risco. Cada onda deve ter um resultado de negócio concreto antes de avançar, não apenas uma entrega técnica.</p></div>
+            <div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Escopo incremental; resultado por onda; não avança sem validação; rollback barato.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <span class="text-lg">🔗</span>
+            <div><span class="font-medium">Dependências: dados e fundação primeiro</span><span class="text-neutral-500 text-sm ml-2">- o que bloqueia o quê</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Dependência é tudo o que precisa existir para um caso de uso funcionar: dados limpos e acessíveis, integrações de sistemas, capacidades de equipe, permissões e governança. Construir antes de resolver dependências é construir sobre areia.</p></div>
+            <div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">O maior desperdício em projetos de IA é construir o modelo antes de ter os dados. Mapear dependências no início do roadmap evita retrabalho e mantém o cronograma.</p></div>
+            <div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Árvore de dependências; fundação antes de feature; dado como pré-requisito; integrações como risco.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <span class="text-lg">🏆</span>
+            <div><span class="font-medium">Sequenciar por valor, risco e aprendizado</span><span class="text-neutral-500 text-sm ml-2">- o que vai primeiro</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Para cada caso de uso, avaliar três eixos: valor (qual o impacto se funcionar), risco (qual a chance de dar errado e o custo do erro), e aprendizado (o que esse caso ensina que desbloqueará outros). O melhor candidato para primeira onda tem alto aprendizado, valor visível e risco controlável.</p></div>
+            <div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sem critérios explícitos, o primeiro projeto é escolhido pelo mais entusiasmado ou pelo mais visível — não necessariamente o mais estratégico. Critérios definem o que vai primeiro e tornam a decisão defensável.</p></div>
+            <div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Matriz valor × risco; aprendizado como critério de sequência; decisão defensável e reversível.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <span class="text-lg">🧱</span>
+            <div><span class="font-medium">Capacidades reutilizáveis</span><span class="text-neutral-500 text-sm ml-2">- não resolver tudo do zero</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Capacidades reutilizáveis são blocos que, ao serem construídos num caso de uso, ficam disponíveis para outros: um pipeline de dados limpos, um módulo de extração de entidades, uma integração com o CRM. Planejar o roadmap com reutilização reduz custo marginal das ondas seguintes.</p></div>
+            <div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">O consultor que pensa em plataforma antes de feature evita que cada novo caso comece do zero. É a diferença entre um portfólio de projetos e uma pilha de silos.</p></div>
+            <div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Construir uma vez, usar muitas; plataforma vs. ponto a ponto; custo marginal decrescente das ondas.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <span class="text-lg">🗓️</span>
+            <div><span class="font-medium">Roadmap visual com marcos e responsáveis</span><span class="text-neutral-500 text-sm ml-2">- quem faz o quê e quando</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O roadmap visual coloca cada caso de uso numa linha do tempo com ondas claramente separadas, marcos de validação (go/no-go), dependências visíveis e um responsável identificado por cada bloco. Não precisa ser ferramenta cara: uma tabela ou diagrama simples cumpre a função.</p></div>
+            <div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sem visibilidade compartilhada, cada pessoa enxerga um roadmap diferente na cabeça. O artefato visual alinha expectativas, facilita a revisão e serve de âncora para a conversa de priorização.</p></div>
+            <div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Artefato de alinhamento; marco ≠ entrega; responsável único por onda; visibilidade pública.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <span class="text-lg">🔁</span>
+            <div><span class="font-medium">Replanejar com o que o piloto ensinou</span><span class="text-neutral-500 text-sm ml-2">- o plano muda, e isso é bom</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O piloto sempre ensina algo que o planejamento não antecipou: dados piores do que o esperado, resistência de equipe, integração mais complexa, ou caso de uso com resultado melhor do que o previsto. Replanejar a partir do que o piloto revelou é a diferença entre um roadmap vivo e um documento que ninguém consulta.</p></div>
+            <div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Projetos que não atualizam o roadmap após a primeira onda tratam o plano como sagrado — e perdem a chance de usar os aprendizados mais valiosos do projeto.</p></div>
+            <div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Revisão formal pós-onda; aprendizados como insumo do próximo plano; plano como hipótese, não decreto.</p></div>
+          </div></div>
+        </div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <button onclick="openModal('modal-4-2')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors">Ver em Modal</button>
+        <a href="modulo-4-2.html" class="px-4 py-2 text-sm bg-amber-600 hover:bg-amber-500 text-white rounded-lg transition-colors">Ver Completo</a>
+      </div>
+    </div>
+
+    <!-- MÓDULO 4.3 -->
+    <div id="modulo-4-3" class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2"><span class="text-amber-400 font-bold">4.3</span><span class="text-xs text-neutral-500">~45 min</span></div>
+        <h3 class="text-2xl font-bold mb-2">🪜 Escolher o nível da pirâmide para cada caso</h3>
+        <p class="text-neutral-400 text-sm">Aplicar a pirâmide determinístico/IA/agente ao caso concreto: quando cada nível é a resposta certa, como avaliar custo × risco × tempo por andar, e por que registrar a decisão.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <span class="text-lg">🧱</span>
+            <div><span class="font-medium">Quando determinístico basta</span><span class="text-neutral-500 text-sm ml-2">- e por que é a melhor resposta</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Determinístico basta quando: as regras são claras e estáveis, o volume não justifica IA, o erro tem custo alto (100% de acerto exigido) ou os dados não existem ainda. Regras, automações, filtros, integrações e SaaS resolvem a maioria dos casos — e a custo drasticamente menor.</p></div>
+            <div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">O reflexo de ir direto para IA ignora a base que resolve mais barato, mais rápido e com menos formas de falhar. Treinar o instinto de checar a base primeiro é o principal objetivo da pirâmide.</p></div>
+            <div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Regra explícita é melhor que modelo implícito; previsível &gt; inteligente quando possível; base como default.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <span class="text-lg">🤖</span>
+            <div><span class="font-medium">Quando o caso pede IA num passo</span><span class="text-neutral-500 text-sm ml-2">- linguagem, imagem, previsão</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O meio da pirâmide (IA num passo do fluxo) é indicado quando há linguagem natural, imagens, previsões probabilísticas ou ambiguidade que regras não cobrem com custo razoável. O fluxo continua determinístico nas etapas antes e depois — IA entra cirurgicamente só onde regra não funciona.</p></div>
+            <div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Usar IA num passo mantém o restante do fluxo confiável e auditável, enquanto resolve o que regra não resolve. É o padrão mais comum e mais equilibrado para projetos de IA em produção.</p></div>
+            <div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">IA cirúrgica; wrapper determinístico; validação da saída; fallback para humano.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <span class="text-lg">🛰️</span>
+            <div><span class="font-medium">Quando justifica um agente</span><span class="text-neutral-500 text-sm ml-2">- autonomia, ferramentas, loop</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Agentes são indicados quando: o problema requer múltiplas decisões encadeadas e autônomas, as ferramentas disponíveis (APIs, buscas, execução de código) são necessárias, e o custo do erro por ação é tolerável. São o andar com maior superfície de falha, maior custo e maior exigência de supervisão.</p></div>
+            <div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Saber quando um agente se justifica evita usar o padrão mais caro e arriscado onde um workflow com IA num passo resolveria. Agentes são raros nos casos de uso de consultoria típica — e devem ser.</p></div>
+            <div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Autonomia requer supervisão; ferramentas ampliam risco; justificar o topo da pirâmide explicitamente.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <span class="text-lg">📐</span>
+            <div><span class="font-medium">Custo × risco × tempo por nível</span><span class="text-neutral-500 text-sm ml-2">- os números que mudam</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Cada andar da pirâmide tem um perfil diferente: determinístico tem custo fixo baixo e risco baixo; IA num passo tem custo de API recorrente e risco médio; agente tem custo alto, latência alta e risco alto. Apresentar esse comparativo ao cliente com estimativas reais é parte do business case.</p></div>
+            <div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">O trade-off explícito evita que o cliente escolha o andar errado por achar que "mais IA = mais resultado". A decisão deve ser informada, não por entusiasmo.</p></div>
+            <div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Tabela comparativa por nível; custo fixo vs. variável; risco operacional crescente; latência como custo.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <span class="text-lg">🧪</span>
+            <div><span class="font-medium">Híbrido: determinístico com IA cirúrgica</span><span class="text-neutral-500 text-sm ml-2">- o padrão mais equilibrado</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O padrão híbrido mantém a lógica de negócio em código determinístico (previsível, testável, barato) e usa IA apenas no ponto onde regra não resolve: classificar intenção num campo livre, extrair entidade de texto, resumir documento longo. O resultado vai de volta para o fluxo determinístico.</p></div>
+            <div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">O híbrido combina a confiabilidade da base com o poder da IA onde ela realmente agrega. É o padrão mais recomendável para produção em consultoria — e o que diferencia uma solução madura de um protótipo.</p></div>
+            <div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Determinístico como container; IA como módulo substituível; testabilidade preservada; fallback explícito.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <span class="text-lg">✅</span>
+            <div><span class="font-medium">Decidir o nível e registrar o porquê</span><span class="text-neutral-500 text-sm ml-2">- decisão defensável</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Para cada caso de uso, registrar explicitamente: qual nível foi escolhido, por que os andares abaixo não resolvem, e quais critérios tornariam o andar acima justificável no futuro. O registro protege o consultor, alinha a equipe e serve de referência quando o contexto muda.</p></div>
+            <div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Decisões sem registro são refeitas repetidamente. A documentação mínima da escolha de nível cria memória de projeto e permite revisão inteligente quando o piloto retorna com dados reais.</p></div>
+            <div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">ADR (architecture decision record) simplificado; critérios de revisão; decisão como hipótese revisável.</p></div>
+          </div></div>
+        </div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <button onclick="openModal('modal-4-3')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors">Ver em Modal</button>
+        <a href="modulo-4-3.html" class="px-4 py-2 text-sm bg-amber-600 hover:bg-amber-500 text-white rounded-lg transition-colors">Ver Completo</a>
+      </div>
+    </div>
+
+    <!-- MÓDULO 4.4 -->
+    <div id="modulo-4-4" class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2"><span class="text-amber-400 font-bold">4.4</span><span class="text-xs text-neutral-500">~45 min</span></div>
+        <h3 class="text-2xl font-bold mb-2">🧪 Piloto, prova de conceito e métricas de sucesso</h3>
+        <p class="text-neutral-400 text-sm">Definir sucesso antes de começar, distinguir PoC de piloto, delimitar o escopo mínimo que ensina, manter humano no loop e decidir escalar ou matar com critérios go/no-go.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <span class="text-lg">🎯</span>
+            <div><span class="font-medium">Definir sucesso antes de começar</span><span class="text-neutral-500 text-sm ml-2">- o critério que vem primeiro</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Antes de escrever uma linha de código ou configurar qualquer ferramenta, o sucesso do piloto precisa estar definido em números: qual métrica, qual valor mínimo aceitável e qual prazo. Sem isso, o piloto termina com "ficou legal" — que não é dado para decidir nada.</p></div>
+            <div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Definir sucesso depois do resultado é viés de confirmação garantido. O critério definido antes protege a objetividade da avaliação e torna o go/no-go defensável para todas as partes.</p></div>
+            <div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Pré-registro do critério; métrica vs. intuição; o que vai nos slides de resultado antes de ver os dados.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <span class="text-lg">🔬</span>
+            <div><span class="font-medium">PoC vs. piloto vs. produção</span><span class="text-neutral-500 text-sm ml-2">- três estágios, três objetivos</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">PoC (prova de conceito) responde "isso é tecnicamente possível?" com o mínimo de esforço — frequentemente sem dados reais. Piloto responde "isso funciona neste contexto específico?" com dados reais e usuários reais, mas escopo restrito. Produção é quando escalar com confiança. Pular etapas é o principal motivo de rollback caro.</p></div>
+            <div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Misturar os estágios cria expectativas erradas: tratar um PoC como piloto leva a decisões baseadas em dados de laboratório. Saber distingui-los define o tom correto das conversas com o cliente.</p></div>
+            <div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">PoC = viabilidade técnica; piloto = validade operacional; produção = escala validada; cada etapa tem entregável distinto.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <span class="text-lg">🔭</span>
+            <div><span class="font-medium">Escopo mínimo que ensina</span><span class="text-neutral-500 text-sm ml-2">- aprender rápido, gastar pouco</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O escopo mínimo do piloto é o menor experimento que responde à pergunta mais importante do projeto. Se a pergunta é "a IA consegue classificar intenção com 80% de acerto?", o piloto testa só isso, com volume mínimo, sem construir toda a integração antes de saber a resposta.</p></div>
+            <div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Escopo inflado é a principal causa de pilotos que demoram meses e terminam sem resposta clara. O menor escopo que ensina o máximo é sempre o alvo — não o mais completo, o mais inteligente.</p></div>
+            <div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">MLP (minimum learning pilot); pergunta principal do piloto; não construir o que não responde à pergunta.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <span class="text-lg">👤</span>
+            <div><span class="font-medium">Humano no loop + plano de falha</span><span class="text-neutral-500 text-sm ml-2">- o que acontece quando errar</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Humano no loop significa que toda saída da IA tem um ponto de revisão humana durante o piloto. O plano de falha define o que acontece quando a IA erra: quem reverte, em quanto tempo, como a operação continua sem a solução. Pilotos sem plano de falha estão assumindo que o sistema nunca vai errar.</p></div>
+            <div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">O piloto é o momento de maior incerteza. Ter humano no loop permite capturar erros antes que cheguem ao cliente final e alimenta os dados de melhoria. O plano de falha garante que um erro não interrompe a operação do cliente.</p></div>
+            <div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Human-in-the-loop; fallback operacional; SLA de revisão; custo da supervisão no piloto.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <span class="text-lg">📊</span>
+            <div><span class="font-medium">Medir vs. linha de base</span><span class="text-neutral-500 text-sm ml-2">- comparar o antes e o depois</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Durante o piloto, medir a mesma métrica que foi registrada na linha de base — com a mesma definição, no mesmo período equivalente. A comparação antes/depois é o único argumento que transforma percepção em evidência e justifica a decisão de escalar ou abandonar.</p></div>
+            <div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Pilotos que não comparam com baseline produzem histórias, não dados. A comparação rigorosa é o que separa uma decisão de escalar informada de uma decisão por entusiasmo.</p></div>
+            <div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Mesma definição de métrica antes e depois; período comparável; variação atribuível; evidência vs. história.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <span class="text-lg">🚦</span>
+            <div><span class="font-medium">Critérios go/no-go: escalar ou matar</span><span class="text-neutral-500 text-sm ml-2">- a decisão mais importante</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-amber-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Go/no-go é a decisão formal ao final do piloto: os critérios foram atingidos? Se sim, escalar — com o que aprendeu e ajustando o roadmap. Se não, matar ou pivotar — sem culpa, porque pilotos existem exatamente para responder essa pergunta. Matar um piloto que não funcionou é sucesso do processo, não fracasso do projeto.</p></div>
+            <div><span class="text-amber-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sem um critério formal de go/no-go, todo piloto vira produção por inércia. A capacidade de matar um projeto que não funciona é o que mantém o portfólio saudável e a confiança do cliente intacta.</p></div>
+            <div><span class="text-amber-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Critério pré-registrado; matar sem culpa; pivotar vs. escalar; próximos passos explícitos em ambos os casos.</p></div>
+          </div></div>
+        </div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <button onclick="openModal('modal-4-4')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors">Ver em Modal</button>
+        <a href="modulo-4-4.html" class="px-4 py-2 text-sm bg-amber-600 hover:bg-amber-500 text-white rounded-lg transition-colors">Ver Completo</a>
+      </div>
+    </div>
+
+    <!-- NAVEGAÇÃO ENTRE TRILHAS -->
+    <div class="flex flex-col sm:flex-row gap-4 mt-10">
+      <a href="../../index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Voltar ao início</a>
+      <a href="../trilha5/index.html" class="flex-1 text-center px-6 py-3 bg-amber-600 text-white rounded-lg font-semibold hover:bg-amber-500 transition-colors">Próxima trilha: Entrega →</a>
+    </div>
+  </main>
+
+  <!-- MODAIS -->
+  <div id="modal-4-1" class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" onclick="if(event.target === this) closeModal()">
+    <div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+      <div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0">
+        <div class="flex items-center space-x-3"><span class="text-amber-400 font-bold">4.1</span><span class="font-semibold">ROI e custo total</span></div>
+        <button onclick="closeModal()" class="text-neutral-400 hover:text-white text-2xl leading-none">&times;</button>
+      </div>
+      <iframe src="modulo-4-1.html" class="flex-1 w-full rounded-b-xl"></iframe>
+    </div>
+  </div>
+  <div id="modal-4-2" class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" onclick="if(event.target === this) closeModal()">
+    <div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+      <div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0">
+        <div class="flex items-center space-x-3"><span class="text-amber-400 font-bold">4.2</span><span class="font-semibold">Roadmap por ondas</span></div>
+        <button onclick="closeModal()" class="text-neutral-400 hover:text-white text-2xl leading-none">&times;</button>
+      </div>
+      <iframe src="modulo-4-2.html" class="flex-1 w-full rounded-b-xl"></iframe>
+    </div>
+  </div>
+  <div id="modal-4-3" class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" onclick="if(event.target === this) closeModal()">
+    <div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+      <div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0">
+        <div class="flex items-center space-x-3"><span class="text-amber-400 font-bold">4.3</span><span class="font-semibold">Nível da pirâmide</span></div>
+        <button onclick="closeModal()" class="text-neutral-400 hover:text-white text-2xl leading-none">&times;</button>
+      </div>
+      <iframe src="modulo-4-3.html" class="flex-1 w-full rounded-b-xl"></iframe>
+    </div>
+  </div>
+  <div id="modal-4-4" class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" onclick="if(event.target === this) closeModal()">
+    <div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+      <div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0">
+        <div class="flex items-center space-x-3"><span class="text-amber-400 font-bold">4.4</span><span class="font-semibold">Piloto e métricas</span></div>
+        <button onclick="closeModal()" class="text-neutral-400 hover:text-white text-2xl leading-none">&times;</button>
+      </div>
+      <iframe src="modulo-4-4.html" class="flex-1 w-full rounded-b-xl"></iframe>
+    </div>
+  </div>
+
+  <footer class="border-t border-dark-600 py-8 mt-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>Consultor de IA · Trilha 4 — Planos de execução · <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a> · 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      const moduleCard = button.closest('.bg-dark-800');
+      moduleCard.querySelectorAll('.topic-explanation.active').forEach(exp => { if (exp !== explanation) exp.classList.remove('active'); });
+      explanation.classList.toggle('active');
+    }
+    function openModal(modalId) { const m = document.getElementById(modalId); if (m) { m.classList.remove('hidden'); document.body.style.overflow = 'hidden'; } }
+    function closeModal() { document.querySelectorAll('.modal').forEach(m => m.classList.add('hidden')); document.body.style.overflow = 'auto'; }
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark');
+    } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

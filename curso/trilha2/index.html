@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trilha 2 · Mapear | Consultor de IA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: {
+      primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+    .modal.hidden { display: none; }
+
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    /* acento blue (T2) */
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .bg-blue-500\/20 { background-color: rgba(37,99,235,0.12); }
+    html:not(.dark) .bg-blue-500\/10 { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37,99,235,0.25); }
+    html:not(.dark) .hover\:bg-blue-500\/30:hover { background-color: rgba(37,99,235,0.2); }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .group:hover .group-hover\:text-blue-400 { color: #2563eb; }
+    /* hover das outras trilhas no nav */
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124,58,237,0.08); }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(217,119,6,0.09); }
+    html:not(.dark) .hover\:text-teal-400:hover { color: #0d9488; }
+    html:not(.dark) .hover\:bg-teal-500\/10:hover { background-color: rgba(13,148,136,0.08); }
+
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161,98,7,0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161,98,7,0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .text-red-400 { color: #b91c1c; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,0.95); }
+
+    .dark .border-dark-600 { border-color: #374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+
+    @keyframes wf-pulse { 0%,100% { opacity:.55 } 50% { opacity:1 } }
+    @media (prefers-reduced-motion: no-preference) {
+      .wf-a { animation: wf-pulse 2.8s ease-in-out infinite; }
+      .wf-a:nth-child(2){animation-delay:.3s} .wf-a:nth-child(3){animation-delay:.6s}
+      .wf-a:nth-child(4){animation-delay:.9s}
+    }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🧭</span><span class="font-bold text-lg hidden sm:inline">Consultor de IA</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors">
+            <span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-400 bg-blue-500/10">
+            <span class="sm:hidden">T2</span><span class="hidden sm:inline">Mapear</span></a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors">
+            <span class="sm:hidden">T3</span><span class="hidden sm:inline">Auditar</span></a>
+          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors">
+            <span class="sm:hidden">T4</span><span class="hidden sm:inline">Planos</span></a>
+          <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors">
+            <span class="sm:hidden">T5</span><span class="hidden sm:inline">Entrega</span></a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <header class="relative overflow-hidden bg-gradient-to-br from-blue-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-4">TRILHA 2</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🔎 Mapear: descobrir a restrição real</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl mb-8">Antes de qualquer proposta, o consultor entra na operação e ouve. Entrevista, observa o trabalho real, desenha o fluxo, localiza o gargalo e cataloga as oportunidades de IA por função — priorizando pelo que entrega valor com viabilidade real.</p>
+
+      <!-- HERO SVG: fan-out de descoberta — entrevistar → mapear → catalogar → priorizar -->
+      <div class="rounded-2xl border border-blue-500/30 bg-dark-900/40 p-3 sm:p-4 mb-8 overflow-hidden">
+        <svg viewBox="0 0 900 260" class="w-full h-auto" role="img" aria-label="Fluxo de mapeamento: descoberta via entrevistas e observação alimenta o mapa de processos que revela o gargalo, gerando o catálogo de oportunidades de IA priorizadas pela matriz Valor × Viabilidade.">
+          <defs>
+            <linearGradient id="t2-grad" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#60a5fa"/><stop offset="1" stop-color="#3b82f6"/></linearGradient>
+            <linearGradient id="t2-cyan" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#0ea5e9"/></linearGradient>
+            <filter id="t2-glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            <pattern id="t2-grid" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="1.3" fill="#3b82f6" opacity="0.12"/></pattern>
+            <marker id="t2-ah" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#60a5fa"/></marker>
+            <marker id="t2-ahc" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#38bdf8"/></marker>
+          </defs>
+          <rect x="0" y="0" width="900" height="260" fill="url(#t2-grid)"/>
+          <!-- Nó 1: Descoberta -->
+          <g class="wf-a" filter="url(#t2-glow)">
+            <rect x="30" y="96" width="160" height="68" rx="14" fill="#0e1622" stroke="url(#t2-grad)" stroke-width="2.5"/>
+          </g>
+          <text x="110" y="126" text-anchor="middle" fill="#60a5fa" font-family="Inter,sans-serif" font-weight="700" font-size="14">🎙️ Descoberta</text>
+          <text x="110" y="148" text-anchor="middle" fill="#bfdbfe" font-family="Inter,sans-serif" font-size="11">entrevistar · observar</text>
+          <!-- Seta 1→2 -->
+          <path d="M190,130 L260,130" stroke="#60a5fa" stroke-width="2" marker-end="url(#t2-ah)"/>
+          <!-- Nó 2: Mapeamento -->
+          <g class="wf-a">
+            <rect x="262" y="96" width="160" height="68" rx="14" fill="#0e1622" stroke="url(#t2-grad)" stroke-width="2.5"/>
+          </g>
+          <text x="342" y="126" text-anchor="middle" fill="#60a5fa" font-family="Inter,sans-serif" font-weight="700" font-size="14">🗺️ Processos</text>
+          <text x="342" y="148" text-anchor="middle" fill="#bfdbfe" font-family="Inter,sans-serif" font-size="11">fluxo · gargalo</text>
+          <!-- Seta 2→3 -->
+          <path d="M422,130 L492,130" stroke="#60a5fa" stroke-width="2" marker-end="url(#t2-ah)"/>
+          <!-- Nó 3: Catálogo (ciano = resultado intermediário) -->
+          <g class="wf-a">
+            <rect x="494" y="96" width="160" height="68" rx="14" fill="#0e1b26" stroke="url(#t2-cyan)" stroke-width="2.5"/>
+          </g>
+          <text x="574" y="126" text-anchor="middle" fill="#38bdf8" font-family="Inter,sans-serif" font-weight="700" font-size="14">📚 Catálogo IA</text>
+          <text x="574" y="148" text-anchor="middle" fill="#9ad6ff" font-family="Inter,sans-serif" font-size="11">oportunidades × função</text>
+          <!-- Seta 3→4 -->
+          <path d="M654,130 L720,130" stroke="#38bdf8" stroke-width="2" marker-end="url(#t2-ahc)"/>
+          <!-- Nó 4: Priorização (glow) -->
+          <g filter="url(#t2-glow)">
+            <rect x="722" y="88" width="148" height="84" rx="14" fill="#0e1622" stroke="url(#t2-grad)" stroke-width="2.5"/>
+          </g>
+          <text x="796" y="122" text-anchor="middle" fill="#60a5fa" font-family="Inter,sans-serif" font-weight="700" font-size="14">🎚️ Priorizar</text>
+          <text x="796" y="142" text-anchor="middle" fill="#bfdbfe" font-family="Inter,sans-serif" font-size="11">Valor × Viabilidade</text>
+          <text x="796" y="160" text-anchor="middle" fill="#93c5fd" font-family="Inter,sans-serif" font-size="10">quick wins primeiro</text>
+          <!-- Label inferior -->
+          <text x="450" y="220" text-anchor="middle" fill="#9aa4b2" font-family="Inter,sans-serif" font-size="12">o consultor descobre a restrição real antes de prescrever qualquer solução</text>
+        </svg>
+      </div>
+
+      <div class="grid grid-cols-4 gap-4 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">4</div><div class="text-xs text-neutral-400">Módulos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">24</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">~3h</div><div class="text-xs text-neutral-400">Duração</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">Mapeam.</div><div class="text-xs text-neutral-400">Nível</div></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- MAPA DA TRILHA -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-6">Mapa da trilha</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <a href="#modulo-2-1" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 p-5 transition-all">
+          <div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold text-sm">2.1</span><span class="text-xs text-neutral-500">~45 min</span></div>
+          <h3 class="font-semibold mb-1 group-hover:text-blue-400 transition-colors">🎙️ Descoberta</h3>
+          <p class="text-xs text-neutral-400">Ouvir antes de recomendar</p>
+        </a>
+        <a href="#modulo-2-2" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 p-5 transition-all">
+          <div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold text-sm">2.2</span><span class="text-xs text-neutral-500">~45 min</span></div>
+          <h3 class="font-semibold mb-1 group-hover:text-blue-400 transition-colors">🗺️ Processos e gargalos</h3>
+          <p class="text-xs text-neutral-400">O fluxo real, não o oficial</p>
+        </a>
+        <a href="#modulo-2-3" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 p-5 transition-all">
+          <div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold text-sm">2.3</span><span class="text-xs text-neutral-500">~45 min</span></div>
+          <h3 class="font-semibold mb-1 group-hover:text-blue-400 transition-colors">📚 Catálogo IA por função</h3>
+          <p class="text-xs text-neutral-400">Padrão certo na etapa certa</p>
+        </a>
+        <a href="#modulo-2-4" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 p-5 transition-all">
+          <div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold text-sm">2.4</span><span class="text-xs text-neutral-500">~45 min</span></div>
+          <h3 class="font-semibold mb-1 group-hover:text-blue-400 transition-colors">🎚️ Priorização</h3>
+          <p class="text-xs text-neutral-400">Valor × Viabilidade</p>
+        </a>
+      </div>
+    </section>
+
+    <h2 class="text-2xl font-bold mb-6">Conteúdo detalhado</h2>
+
+    <!-- MÓDULO 2.1 -->
+    <div id="modulo-2-1" class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold">2.1</span><span class="text-xs text-neutral-500">~45 min</span></div>
+        <h3 class="text-2xl font-bold mb-2">🎙️ Descoberta: entrevistar, escutar e observar a operação</h3>
+        <p class="text-neutral-400 text-sm">O consultor não entra com a solução na cabeça. Entra com perguntas. Antes de qualquer proposta, ouve, observa e mapeia quem sente a dor e quem paga por ela.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <span class="text-lg">🎯</span>
+            <div><span class="font-medium">Objetivo da descoberta</span><span class="text-neutral-500 text-sm ml-2">- entender antes de propor</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A fase de descoberta é o período em que o consultor entra na operação do cliente para entender o que realmente acontece — sem pressupor a solução. É o contrapeso ao viés de "já sei o que vocês precisam".</p></div>
+            <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Consultores que pulam a descoberta prescrevem para o sintoma, não para a causa. A fase de escuta reduz o risco de entrar com a solução errada e queimar a relação no primeiro mês.</p></div>
+            <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Descoberta estruturada; hipóteses a validar (não certezas); separar sintoma de causa; construir confiança antes de recomendar.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <span class="text-lg">❓</span>
+            <div><span class="font-medium">Perguntas que revelam a dor (SPIN)</span><span class="text-neutral-500 text-sm ml-2">- situação, problema, implicação, necessidade</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O framework SPIN orienta a sequência das perguntas: primeiro mapeia a situação atual, depois explora o problema percebido, aprofunda as implicações desse problema e, por fim, articula a necessidade real de mudança.</p></div>
+            <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Perguntas mal sequenciadas geram respostas genéricas. SPIN foi validado em décadas de pesquisa em vendas consultivas — funciona igualmente bem para diagnóstico.</p></div>
+            <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Situação (contexto) → Problema (dor explícita) → Implicação (custo da dor) → Necessidade (o que muda se resolver). Perguntas abertas dominam; fechadas confirmam.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <span class="text-lg">👂</span>
+            <div><span class="font-medium">Escuta ativa e o viés de confirmação</span><span class="text-neutral-500 text-sm ml-2">- ouvir o que não esperava</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Escuta ativa é prestar atenção no que está sendo dito — e no que não está. O viés de confirmação é a tendência do consultor de ouvir apenas o que confirma sua hipótese inicial, ignorando dados que contradizem.</p></div>
+            <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">A armadilha mais comum em diagnóstico: entrar com uma hipótese de solução e inconscientemente coletar apenas evidências que a confirmam. Resultado: diagnóstico tendencioso, solução errada.</p></div>
+            <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Escuta sem agenda; anotar o que contradiz a hipótese; parafraseando para confirmar compreensão; silêncio como ferramenta de aprofundamento.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <span class="text-lg">🚶</span>
+            <div><span class="font-medium">Observar o trabalho real (gemba)</span><span class="text-neutral-500 text-sm ml-2">- processo documentado ≠ executado</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Gemba (palavra japonesa para "local real") é a prática de ir ao lugar onde o trabalho acontece e observar diretamente. O que está escrito no processo raramente é o que as pessoas fazem na prática.</p></div>
+            <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Processos documentados refletem o ideal; o trabalho real é cheio de gambiarras, workarounds e etapas informais invisíveis no papel. Quem não vai ao gemba diagnostica o processo oficial, não o real.</p></div>
+            <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Gemba walk; processo oficial vs. processo real; shadow work (trabalho paralelo invisível); gargalos que só aparecem ao vivo.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <span class="text-lg">👥</span>
+            <div><span class="font-medium">Mapear stakeholders</span><span class="text-neutral-500 text-sm ml-2">- quem sente a dor vs. quem paga</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Mapeamento de stakeholders identifica quem é afetado pelo problema, quem tem poder de decisão e quem financia a solução. Frequentemente quem sente a dor (operação) não é quem paga (diretoria) — e os dois têm agendas diferentes.</p></div>
+            <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Recomendar sem entender a política interna é arriscado. A solução tecnicamente correta pode travar por falta de patrocínio executivo ou resistência operacional.</p></div>
+            <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Mapa de influência × interesse; sponsor executivo; campeões operacionais; quem perde poder com a mudança; alinhar agenda antes de propor.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <span class="text-lg">📋</span>
+            <div><span class="font-medium">Documentar e sintetizar os achados</span><span class="text-neutral-500 text-sm ml-2">- da escuta ao diagnóstico</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Após as entrevistas e observações, o consultor sistematiza os achados em um documento de diagnóstico: padrões identificados, hipóteses confirmadas e refutadas, e as duas ou três restrições mais críticas.</p></div>
+            <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Dados brutos de entrevistas não viram recomendação sozinhos. A síntese é o trabalho intelectual que transforma escuta em diagnóstico acionável — e demonstra o valor do consultor para o cliente.</p></div>
+            <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Relatório de descoberta; top 3 restrições; evidências por achado; hipóteses descartadas (e por quê); próximos passos claros.</p></div>
+          </div></div>
+        </div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <button onclick="openModal('modal-2-1')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors">Ver em Modal</button>
+        <a href="modulo-2-1.html" class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">Ver Completo</a>
+      </div>
+    </div>
+
+    <!-- MÓDULO 2.2 -->
+    <div id="modulo-2-2" class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold">2.2</span><span class="text-xs text-neutral-500">~45 min</span></div>
+        <h3 class="text-2xl font-bold mb-2">🗺️ Mapeamento de processos e gargalos</h3>
+        <p class="text-neutral-400 text-sm">Desenhar o fluxo de ponta a ponta, medir cada etapa e localizar a restrição que limita o todo. Sem esse mapa, qualquer solução de IA é chute.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <span class="text-lg">🔗</span>
+            <div><span class="font-medium">Value stream mapping</span><span class="text-neutral-500 text-sm ml-2">- fluxo de ponta a ponta</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Value stream mapping (VSM) é uma técnica do Lean para desenhar visualmente todas as etapas que transformam um input em valor para o cliente — incluindo tempo de processamento, tempo de espera e transferências entre departamentos.</p></div>
+            <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sem ver o fluxo completo, é impossível identificar onde está a restrição real. Muitas vezes o problema visível (lentidão em X) é consequência de um gargalo em Y que fica antes.</p></div>
+            <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Mapa de fluxo de valor; lead time vs. tempo de processamento; tempo de espera entre etapas; identificar onde o trabalho para e espera.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <span class="text-lg">⏱️</span>
+            <div><span class="font-medium">Medir tempo, espera, retrabalho e custo</span><span class="text-neutral-500 text-sm ml-2">- números por etapa</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Cada etapa do processo deve ter números: tempo médio de execução, tempo de fila, taxa de retrabalho (% de vezes que o item volta para correção) e custo unitário (hora × pessoas envolvidas).</p></div>
+            <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sem dados por etapa, a priorização de onde aplicar IA é subjetiva. Com dados, o consultor transforma percepção ("isso é lento") em evidência ("essa etapa consome 40% do lead time total").</p></div>
+            <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Cycle time; lead time; throughput; taxa de retrabalho; custo unitário por etapa; identificar as etapas de maior custo relativo.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <span class="text-lg">🍾</span>
+            <div><span class="font-medium">Encontrar o gargalo (Theory of Constraints)</span><span class="text-neutral-500 text-sm ml-2">- a restrição que limita o todo</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A Theory of Constraints (TOC) de Eliyahu Goldratt diz que todo sistema tem exatamente um gargalo — a etapa mais lenta — que define a velocidade máxima do fluxo. Melhorar qualquer outra etapa não acelera o resultado.</p></div>
+            <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É o princípio mais importante do mapeamento. Sem identificar o gargalo, o consultor corre o risco de otimizar etapas que não mudam o resultado — gerando custo sem ganho perceptível.</p></div>
+            <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">TOC; gargalo como etapa mais lenta; elevação vs. exploração do gargalo; subordinar tudo ao gargalo; o gargalo migra após a otimização.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <span class="text-lg">📊</span>
+            <div><span class="font-medium">Dados de volume e frequência</span><span class="text-neutral-500 text-sm ml-2">- o que justifica investir</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Volume e frequência respondem "quanto isso acontece?" — base para calcular o impacto potencial de qualquer automação. Um processo com 5 ocorrências por ano raramente justifica investimento; um com 500 por dia, quase sempre justifica.</p></div>
+            <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">ROI de automação é diretamente proporcional ao volume de repetição. Coletar dados de frequência transforma uma ideia de solução em um business case defensável.</p></div>
+            <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Frequência diária/mensal; volume de transações; sazonalidade; custo total anual da etapa = frequência × custo unitário × pessoas.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <span class="text-lg">🧮</span>
+            <div><span class="font-medium">Trabalho repetitivo vs. baseado em julgamento</span><span class="text-neutral-500 text-sm ml-2">- o que IA substitui</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Classificar cada etapa do processo em um espectro: de totalmente baseada em regra (determinístico, automatizável sem IA) até totalmente baseada em julgamento contextual (requer humano). A IA encaixa no meio — onde há padrões mas também variação.</p></div>
+            <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">A classificação direciona qual nível da pirâmide usar: regra pura → determinístico; padrão com variação → IA; contexto complexo + decisão → humano ou agente supervisionado.</p></div>
+            <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Espectro determinístico → IA → agente; trabalho de regra vs. de julgamento; automação completa vs. assistida; onde manter o humano no loop.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <span class="text-lg">📝</span>
+            <div><span class="font-medium">Documentar o mapa e validar com a equipe</span><span class="text-neutral-500 text-sm ml-2">- antes de virar recomendação</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O mapa de processo desenhado pelo consultor precisa ser validado com quem executa o trabalho diariamente. Erros de mapeamento — etapas faltando, sequência errada, volumes estimados — são comuns e invalidam todo o diagnóstico.</p></div>
+            <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Um mapa errado gera recomendação errada. A validação com a equipe operacional é o "teste de realidade" mais barato — e também gera buy-in dos responsáveis pela mudança.</p></div>
+            <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Workshop de validação; walk-through do mapa com operação; correção colaborativa; buy-in antes do diagnóstico final.</p></div>
+          </div></div>
+        </div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <button onclick="openModal('modal-2-2')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors">Ver em Modal</button>
+        <a href="modulo-2-2.html" class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">Ver Completo</a>
+      </div>
+    </div>
+
+    <!-- MÓDULO 2.3 -->
+    <div id="modulo-2-3" class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold">2.3</span><span class="text-xs text-neutral-500">~45 min</span></div>
+        <h3 class="text-2xl font-bold mb-2">📚 Catálogo de oportunidades de IA por função</h3>
+        <p class="text-neutral-400 text-sm">Cada etapa do processo pode se encaixar em um padrão de caso de uso de IA. Conhecer o catálogo permite identificar rapidamente o que é aplicável — e o que é armadilha.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <span class="text-lg">🗂️</span>
+            <div><span class="font-medium">Padrões de caso de uso de IA</span><span class="text-neutral-500 text-sm ml-2">- classificar, extrair, gerar, resumir, prever, conversar</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Todos os casos de uso de IA generativa em contexto empresarial se encaixam em seis padrões: classificar (categorizar texto/dados), extrair (puxar informação estruturada de texto livre), gerar (criar conteúdo), resumir (condensar), prever (inferir estado futuro) e conversar (interface de diálogo).</p></div>
+            <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Ter o catálogo de padrões na cabeça acelera o diagnóstico. Quando o consultor vê uma etapa, consegue rapidamente mapear se ela é "classificar", "extrair" ou "gerar" — e já sabe quais ferramentas e riscos se aplicam.</p></div>
+            <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Classificação; extração de entidades; geração de texto; sumarização; previsão/scoring; chatbot/assistente. Cada padrão tem riscos e maturidade tecnológica diferentes.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <span class="text-lg">💼</span>
+            <div><span class="font-medium">Oportunidades por área funcional</span><span class="text-neutral-500 text-sm ml-2">- vendas, suporte, financeiro, RH, operações</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Cada área funcional tem padrões recorrentes de oportunidade: vendas (qualificação de leads, geração de propostas), suporte (triagem de tickets, base de conhecimento), financeiro (extração de dados de notas, reconciliação), RH (triagem de currículos, onboarding), operações (planejamento de produção, anomalias em dados).</p></div>
+            <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Reconhecer o padrão pela área acelera a geração de hipóteses durante o diagnóstico. O consultor chega à reunião já sabendo o que procurar em cada departamento.</p></div>
+            <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Quick wins por área; casos mais maduros vs. mais experimentais; onde a taxa de adoção é mais alta; onde o risco de alucinação é crítico.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <span class="text-lg">🧱</span>
+            <div><span class="font-medium">Casar o padrão de IA com a etapa do processo</span><span class="text-neutral-500 text-sm ml-2">- encaixe preciso</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Para cada etapa do processo mapeado, o consultor faz o match: qual padrão de IA resolve isso? A pergunta não é "que IA existe?" mas "qual padrão se encaixa nessa etapa específica?" — um processo de dentro para fora.</p></div>
+            <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Consultores que pensam de fora para dentro (começando pela ferramenta) forçam encaixes artificiais. O método correto é partir do processo e perguntar qual padrão resolve — o que muda radicalmente a qualidade da recomendação.</p></div>
+            <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Process-first approach; pergunta de matching (qual padrão resolve?); evitar ferramenta à procura de problema; critérios de fit: dados disponíveis, variação aceitável, consecuências do erro.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <span class="text-lg">🪜</span>
+            <div><span class="font-medium">Mapear ao nível da pirâmide</span><span class="text-neutral-500 text-sm ml-2">- determinístico, IA ou agente</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Para cada oportunidade identificada, o consultor posiciona na pirâmide: é determinístico (regra + if/else)? Workflow com IA (LLM num passo)? Agente autônomo? A posição define custo, risco e prazo de implementação.</p></div>
+            <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Muitas oportunidades que parecem "agente" são na verdade "workflow com IA" — ou até "determinístico". Ir para um nível mais alto do que o necessário aumenta custo e risco sem aumentar resultado.</p></div>
+            <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Pirâmide: determinístico → IA → agentes; critérios para subir um nível; overfitting de complexidade; menor nível suficiente que resolve.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <span class="text-lg">🚩</span>
+            <div><span class="font-medium">Red flags: casos sedutores que não entregam</span><span class="text-neutral-500 text-sm ml-2">- armadilhas do catálogo</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Alguns casos de uso de IA são "sedutores" — parecem perfeitos mas raramente entregam valor real: chatbot de atendimento sem base de conhecimento estruturada, geração de relatórios financeiros sem dados limpos, agente de vendas sem CRM. O problema precede a solução.</p></div>
+            <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Saber identificar red flags antes de propor salva o consultor de projetos que falham previsivelmente — o que destrói reputação e relação. É o "dizer não" aplicado ao catálogo.</p></div>
+            <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Pré-condições de cada padrão (dados limpos, processo estável, KPIs claros); chatbot sem knowledge base; IA gerativa sem validação humana em contexto de risco; automação de processo quebrado.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <span class="text-lg">📋</span>
+            <div><span class="font-medium">Montar o catálogo de oportunidades do cliente</span><span class="text-neutral-500 text-sm ml-2">- lista priorizada de casos</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O entregável desta fase é um catálogo com todas as oportunidades de IA identificadas para o cliente: etapa do processo, padrão de caso de uso, nível da pirâmide, pré-condições e dependências. Ainda sem priorização — isso vem no próximo módulo.</p></div>
+            <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">O catálogo é a matéria-prima da priorização. Sem ele, o processo de decidir o que fazer primeiro é intuitivo e defensável apenas pelo prestígio do consultor — não pela análise.</p></div>
+            <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Tabela de oportunidades; campos: etapa, padrão, nível, pré-condições, dados necessários; escopo deliberadamente amplo antes da priorização.</p></div>
+          </div></div>
+        </div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <button onclick="openModal('modal-2-3')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors">Ver em Modal</button>
+        <a href="modulo-2-3.html" class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">Ver Completo</a>
+      </div>
+    </div>
+
+    <!-- MÓDULO 2.4 -->
+    <div id="modulo-2-4" class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold">2.4</span><span class="text-xs text-neutral-500">~45 min</span></div>
+        <h3 class="text-2xl font-bold mb-2">🎚️ Priorização inicial: matriz Valor × Viabilidade</h3>
+        <p class="text-neutral-400 text-sm">Com o catálogo em mãos, o consultor usa uma matriz simples para ordenar o que atacar primeiro. Quick wins geram confiança; apostas têm que esperar dados.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <span class="text-lg">💰</span>
+            <div><span class="font-medium">Eixo valor: impacto, frequência, custo evitado, receita</span><span class="text-neutral-500 text-sm ml-2">- o quanto isso vale</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O eixo vertical da matriz mede o valor potencial da oportunidade. Quatro dimensões: impacto no cliente final (qualidade, velocidade, satisfação), frequência do processo (volume × custo por ocorrência), custo evitado (quanto deixa de gastar) e receita habilitada (o que passa a ser possível vender).</p></div>
+            <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Valor percebido sem dados é argumentação fraca. Com as quatro dimensões, o consultor constrói o numerador do ROI — e o cliente consegue ver concretamente o que está em jogo.</p></div>
+            <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Impacto × frequência; custo da não-mudança; receita incremental; valor qualitativo (satisfação, risco reputacional) vs. quantitativo.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <span class="text-lg">🔧</span>
+            <div><span class="font-medium">Eixo viabilidade: dados, técnica, integração, mudança</span><span class="text-neutral-500 text-sm ml-2">- o quanto é realizável</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O eixo horizontal mede o quão viável é implementar a oportunidade. Quatro dimensões: prontidão dos dados (existem? estão limpos?), complexidade técnica (off-the-shelf vs. customizado), complexidade de integração (APIs existem? legado?) e mudança organizacional (treinamento, resistência).</p></div>
+            <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sem avaliar viabilidade, projetos de alto valor se tornam sinkholes de prazo e orçamento. A avaliação honesta do esforço real é o que distingue o diagnóstico consultivo da venda de projeto.</p></div>
+            <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Dados (existência, limpeza, acesso); stack técnico disponível; integrações necessárias; gestão de mudança; prazo realista vs. otimista.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <span class="text-lg">🟢</span>
+            <div><span class="font-medium">Os quatro quadrantes da matriz</span><span class="text-neutral-500 text-sm ml-2">- quick wins, apostas, preencher, descartar</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A combinação de valor e viabilidade gera quatro quadrantes: alto valor + alta viabilidade = quick wins (fazer agora); alto valor + baixa viabilidade = apostas (investir, mas com cautela); baixo valor + alta viabilidade = preencher (só se sobrar capacidade); baixo valor + baixa viabilidade = descartar (não fazer).</p></div>
+            <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">A matriz força uma conversa explícita sobre o que priorizar. Sem ela, todos os projetos parecem urgentes e o cliente não consegue decidir — e o consultor perde a liderança do diagnóstico.</p></div>
+            <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Quadrante 1 (quick wins): prioridade máxima; quadrante 2 (apostas): roadmap futuro; quadrante 3: backlog de baixa prioridade; quadrante 4: justificativa explícita de descarte.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <span class="text-lg">⚡</span>
+            <div><span class="font-medium">Quick wins primeiro — confiança e tração</span><span class="text-neutral-500 text-sm ml-2">- ganhar antes de escalar</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Quick wins são projetos de alto valor e alta viabilidade que podem ser entregues em semanas. Começar por eles gera uma vitória visível rápida — o que constrói confiança com o cliente e cria a tração política para os projetos maiores.</p></div>
+            <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Projetos longos sem resultado visível perdem patrocínio. O quick win protege o projeto maior: quando a diretoria quer cancelar, você tem uma vitória concreta para mostrar e justificar a continuidade.</p></div>
+            <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Time-to-value curto; protótipo ou piloto em 2-4 semanas; resultado mensurável e visível; quick win como prova de conceito comercial.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <span class="text-lg">⚠️</span>
+            <div><span class="font-medium">Viés de superestimar valor e subestimar esforço</span><span class="text-neutral-500 text-sm ml-2">- o erro mais caro</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O viés de otimismo faz consultores e clientes superestimarem o valor de projetos de IA e subestimarem o esforço real de integração, dados e mudança organizacional. O resultado é projetos que atrasam, custam mais e entregam menos do que prometido.</p></div>
+            <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Calibrar as estimativas de forma conservadora protege a credibilidade do consultor. É melhor prometer menos e entregar mais do que o contrário — especialmente no primeiro projeto com um novo cliente.</p></div>
+            <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Otimismo de planejamento; reference class forecasting; multiplicar estimativas de esforço por 1,5×; comprometimento conservador; underpromise-overdeliver.</p></div>
+          </div></div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <span class="text-lg">📊</span>
+            <div><span class="font-medium">Apresentar a priorização ao cliente</span><span class="text-neutral-500 text-sm ml-2">- da análise à decisão</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A matriz preenchida vira a pauta da reunião de priorização com o cliente. O consultor apresenta os quadrantes, justifica cada posicionamento com dados, propõe os quick wins e convida o cliente a ajustar — tornando a decisão colaborativa.</p></div>
+            <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Apresentar a priorização, não somente a lista de oportunidades, posiciona o consultor como tomador de decisão — não apenas executor. É a diferença entre cobrar por entregável e cobrar por julgamento.</p></div>
+            <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Narrativa de priorização; proposta de quick win 1 e 2; roadmap de apostas; comunicar o que foi descartado e por quê; transformar análise em decisão.</p></div>
+          </div></div>
+        </div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <button onclick="openModal('modal-2-4')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors">Ver em Modal</button>
+        <a href="modulo-2-4.html" class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">Ver Completo</a>
+      </div>
+    </div>
+
+    <!-- NAVEGAÇÃO FINAL -->
+    <div class="flex flex-col sm:flex-row gap-4 mt-8">
+      <a href="../trilha1/index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Trilha 1: Fundamentos</a>
+      <a href="../trilha3/index.html" class="flex-1 text-center px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-500 transition-colors">Próxima trilha: Auditar →</a>
+    </div>
+  </main>
+
+  <!-- MODAIS -->
+  <div id="modal-2-1" class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" onclick="if(event.target === this) closeModal()">
+    <div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+      <div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0">
+        <div class="flex items-center space-x-3"><span class="text-blue-400 font-bold">2.1</span><span class="font-semibold">Descoberta</span></div>
+        <button onclick="closeModal()" class="text-neutral-400 hover:text-white text-2xl leading-none">&times;</button>
+      </div>
+      <iframe src="modulo-2-1.html" class="flex-1 w-full rounded-b-xl"></iframe>
+    </div>
+  </div>
+  <div id="modal-2-2" class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" onclick="if(event.target === this) closeModal()">
+    <div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+      <div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0">
+        <div class="flex items-center space-x-3"><span class="text-blue-400 font-bold">2.2</span><span class="font-semibold">Processos e gargalos</span></div>
+        <button onclick="closeModal()" class="text-neutral-400 hover:text-white text-2xl leading-none">&times;</button>
+      </div>
+      <iframe src="modulo-2-2.html" class="flex-1 w-full rounded-b-xl"></iframe>
+    </div>
+  </div>
+  <div id="modal-2-3" class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" onclick="if(event.target === this) closeModal()">
+    <div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+      <div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0">
+        <div class="flex items-center space-x-3"><span class="text-blue-400 font-bold">2.3</span><span class="font-semibold">Catálogo de IA por função</span></div>
+        <button onclick="closeModal()" class="text-neutral-400 hover:text-white text-2xl leading-none">&times;</button>
+      </div>
+      <iframe src="modulo-2-3.html" class="flex-1 w-full rounded-b-xl"></iframe>
+    </div>
+  </div>
+  <div id="modal-2-4" class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" onclick="if(event.target === this) closeModal()">
+    <div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+      <div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0">
+        <div class="flex items-center space-x-3"><span class="text-blue-400 font-bold">2.4</span><span class="font-semibold">Priorização Valor × Viabilidade</span></div>
+        <button onclick="closeModal()" class="text-neutral-400 hover:text-white text-2xl leading-none">&times;</button>
+      </div>
+      <iframe src="modulo-2-4.html" class="flex-1 w-full rounded-b-xl"></iframe>
+    </div>
+  </div>
+
+  <footer class="border-t border-dark-600 py-8 mt-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>Consultor de IA · Trilha 2 — Mapear · <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a> · 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      const moduleCard = button.closest('.bg-dark-800');
+      moduleCard.querySelectorAll('.topic-explanation.active').forEach(exp => { if (exp !== explanation) exp.classList.remove('active'); });
+      explanation.classList.toggle('active');
+    }
+    function openModal(modalId) { const m = document.getElementById(modalId); if (m) { m.classList.remove('hidden'); document.body.style.overflow = 'hidden'; } }
+    function closeModal() { document.querySelectorAll('.modal').forEach(m => m.classList.add('hidden')); document.body.style.overflow = 'auto'; }
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark');
+    } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>
