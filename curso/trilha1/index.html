@@ -61,6 +61,8 @@
 
     .dark .border-dark-600 { border-color: #374151; }
     .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+    /* Intensidade contida: suaviza os diagramas SVG no tema claro */
+    html:not(.dark) svg[role="img"] { filter: saturate(0.82) brightness(0.96); }
 
     @keyframes wf-pulse { 0%,100% { opacity:.55 } 50% { opacity:1 } }
     @media (prefers-reduced-motion: no-preference) {
@@ -114,7 +116,7 @@
             <linearGradient id="t1-base" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#34d399"/><stop offset="1" stop-color="#10b981"/></linearGradient>
             <linearGradient id="t1-mid" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fbbf24"/><stop offset="1" stop-color="#f59e0b"/></linearGradient>
             <linearGradient id="t1-top" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#0ea5e9"/></linearGradient>
-            <filter id="t1-glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            <filter id="t1-glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="1.8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
             <pattern id="t1-grid" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="1.3" fill="#10b981" opacity="0.12"/></pattern>
             <marker id="t1-ah" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#34d399"/></marker>
           </defs>
@@ -124,14 +126,14 @@
             <polygon points="58,24 54,36 62,36" fill="#64748b"/>
             <text x="46" y="140" fill="#94a3b8" font-size="12" transform="rotate(-90 46 140)" text-anchor="middle">custo · tempo · risco ↑</text>
           </g>
-          <g class="wf-a" filter="url(#t1-glow)"><polygon points="380,34 466,108 294,108" fill="#0e1b26" stroke="url(#t1-top)" stroke-width="2.5"/></g>
-          <text x="380" y="78" text-anchor="middle" fill="#7dd3fc" font-family="Inter,sans-serif" font-weight="700" font-size="15">Agentes de IA</text>
+          <g class="wf-a" filter="url(#t1-glow)"><polygon points="380,34 466,108 294,108" fill="#0e1b26" stroke="url(#t1-top)" stroke-width="2"/></g>
+          <text x="380" y="78" text-anchor="middle" fill="#7dd3fc" font-family="Inter,sans-serif" font-weight="600" font-size="15">Agentes de IA</text>
           <text x="380" y="96" text-anchor="middle" fill="#bae6fd" font-family="Inter,sans-serif" font-size="10.5">risco máximo</text>
-          <g class="wf-a"><polygon points="294,116 466,116 524,184 236,184" fill="#1f1604" stroke="url(#t1-mid)" stroke-width="2.5"/></g>
-          <text x="380" y="148" text-anchor="middle" fill="#fbbf24" font-family="Inter,sans-serif" font-weight="700" font-size="15">Workflows com IA</text>
+          <g class="wf-a"><polygon points="294,116 466,116 524,184 236,184" fill="#1f1604" stroke="url(#t1-mid)" stroke-width="2"/></g>
+          <text x="380" y="148" text-anchor="middle" fill="#fbbf24" font-family="Inter,sans-serif" font-weight="600" font-size="15">Workflows com IA</text>
           <text x="380" y="167" text-anchor="middle" fill="#fcd9a0" font-family="Inter,sans-serif" font-size="10.5">mais poder, mais falhas</text>
-          <g class="wf-a"><polygon points="236,192 524,192 582,248 178,248" fill="#0e2018" stroke="url(#t1-base)" stroke-width="2.5"/></g>
-          <text x="380" y="218" text-anchor="middle" fill="#34d399" font-family="Inter,sans-serif" font-weight="700" font-size="15">Determinístico · sem IA</text>
+          <g class="wf-a"><polygon points="236,192 524,192 582,248 178,248" fill="#0e2018" stroke="url(#t1-base)" stroke-width="2"/></g>
+          <text x="380" y="218" text-anchor="middle" fill="#34d399" font-family="Inter,sans-serif" font-weight="600" font-size="15">Determinístico · sem IA</text>
           <text x="380" y="237" text-anchor="middle" fill="#a7f3d0" font-family="Inter,sans-serif" font-size="10.5">barato, rápido, confiável</text>
           <g font-family="Inter,sans-serif">
             <text x="648" y="226" fill="#34d399" font-size="12" font-weight="600" text-anchor="middle">comece</text>

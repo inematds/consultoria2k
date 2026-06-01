@@ -62,6 +62,8 @@
 
     .dark .border-dark-600 { border-color: #374151; }
     .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+    /* Intensidade contida: suaviza os diagramas SVG no tema claro */
+    html:not(.dark) svg[role="img"] { filter: saturate(0.82) brightness(0.96); }
 
     @keyframes m54-flow { 0%,100%{opacity:.5} 50%{opacity:1} }
     @media (prefers-reduced-motion: no-preference) {
@@ -137,7 +139,7 @@
       <svg viewBox="0 0 820 200" class="w-full h-auto" role="img" aria-label="Ciclo de adoção: da entrega técnica passando pela mudança de comportamento, métricas de valor, confiança consolidada, e chegando ao relacionamento de longo prazo. Cada etapa alimenta a próxima.">
         <defs>
           <linearGradient id="m54-g1" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2dd4bf"/><stop offset="1" stop-color="#38bdf8"/></linearGradient>
-          <filter id="m54-glow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <filter id="m54-glow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="1.8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
           <pattern id="m54-grid" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="1.3" fill="#14b8a6" opacity="0.10"/></pattern>
           <marker id="m54-ah" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L7,4 L0,8 L2,4 Z" fill="#2dd4bf"/></marker>
           <marker id="m54-ahc" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L7,4 L0,8 L2,4 Z" fill="#38bdf8"/></marker>
@@ -146,9 +148,9 @@
 
         <!-- nós do ciclo -->
         <g class="m54-a" filter="url(#m54-glow)">
-          <rect x="20" y="65" width="115" height="70" rx="10" fill="#0c1f1c" stroke="#2dd4bf" stroke-width="2.5"/>
+          <rect x="20" y="65" width="115" height="70" rx="10" fill="#0c1f1c" stroke="#2dd4bf" stroke-width="2"/>
         </g>
-        <text x="77" y="91" text-anchor="middle" fill="#2dd4bf" font-family="Inter,sans-serif" font-weight="700" font-size="11">Entrega</text>
+        <text x="77" y="91" text-anchor="middle" fill="#2dd4bf" font-family="Inter,sans-serif" font-weight="600" font-size="11">Entrega</text>
         <text x="77" y="107" text-anchor="middle" fill="#99f6e4" font-family="Inter,sans-serif" font-size="10">técnica pronta</text>
         <text x="77" y="123" text-anchor="middle" fill="#5eead4" font-family="Inter,sans-serif" font-size="9">deploy ≠ resultado</text>
         <line x1="135" y1="100" x2="158" y2="100" stroke="#2dd4bf" stroke-width="1.5" marker-end="url(#m54-ah)"/>
@@ -156,7 +158,7 @@
         <g class="m54-a">
           <rect x="160" y="60" width="125" height="80" rx="10" fill="#0c1f1c" stroke="#2dd4bf" stroke-width="2"/>
         </g>
-        <text x="222" y="87" text-anchor="middle" fill="#2dd4bf" font-family="Inter,sans-serif" font-weight="700" font-size="11">Change</text>
+        <text x="222" y="87" text-anchor="middle" fill="#2dd4bf" font-family="Inter,sans-serif" font-weight="600" font-size="11">Change</text>
         <text x="222" y="103" text-anchor="middle" fill="#99f6e4" font-family="Inter,sans-serif" font-size="10">Management</text>
         <text x="222" y="119" text-anchor="middle" fill="#5eead4" font-family="Inter,sans-serif" font-size="9">sponsor+campeões</text>
         <text x="222" y="133" text-anchor="middle" fill="#5eead4" font-family="Inter,sans-serif" font-size="9">treino no fluxo</text>
@@ -165,25 +167,25 @@
         <g class="m54-a">
           <rect x="310" y="60" width="125" height="80" rx="10" fill="#0c1f1c" stroke="#2dd4bf" stroke-width="2"/>
         </g>
-        <text x="372" y="87" text-anchor="middle" fill="#2dd4bf" font-family="Inter,sans-serif" font-weight="700" font-size="11">Métricas</text>
+        <text x="372" y="87" text-anchor="middle" fill="#2dd4bf" font-family="Inter,sans-serif" font-weight="600" font-size="11">Métricas</text>
         <text x="372" y="103" text-anchor="middle" fill="#99f6e4" font-family="Inter,sans-serif" font-size="10">de adoção</text>
         <text x="372" y="119" text-anchor="middle" fill="#5eead4" font-family="Inter,sans-serif" font-size="9">30/60/90 dias</text>
         <text x="372" y="133" text-anchor="middle" fill="#5eead4" font-family="Inter,sans-serif" font-size="9">valor mensurável</text>
         <line x1="435" y1="100" x2="458" y2="100" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#m54-ahc)"/>
 
         <g class="m54-a" filter="url(#m54-glow)">
-          <rect x="460" y="55" width="135" height="90" rx="10" fill="#0e1b26" stroke="#38bdf8" stroke-width="2.5"/>
+          <rect x="460" y="55" width="135" height="90" rx="10" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/>
         </g>
-        <text x="527" y="82" text-anchor="middle" fill="#38bdf8" font-family="Inter,sans-serif" font-weight="700" font-size="11">Confiança</text>
+        <text x="527" y="82" text-anchor="middle" fill="#38bdf8" font-family="Inter,sans-serif" font-weight="600" font-size="11">Confiança</text>
         <text x="527" y="98" text-anchor="middle" fill="#9ad6ff" font-family="Inter,sans-serif" font-size="10">consolidada</text>
         <text x="527" y="114" text-anchor="middle" fill="#bfe6ff" font-family="Inter,sans-serif" font-size="9">nicho + indicação</text>
         <text x="527" y="130" text-anchor="middle" fill="#bfe6ff" font-family="Inter,sans-serif" font-size="9">próximo contrato</text>
         <line x1="595" y1="100" x2="618" y2="100" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#m54-ahc)"/>
 
         <g class="m54-a" filter="url(#m54-glow)">
-          <rect x="620" y="60" width="155" height="80" rx="10" fill="#0e1b26" stroke="url(#m54-g1)" stroke-width="2.5"/>
+          <rect x="620" y="60" width="155" height="80" rx="10" fill="#0e1b26" stroke="url(#m54-g1)" stroke-width="2"/>
         </g>
-        <text x="697" y="87" text-anchor="middle" fill="#38bdf8" font-family="Inter,sans-serif" font-weight="700" font-size="11">Relacionamento</text>
+        <text x="697" y="87" text-anchor="middle" fill="#38bdf8" font-family="Inter,sans-serif" font-weight="600" font-size="11">Relacionamento</text>
         <text x="697" y="103" text-anchor="middle" fill="#9ad6ff" font-family="Inter,sans-serif" font-size="10">de longo prazo</text>
         <text x="697" y="119" text-anchor="middle" fill="#bfe6ff" font-family="Inter,sans-serif" font-size="9">retainer / parceiro</text>
         <text x="697" y="133" text-anchor="middle" fill="#bfe6ff" font-family="Inter,sans-serif" font-size="9">ativo real da prática</text>

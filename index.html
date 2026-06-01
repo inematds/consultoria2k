@@ -87,6 +87,8 @@
     /* Dark mode - bordas suavizadas */
     .dark .border-dark-600 { border-color: #374151; }
     .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+    /* Intensidade contida: suaviza os diagramas SVG no tema claro */
+    html:not(.dark) svg[role="img"] { filter: saturate(0.82) brightness(0.96); }
 
     /* Hero — animação sutil dos nós */
     @keyframes pyr-pulse { 0%,100% { opacity:.55 } 50% { opacity:1 } }
@@ -158,7 +160,7 @@
             <linearGradient id="hero-base" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#34d399"/><stop offset="1" stop-color="#10b981"/></linearGradient>
             <linearGradient id="hero-mid" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fbbf24"/><stop offset="1" stop-color="#f59e0b"/></linearGradient>
             <linearGradient id="hero-top" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#0ea5e9"/></linearGradient>
-            <filter id="hero-glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            <filter id="hero-glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="1.8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
             <pattern id="hero-grid" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="1.3" fill="#94a3b8" opacity="0.10"/></pattern>
           </defs>
           <rect x="0" y="0" width="760" height="300" fill="url(#hero-grid)"/>
@@ -171,18 +173,18 @@
           </g>
 
           <!-- Topo: agentes -->
-          <g class="pyr-a" filter="url(#hero-glow)"><polygon points="380,40 470,118 290,118" fill="#0e1b26" stroke="url(#hero-top)" stroke-width="2.5"/></g>
-          <text x="380" y="86" text-anchor="middle" fill="#7dd3fc" font-family="Inter,sans-serif" font-weight="700" font-size="16">Agentes de IA</text>
+          <g class="pyr-a" filter="url(#hero-glow)"><polygon points="380,40 470,118 290,118" fill="#0e1b26" stroke="url(#hero-top)" stroke-width="2"/></g>
+          <text x="380" y="86" text-anchor="middle" fill="#7dd3fc" font-family="Inter,sans-serif" font-weight="600" font-size="16">Agentes de IA</text>
           <text x="380" y="104" text-anchor="middle" fill="#bae6fd" font-family="Inter,sans-serif" font-size="11">capacidade e risco máximos</text>
 
           <!-- Meio: workflows com IA -->
-          <g class="pyr-a"><polygon points="290,126 470,126 530,196 230,196" fill="#1f1604" stroke="url(#hero-mid)" stroke-width="2.5"/></g>
-          <text x="380" y="158" text-anchor="middle" fill="#fbbf24" font-family="Inter,sans-serif" font-weight="700" font-size="16">Workflows com IA</text>
+          <g class="pyr-a"><polygon points="290,126 470,126 530,196 230,196" fill="#1f1604" stroke="url(#hero-mid)" stroke-width="2"/></g>
+          <text x="380" y="158" text-anchor="middle" fill="#fbbf24" font-family="Inter,sans-serif" font-weight="600" font-size="16">Workflows com IA</text>
           <text x="380" y="178" text-anchor="middle" fill="#fcd9a0" font-family="Inter,sans-serif" font-size="11">mais poder, mais pontos de falha</text>
 
           <!-- Base: determinístico -->
-          <g class="pyr-a"><polygon points="230,204 530,204 590,262 170,262" fill="#0e2018" stroke="url(#hero-base)" stroke-width="2.5"/></g>
-          <text x="380" y="232" text-anchor="middle" fill="#34d399" font-family="Inter,sans-serif" font-weight="700" font-size="16">Workflows determinísticos · sem IA</text>
+          <g class="pyr-a"><polygon points="230,204 530,204 590,262 170,262" fill="#0e2018" stroke="url(#hero-base)" stroke-width="2"/></g>
+          <text x="380" y="232" text-anchor="middle" fill="#34d399" font-family="Inter,sans-serif" font-weight="600" font-size="16">Workflows determinísticos · sem IA</text>
           <text x="380" y="252" text-anchor="middle" fill="#a7f3d0" font-family="Inter,sans-serif" font-size="11">baratos, rápidos, confiáveis — comece aqui</text>
 
           <!-- seta "comece pela base" -->
