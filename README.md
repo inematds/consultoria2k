@@ -41,3 +41,11 @@ wrong thing"), **NIST AI RMF 1.0** (Govern/Map/Measure/Manage), **MITRE AI Matur
 
 Publicado em **[inematds.github.io/consultoria2k](https://inematds.github.io/consultoria2k/)** ·
 [INEMA.CLUB](https://inema.club) · 2026
+
+<!-- inema-backlink:v1 -->
+## Mais no INEMA.CLUB
+
+- [Ficha completa deste curso](https://www.inema.club/cursos/125-consultor-de-ia-do-rotulo-ao-resultado/)
+- [Guia: como aprender inteligência artificial](https://www.inema.club/aprender-inteligencia-artificial/)
+- [Todos os cursos](https://www.inema.club/cursos/)
+<!-- /inema-backlink:v1 -->
